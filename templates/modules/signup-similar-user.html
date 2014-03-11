@@ -1,0 +1,25 @@
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+<div class="item item-{{forloop.counter0}} {% if forloop.first %}active{%endif%}">
+    <div class="similar-user">
+        {% thumbnail profile.avatar "93x93" as im %} <img src="{{ im.url }}" width="{{ im.x }}"
+                                                          height="{{ im.y }}"
+                                                          class="circle photo-border">
+        {% endthumbnail %}
+        <h4 class="name red">{{ profile.user.first_name }} {{ profile.user.last_name }}</h4><h6>
+        {{profile.city }}, {{ profile.state }}</h6>
+
+        <div class="clearfix"></div>
+        <span8>{{ profile.about_me }}</span8>
+        <span class="follow pull-right">{% follow_form profile %}</span>
+        <ul>
+            {% for interest in profile.similar_interests %}
+            <li class="interest"><i class="icon-tag"></i>{{ interest }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- end of similar user -->
+    <div class="clearfix"></div>
+</div>

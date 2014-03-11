@@ -1,0 +1,75 @@
+{% extends "account/profile.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+
+{% block title %}Users You Are Following{% endblock %}
+
+{% block profile_body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+
+
+            <h3 class="profileName" style="margin-top: 20px;">{% if request.user.pk == profile.user.pk %}You Are
+                {% else %}{{ profile.get_pretty_name }} Is {% endif %}Following These Users</h3>
+
+            <div class="row-fluid media_edit">
+                {% for following in followings %}
+                <div class="media_action span3 well">
+                    <div class="similar-users">
+
+                        <a href="{% url public_profile_detail following.id %}">
+                            {% if following.user_gravatar or not following.avatar %}
+                            <img src="{% gravatar_url profile.user.email 93 %}" class="circle photo-border">
+                            {% else %}
+                            {% thumbnail following.avatar "93x93" crop="center" as im %}
+                            <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"
+                                 class="circle photo-border">
+                            {% endthumbnail %}
+                            {% endif %}
+                        </a>
+                        <h4 class="name red profileName"><a
+                                href="{% url public_profile_detail following.id %}">{{ following.get_pretty_name }}</a>
+                        </h4>
+                        <h6 class="profileName">{{ following.city }}, {{ following.state }}</h6>
+
+                        {% follow_form following %}
+                        <form id="blockAction" class=""
+                              action="{% url block_url 'account' 'userprofile' following.id %}"
+                              method="post">
+                            {% csrf_token %}
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i
+                                        class="icon-cogs icon-left black"></i><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    {% if following.user|is_blocked:request.user.get_profile %}
+                                    <li>
+                                        <a id="unblockUser2" href="#">Unblock User</a>
+                                        <input type="hidden" value="Unblock"/>
+                                    </li>
+                                    {% else %}
+                                    <li>
+                                        <a id="blockUser2" href="#">Block User</a>
+                                        <input type="hidden" value="block"/>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end of similar users -->
+
+                </div>
+                <!-- end of media_action well -->
+                {% empty %}
+                Empty
+                {% endfor %}
+            </div>
+            <!-- end of row-fluid -->
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block bodyClass %}inner{% endblock %}
+{% block content_header %} <h2>{{ static_page.title }} </h2>
+    <h3></h3>
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <!-- do nothing -->
+    {% else %}
+        <div class="container container-bg">
+    {% endif %}
+<div class="static">
+    <div class="row-fluid">
+        <div class="span12">
+            {{ static_page.content }}
+        </div>
+        <!-- end of span12 -->
+    </div>
+    <!-- end of row -->
+</div><!-- end of container -->
+{% if request.user.is_authenticated %}
+    <!-- do nothing -->
+{% else %}
+    </div><!-- end of container container-bg -->
+{% endif %}
+{% endblock %}
+
+{% block footer_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // automatically add id to h2
+            $('section .content h2').each(function () {
+                var text = $(this).html();
+                $(this).attr('id', $.trim(text));
+            });
+            
+       });
+    </script>
+
+{% endblock %}

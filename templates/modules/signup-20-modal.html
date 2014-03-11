@@ -1,0 +1,53 @@
+<!-- modal -->
+<div class="modal hide fade" id="signup20Modal" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h1><span class="red">Sports</span><span class="white">Freak</span><br />Customize Your famdates Experience</h1>
+    </div>
+    <!-- end of modal heading -->
+    <div class="modal-body">
+        <form class="form-inline standard form-horizontal" method="POST" action="/account/signup/1">
+            {% csrf_token %}
+            <div class="row-fluid">
+                <div class=" control-group">
+                    <label class="control-label">Email *</label>
+
+                    <div class="controls">
+                        <input id="id_name" class="required" type="text" name="email" maxlength="30">
+                        <span class="help-inline"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="control-group">
+                    <label class="control-label">Password *</label>
+
+                    <div class="controls">
+                        <input id="id_password" class="required" type="password" name="password" maxlength="30">
+                        <span class="help-inline"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid business">
+                <div class="control-group">
+                    <label class="control-label">Password again*</label>
+
+                    <div class="controls">
+                        <input id="id_password_again" class="required" type="password" name="confirm_password" maxlength="30">
+                        <span class="help-inline"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <button type="submit" href="#" class="btn btn-red pull-right">Continue</button>
+                <span class="login_error_msg" style="color: red"></span>
+            </div>
+        </form>
+    </div>
+    <!-- end of row-fluid -->
+</div>
+
+

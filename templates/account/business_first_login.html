@@ -1,0 +1,32 @@
+{% extends "business_base.html" %}
+
+{% block title %} First Login {% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(function () {
+            $('ul.main>li>a').each(function () {
+                $(this).addClass('disabled');
+                $(this).click(function (e) {
+                    e.preventDefault();
+                    return false;
+                })
+            })
+        })
+    </script>
+{% endblock %}
+
+{% block body %}
+    <h3>Welcome to our Dashboard</h3>
+    <div>
+        Your Dashboard will house all of your activities and will give you the ability to send announcements out.
+    </div>
+    <div>
+        Before you get started, we need to create a New Place. All Events, Happy Hours, and Deals are tagged to a Place
+    </div>
+    <div>
+        Once you create a place, use the top menu navigation to add more and to view/edit your place. Also, once you
+        have a place established, go ahead and add Events, Happy Hour Specials or Deals
+    </div>
+    <a class="btn btn-primary" href="#">Create your First Place</a>
+{% endblock %}

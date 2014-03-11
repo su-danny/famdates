@@ -1,0 +1,47 @@
+<!-- modal -->
+<div class="modal hide fade" id="signUp1Modal" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h1><span class="red">Sports</span><span class="white">Freak</span> Signup</h1>
+    </div>
+    <!-- end of modal heading -->
+    <div class="modal-body">
+        <form class="form-inline  standard" method="POST" action="{% url login_page %}">
+            <div class="row-fluid">
+                <div class="control-group">
+                    <a class="btn btn-facebook span12 text-center" type="submit" href="#" onclick="app_model.signing_up_with_facebook=true;popupwindow('/login/facebook','Login With Facebook', 200, 150);"><i class="icon-facebook"></i>Signup with
+                        Facebook</a>
+
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="control-group span12 text-center">
+                    OR
+                </div>
+            </div>
+
+
+            <div class="row-fluid">
+                <div class="control-group ">
+                    <a class="btn btn-facebook span12 text-center" type="submit" href=""><i class="icon-twitter"></i>Signup with
+                        Twitter</a>
+
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="control-group">
+                    <a class="btn btn-red span12 signup-20-button text-center">Sign up with email</a>
+                    <span class="login_error_msg" style="color: red"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <p>
+            Already an famdates member? <a href="#" class="login-button">Login</a>
+        </p>
+    </div>
+</div>
+<!-- end of modal body -->

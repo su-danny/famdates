@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>famdates</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS -->
+    <link href="static/css/bootstrap.css" rel="stylesheet">
+    <link href="static/css/skeleton.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="icon" href="static/static/images/favicon.png" type="image/png"/>
+    <link href="static/css/jquery.fancybox.css" rel="stylesheet">
+    <link href="static/flowplayer/skin/minimalist.css" rel="stylesheet">
+    <link href="static/css/chosen.css" rel="stylesheet">
+    <link href="static/css/datepicker.css" rel="stylesheet">
+    <link href="static/css/profile.css" rel="stylesheet">
+    <!-- PULL IN JQUERY AND MASONRY RIGHT AWAY -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="static/js/jquery.masonry.min.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body class="logged-in">
+<div id="wrap">
+<header>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <div class="row-fluid">
+                    <div class="span4 loggedin">
+                        <div class="logo"><a class="shield" href="index.html"><img src="static/images/logo-shield.png"/></a>
+                        </div>
+                        <!-- end of logo -->
+                    </div>
+                    <!-- end of span4 -->
+
+                    <div class="span4 loggedin">
+                        <ul class="nav pages">
+                            <li><a href="fanzone.html" class=""><img src="media/images/fanzone_icon-medium.png"
+                                                                     alt="FanZone"/><span>FanZone</span></a></li>
+                            <li><a href="getfit.html" class=""><img src="media/images/fitness_icon-medium.png"
+                                                                    alt="FanZone"/><span>GetFit</span></a></li>
+                            <li><a href="gametime.html" class=""><img src="media/images/gametime_icon-medium.png"
+                                                                      alt="FanZone"/><span>GameTime</span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="span4">
+                        <ul id="gn-menu" class="gn-menu-main pull-right">
+
+                            <li class="messageNotification">
+                                <a href="messages.html"><span><i class="icon-comments-alt"></i><span
+                                        class="badge">4</span></span></a>
+                            </li>
+
+                            <li class="searchMenu">
+                                <span><i class="icon-search"></i></span>
+
+                                <div class="searchBar span4" style="display:none">
+                                    <form action="" name="">
+                                        <div class="input-append">
+                                            <input class="span3" name="search" id="search" type="text"
+                                                   placeholder="Sitewide Search…">
+                                            <button type="submit">Search</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+
+                            <li class="menuSlide gn-trigger">
+                                <a class="gn-icon gn-icon-menu"><i class="icon-reorder gn-icon gn-icon-menu"></i></a>
+
+                                <nav class="gn-menu-wrapper left-sidebar">
+                                    <div class="gn-scroller">
+                                        <ul class="gn-menu">
+                                            <li><i class="icon-wrench icon-left"></i><a class="gn-icon"
+                                                                                        href="settings.html">Settings</a>
+                                            </li>
+                                            <li><i class="icon-picture icon-left"></i><a class="gn-icon"
+                                                                                         href="profile-logged-in-user.html#profilePhotos">Photos</a>
+                                            </li>
+                                            <li><i class="icon-group icon-left"></i><a class="gn-icon"
+                                                                                       href="profile-logged-in-user.html#profileFollowers">Followers</a>
+                                            </li>
+                                            <li><i class="icon-group icon-left"></i><a class="gn-icon"
+                                                                                       href="profile-logged-in-user.html#profileFollowing">Following</a>
+                                            </li>
+                                            <li><i class="icon-user icon-left"></i><a class="gn-icon"
+                                                                                      href="profile-logged-in-user.html">My
+                                                Profile</a></li>
+                                            <li><i class="icon-cog icon-left"></i><a class="gn-icon">Find Similar
+                                                Users</a></li>
+                                            <li><i class="icon-calendar icon-left"></i><a class="gn-icon">Live
+                                                Events</a></li>
+                                            <li><i class="icon-calendar icon-left"></i><a class="gn-icon"
+                                                                                          href="/account/logout">Log
+                                                Out</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /gn-scroller -->
+                                </nav>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- end of span4 -->
+
+                </div>
+                <!-- end of row-fluid -->
+            </div>
+            <!-- end of container -->
+        </div>
+        <!-- end of navbar inner -->
+    </div>
+    <!-- end of navbar -->
+</header>
+
+<!--<div class="container container-bg">-->
+<div class="container-bg">
+<!-- 
+****************************
+END OF HEADER
+****************************
+-->
+
+
+<!-- 
+****************************
+START POSTS FOR ALL FEEDS
+****************************
+-->
+<div class="post-container" style="position: relative; height: 0px;">
+
+<!-- ************** POST CREATE MAIN FEED ************** -->
+<!-- WIREFRAME DOESN'T SHOW AREA TO SELECT WHERE YOU ARE POSTING TO. WILL NEED TO ADD THIS OR THE POST
+    CREATION BOX ONLY SHOWS UP ON INTERIOR FEEDS LIKE FANZONE, GAMETIME, GETFIT. NEED TO CLARIFY THIS
+-->
+<div id="postStatus" class="span6 full_post">
+    <div class="post create">
+        <textarea id="postCreate" class="textarea" autocomplete="off" name="body"
+                  placeholder="Create a Post..."></textarea>
+
+        <div id="postEvent" style="display:none">
+            <form id="addEvent" method="post" action="" class="form-horizontal">
+                <h4>Add Your Event</h4>
+
+                <div class="control-group">
+                    <label class="control-label span1" for="eventName">Name</label>
+
+                    <div class="controls span4">
+                        <input type="text" id="eventName" placeholder="Event Name">
+                    </div>
+                </div>
+                <!-- end of control group -->
+                <div class="control-group">
+                    <label class="control-label span1" for="eventDetails">Details</label>
+
+                    <div class="controls span4">
+                        <textarea id="eventDetails" class="textarea" autocomplete="off" name="eventDetails"
+                                  placeholder="Event Details"></textarea>
+                    </div>
+                </div>
+                <!-- end of control group -->
+                <div class="control-group">
+                    <label class="control-label span1" for="eventDate">When</label>
+
+                    <div class="input-append date" id="eventDate" data-date="<?php echo date('m d Y');?>"
+                         data-date-format="mm-dd-yyyy">
+                        <input class="span2" type="text" value="<?php echo date('m d Y');?>">
+                        <span class="add-on"><i class="icon-calendar icon-right"></i></span>
+
+                    </div>
+                </div>
+                <!-- end of control group -->
+                <div class="control-group">
+                    <label class="control-label span1" for="eventType">Type</label>
+                    <select class="controls span4">
+                        <option>Public</option>
+                        <option>Private</option>
+                    </select>
+                </div>
+                <!-- end of control group -->
+                <div class="control-group">
+                    <label class="control-label span1" for="eventSeats">Total Seats</label>
+                    <select class="controls span4">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>More Than I Can Count</option>
+                    </select>
+                </div>
+                <!-- end of control group -->
+                <div class="control-group">
+                    <label class="control-label span1" for="eventInterets">Interests</label>
+                    <select multiple="multiple" class="controls span4">
+                        <option>Interest One</option>
+                        <option>Interest Two</option>
+                        <option>Interest Three</option>
+                    </select>
+                </div>
+                <!-- end of control group -->
+            </form>
+        </div>
+        <!-- end of postEvent -->
+        <span class="alert" style="display: none;"></span>
+        <span class="detected-location"></span>
+        <!-- this is where the previews get added -->
+        <table class="table table-striped" role="presentation">
+            <tbody class="files" data-target="#modal-gallery" data-toggle="modal-gallery"></tbody>
+        </table>
+    </div>
+    <!-- end of post create -->
+
+    <form id="fileupload" method="post" action="/upload/new/" enctype="multipart/form-data">
+        <div class="fileupload-loading"></div>
+        <table class="table table-striped" id="preview-section">
+            <tbody class="files" data-toggle="modal-gallery2" data-target="#modal-gallery2"></tbody>
+        </table>
+
+        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken'
+                                         value='Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM'/></div>
+        <div class="fileupload-buttonbar">
+            <div class="gray-bottom row-fluid">
+                <div class="span6">
+                    <div class="post-type">
+                        <i class="icon-map-marker"></i>
+			
+								<span class="fileinput-button"> <i class="icon-camera"></i>
+									<input id="fileuploadImage" type="file" name="image" multiple/>
+								</span>
+								<span class="fileinput-button"> <i class="icon-film"></i>
+									<input id="fileuploadVideo" type="file" name="video" multiple/>
+								</span>
+
+                        <span><i class="icon-calendar"></i></span>
+
+                        <button style="display: none;" type="submit" class="btn btn-success start">
+                            <i class="icon-upload icon-white"></i>
+                            <span>Start upload</span>
+                        </button>
+                    </div>
+                    <!-- end of post-type -->
+                </div>
+                <!-- end of span3 -->
+
+                <div class="span6 feed-type">
+                    <span class="btn btn-red post-button">Post</span>
+                    <ul class="socialPost">
+                        <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                        <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                    </ul>
+                </div>
+                <!-- end of span3 -->
+
+
+            </div>
+            <!-- end of gray bottom -->
+
+            <input type="hidden" name="location"/>
+
+            <div class="span6 fileupload-progress fade">
+
+            </div>
+        </div>
+        <!-- end of file upload button bar -->
+    </form>
+    <div class="fileupload-content">
+        <table class="files"></table>
+        <div class="fileupload-progressbar"></div>
+    </div>
+    <!-- end of fileupload content -->
+</div>
+<!-- end of span6 full post-->
+
+<!-- ************** END OF POST CREATE **************** -->
+
+
+<!-- ************** EVENTS LISTINGS BOX *************** -->
+
+<div id="eventListings" class="span6 full_post">
+    <div class="post">
+        <h4 class="span3">Upcoming Events</h4>
+        <a class="eventToggle span2" href="live-events.html">View All</a>
+
+        <div class="clearfix"></div>
+        <ul class="events">
+            <li>
+                <div class="post_author_thumb">
+                    <a href="/account/profile/3"><img width="32" height="20" class="circle photo-border"
+                                                      src="media/cache/d6/7d/d67d900b497aeab49ccef613f6a7fde0.jpg"></a>
+                </div>
+                <!--/post img-->
+                <div class="eventInfo">
+                    <a href="URLTOEVENT" class="post_author_name"><span>Event Title Goes Here</span></a>
+                    <span class="eventDate">Today @ 3pm</span>
+                </div>
+                <div class="eventActions">
+                    <a class="calendar" href="#"><i class="icon-calendar icon-left"></i></a>
+                    <a class="info" href="#"><i class="icon-info icon-left"></i></a>
+                </div>
+            </li>
+
+            <li>
+                <div class="post_author_thumb">
+                    <a href="/account/profile/3"><img width="32" height="20" class="circle photo-border"
+                                                      src="media/cache/d6/7d/d67d900b497aeab49ccef613f6a7fde0.jpg"></a>
+                </div>
+                <!--/post img-->
+                <div class="eventInfo">
+                    <a href="URLTOEVENT" class="post_author_name"><span>Another Event Here</span></a>
+                    <span class="eventDate">Oct 20th @ 3pm</span>
+                </div>
+                <div class="eventActions">
+                    <a class="calendar" href="#"><i class="icon-calendar icon-left"></i></a>
+                    <a class="info" href="#"><i class="icon-info icon-left"></i></a>
+                </div>
+            </li>
+
+            <li>
+                <div class="post_author_thumb">
+                    <a href="/account/profile/3"><img width="32" height="20" class="circle photo-border"
+                                                      src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"></a>
+                </div>
+                <!--/post img-->
+                <div class="eventInfo">
+                    <a href="URLTOEVENT" class="post_author_name"><span>Come Join My Event</span></a>
+                    <span class="eventDate">Oct 28th @ 1:30pm</span>
+                </div>
+                <div class="eventActions">
+                    <a class="calendar" href="#"><i class="icon-calendar icon-left"></i></a>
+                    <a class="info" href="#"><i class="icon-info icon-left"></i></a>
+                </div>
+            </li>
+
+            <div class="clearfix"></div>
+        </ul>
+
+    </div>
+    <!-- end of the post -->
+</div>
+<!-- end of Event Listings -->
+
+<!-- ************** END OF EVENTS LISTINGS BOX *************** -->
+
+
+<!-- ************** START MAIN FEED AGGREGATE. THIS IS ALL FEEDS ********************* -->
+
+<div post_id="101" class="full_post span6">
+    <div id="post_101" class="post">
+
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/3"><img width="32" height="20" class="circle photo-border"
+                                                  src="media/cache/d6/7d/d67d900b497aeab49ccef613f6a7fde0.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/3" class="post_author_name"><span>Percey Harvin</span></a>
+            <span class="timestamp">1 week, 1 day ago <span class="icon icon-fanzone"><img
+                    src="media/images/fanzone_icon-mini.png" alt="fanzone_icon-mini" width="16"
+                    height="16"/></span></span>
+            <span class="locationstamp"> near Queen Creek, AZ</span>
+
+            <div class="post-votes">
+						<span id="vote-status-101" class="vote-status-101 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('101', 'up');" href="#vote-status-101"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('101', 'down');" href="#vote-status-101"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>testing post</p>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- hide comments but lets put # of comments in-->
+                    <span class="toggle-post-responses"># of Comments Toggle <i class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/101/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post-comment -->
+            </div>
+            <!--/span11-->
+        </div>
+        <!--/friend comments-->
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+
+<div post_id="88" class="full_post span6">
+    <div id="post_88" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/21"><img width="32" height="23" class="circle photo-border"
+                                                   src="media/cache/c9/41/c94176c9a8310af44317d823a17e7a13.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/21" class="post_author_name"><span>jason borne</span></a>
+            <span class="timestamp">3 months, 1 week ago <span class="icon icon-fanzone"><img
+                    src="media/images/fanzone_icon-mini.png" alt="fanzone_icon-mini" width="16"
+                    height="16"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-88" class="vote-status-88 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('88', 'up');" href="#vote-status-88"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('88', 'down');" href="#vote-status-88"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>Get Ready!</p>
+            <object width="500" height="300" type="application/x-shockwave-flash"
+                    data="http://releases.flowplayer.org/swf/flowplayer-3.2.15.swf" bgcolor="#000000"
+                    class="flowplayer">
+                <param value="http://releases.flowplayer.org/swf/flowplayer-3.2.15.swf" name="movie">
+                <param value="true" name="allowfullscreen">
+                <param value="false" name="autoPlay">
+                <param value="config={&quot;clip&quot;:{&quot;url&quot;:&quot;http://famdates.simpleunion.commedia/file/Seattle_Seahawks_2013_Hype_Video_Promo.mp4&quot;,&quot;autoPlay&quot;:false}}"
+                       name="flashvars">
+            </object>
+        </div>
+        <!-- end of post body -->
+
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses"># of Comments Toggle <i class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/88/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post-comment -->
+            </div>
+            <!--/span11-->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="72" class="full_post span6">
+    <div id="post_72" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/1"><img width="32" height="24" class="circle photo-border"
+                                                  src="media/cache/da/14/da14e9a00de987cb9dcd3da79b163e54.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/1" class="post_author_name"><span>todd sweeney</span></a>
+            <span class="timestamp">3 months, 2 weeks ago <span class="icon icon-gametime"><img
+                    src="media/images/gametime_icon-mini.png" alt="gametime_icon-mini" width="16"
+                    height="15"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-72" class="vote-status-72 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('72', 'up');" href="#vote-status-72"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">2</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('72', 'down');" href="#vote-status-72"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>Oh yay, can't wait!</p>
+
+            <div class="media_action"><img src="media/file/seahawks_3.jpg"></div>
+            <div class="media_action"><img src="media/file/seattle_seahawks_stadium-10117.jpg"></div>
+            <div class="media_action"><img src="media/file/tempRM2_3087--nfl_mezz_1280_1024.jpg"></div>
+            <div class="media_action"><img src="media/file/Seattle_Seahawks_NFL_Football.jpg"></div>
+            <div class="media_action"><img src="media/file/Seahawks_0005.jpg"></div>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses">Comments Toggle <i
+                            class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end of response -->
+
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/72/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post comment -->
+            </div>
+            <!-- end of marginleft10 -->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="56" class="full_post span6">
+    <div id="post_56" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/27">
+
+                </a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/27" class="post_author_name"><span>Henrik  Shahgholian</span></a>
+            <span class="timestamp">3 months, 1 week ago <span class="icon icon-fitness"><img
+                    src="media/images/fitness_icon-mini.png" alt="fitness_icon-mini" width="16"
+                    height="16"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-56" class="vote-status-56 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('56', 'up');" href="#vote-status-56"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('56', 'down');" href="#vote-status-56"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+
+        <div class="post_body">
+            <p></p>
+
+            <div class="media_action"><img src="media/file/image.jpg"></div>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses"># of Comments Toggle <i class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <form method="POST" class="comment-form" action="/post/comment/56/create">
+                                <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                                 name="csrfmiddlewaretoken"></div>
+                                <a href="/account/profile/4"><img width="32" height="20"
+                                                                  src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                                  class="hidden-phone circle photo-border"></a>
+                                <input type="text" placeholder="Leave a comment..." class="response_comment"
+                                       name="body">
+                                <button type="submit" class="btn">Post</button>
+                                <ul class="socialPost">
+                                    <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                                    <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end of response -->
+            </div>
+            <!--/span11-->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="101" class="full_post span6">
+    <div id="post_101" class="post">
+
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/3"><img width="32" height="20" class="circle photo-border"
+                                                  src="media/cache/d6/7d/d67d900b497aeab49ccef613f6a7fde0.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/3" class="post_author_name"><span>Percey Harvin</span></a>
+            <span class="timestamp">1 week, 1 day ago <span class="icon icon-fitness"><img
+                    src="media/images/fitness_icon-mini.png" alt="fitness_icon-mini" width="16"
+                    height="15"/></span></span>
+            <span class="locationstamp"> near Queen Creek, AZ</span>
+
+            <div class="post-votes">
+						<span id="vote-status-101" class="vote-status-101 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('101', 'up');" href="#vote-status-101"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('101', 'down');" href="#vote-status-101"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>testing post</p>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- hide comments but lets put # of comments in-->
+                    <span class="toggle-post-responses"># of Comments Toggle <i class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/101/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post-comment -->
+            </div>
+            <!--/span11-->
+        </div>
+        <!--/friend comments-->
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+
+<div post_id="88" class="full_post span6">
+    <div id="post_88" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/21"><img width="32" height="23" class="circle photo-border"
+                                                   src="media/cache/c9/41/c94176c9a8310af44317d823a17e7a13.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/21" class="post_author_name"><span>jason borne</span></a>
+            <span class="timestamp">3 months, 1 week ago <span class="icon icon-fanzone"><img
+                    src="media/images/fanzone_icon-mini.png" alt="fanzone_icon-mini" width="16"
+                    height="16"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-88" class="vote-status-88 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('88', 'up');" href="#vote-status-88"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('88', 'down');" href="#vote-status-88"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>Get Ready!</p>
+            <object width="500" height="300" type="application/x-shockwave-flash"
+                    data="http://releases.flowplayer.org/swf/flowplayer-3.2.15.swf" bgcolor="#000000"
+                    class="flowplayer">
+                <param value="http://releases.flowplayer.org/swf/flowplayer-3.2.15.swf" name="movie">
+                <param value="true" name="allowfullscreen">
+                <param value="false" name="autoPlay">
+                <param value="config={&quot;clip&quot;:{&quot;url&quot;:&quot;http://famdates.simpleunion.commedia/file/Seattle_Seahawks_2013_Hype_Video_Promo.mp4&quot;,&quot;autoPlay&quot;:false}}"
+                       name="flashvars">
+            </object>
+        </div>
+        <!-- end of post body -->
+
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses"># of Comments Toggle <i class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/88/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post-comment -->
+            </div>
+            <!--/span11-->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="72" class="full_post span6">
+    <div id="post_72" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/1"><img width="32" height="24" class="circle photo-border"
+                                                  src="media/cache/da/14/da14e9a00de987cb9dcd3da79b163e54.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/1" class="post_author_name"><span>todd sweeney</span></a>
+            <span class="timestamp">3 months, 2 weeks ago <span class="icon icon-gametime"><img
+                    src="media/images/gametime_icon-mini.png" alt="gametime_icon-mini" width="16"
+                    height="15"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-72" class="vote-status-72 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('72', 'up');" href="#vote-status-72"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">2</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('72', 'down');" href="#vote-status-72"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>Oh yay, can't wait!</p>
+
+            <div class="media_action"><img src="media/file/seahawks_3.jpg"></div>
+            <div class="media_action"><img src="media/file/seattle_seahawks_stadium-10117.jpg"></div>
+            <div class="media_action"><img src="media/file/tempRM2_3087--nfl_mezz_1280_1024.jpg"></div>
+            <div class="media_action"><img src="media/file/Seattle_Seahawks_NFL_Football.jpg"></div>
+            <div class="media_action"><img src="media/file/Seahawks_0005.jpg"></div>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses">Comments Toggle <i
+                            class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end of response -->
+
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/72/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post comment -->
+            </div>
+            <!-- end of marginleft10 -->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="56" class="full_post span6">
+    <div id="post_56" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/27">
+
+                </a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/27" class="post_author_name"><span>Henrik  Shahgholian</span></a>
+            <span class="timestamp">3 months, 2 weeks ago <span class="icon icon-gametime"><img
+                    src="media/images/gametime_icon-mini.png" alt="gametime_icon-mini" width="16"
+                    height="15"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-56" class="vote-status-56 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('56', 'up');" href="#vote-status-56"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('56', 'down');" href="#vote-status-56"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+
+        <div class="post_body">
+            <p></p>
+
+            <div class="media_action"><img src="media/file/image.jpg"></div>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses"># of Comments Toggle <i class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <form method="POST" class="comment-form" action="/post/comment/56/create">
+                                <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                                 name="csrfmiddlewaretoken"></div>
+                                <a href="/account/profile/4"><img width="32" height="20"
+                                                                  src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                                  class="hidden-phone circle photo-border"></a>
+                                <input type="text" placeholder="Leave a comment..." class="response_comment"
+                                       name="body">
+                                <button type="submit" class="btn">Post</button>
+                                <ul class="socialPost">
+                                    <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                                    <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end of response -->
+            </div>
+            <!--/span11-->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="88" class="full_post span6">
+    <div id="post_88" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/21"><img width="32" height="23" class="circle photo-border"
+                                                   src="media/cache/c9/41/c94176c9a8310af44317d823a17e7a13.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/21" class="post_author_name"><span>jason borne</span></a>
+            <span class="timestamp">3 months, 1 week ago <span class="icon icon-fitness"><img
+                    src="media/images/fitness_icon-mini.png" alt="fitness_icon-mini" width="16"
+                    height="15"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-88" class="vote-status-88 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('88', 'up');" href="#vote-status-88"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('88', 'down');" href="#vote-status-88"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>Get Ready!</p>
+            <object width="500" height="300" type="application/x-shockwave-flash"
+                    data="http://releases.flowplayer.org/swf/flowplayer-3.2.15.swf" bgcolor="#000000"
+                    class="flowplayer">
+                <param value="http://releases.flowplayer.org/swf/flowplayer-3.2.15.swf" name="movie">
+                <param value="true" name="allowfullscreen">
+                <param value="false" name="autoPlay">
+                <param value="config={&quot;clip&quot;:{&quot;url&quot;:&quot;http://famdates.simpleunion.commedia/file/Seattle_Seahawks_2013_Hype_Video_Promo.mp4&quot;,&quot;autoPlay&quot;:false}}"
+                       name="flashvars">
+            </object>
+        </div>
+        <!-- end of post body -->
+
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses"># of Comments Toggle <i class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/88/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post-comment -->
+            </div>
+            <!--/span11-->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="56" class="full_post span6">
+    <div id="post_56" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/27">
+
+                </a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/27" class="post_author_name"><span>Henrik  Shahgholian</span></a>
+            <span class="timestamp">3 months, 2 week ago <span class="icon icon-fitness"><img
+                    src="media/images/fitness_icon-mini.png" alt="fitness_icon-mini" width="16"
+                    height="15"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-56" class="vote-status-56 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('56', 'up');" href="#vote-status-56"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('56', 'down');" href="#vote-status-56"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+
+        <div class="post_body">
+            <p></p>
+
+            <div class="media_action"><img src="media/file/image.jpg"></div>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses"># of Comments Toggle <i class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <form method="POST" class="comment-form" action="/post/comment/56/create">
+                                <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                                 name="csrfmiddlewaretoken"></div>
+                                <a href="/account/profile/4"><img width="32" height="20"
+                                                                  src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                                  class="hidden-phone circle photo-border"></a>
+                                <input type="text" placeholder="Leave a comment..." class="response_comment"
+                                       name="body">
+                                <button type="submit" class="btn">Post</button>
+                                <ul class="socialPost">
+                                    <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                                    <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end of response -->
+            </div>
+            <!--/span11-->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="101" class="full_post span6">
+    <div id="post_101" class="post">
+
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/3"><img width="32" height="20" class="circle photo-border"
+                                                  src="media/cache/d6/7d/d67d900b497aeab49ccef613f6a7fde0.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/3" class="post_author_name"><span>Percey Harvin</span></a>
+            <span class="timestamp">1 week, 1 day ago <span class="icon icon-fanzone"><img
+                    src="media/images/fanzone_icon-mini.png" alt="fanzone_icon-mini" width="16"
+                    height="16"/></span></span>
+            <span class="locationstamp"> near Queen Creek, AZ</span>
+
+            <div class="post-votes">
+						<span id="vote-status-101" class="vote-status-101 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('101', 'up');" href="#vote-status-101"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('101', 'down');" href="#vote-status-101"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">0</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>testing post</p>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- hide comments but lets put # of comments in-->
+                    <span class="toggle-post-responses"># of Comments Toggle <i class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/101/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post-comment -->
+            </div>
+            <!--/span11-->
+        </div>
+        <!--/friend comments-->
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="72" class="full_post span6">
+    <div id="post_72" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/1"><img width="32" height="24" class="circle photo-border"
+                                                  src="media/cache/da/14/da14e9a00de987cb9dcd3da79b163e54.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/1" class="post_author_name"><span>todd sweeney</span></a>
+            <span class="timestamp">3 months, 2 weeks ago <span class="icon icon-fanzone"><img
+                    src="media/images/fanzone_icon-mini.png" alt="fanzone_icon-mini" width="16"
+                    height="16"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-72" class="vote-status-72 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('72', 'up');" href="#vote-status-72"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">2</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('72', 'down');" href="#vote-status-72"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>Oh yay, can't wait!</p>
+
+            <div class="media_action"><img src="media/file/seahawks_3.jpg"></div>
+            <div class="media_action"><img src="media/file/seattle_seahawks_stadium-10117.jpg"></div>
+            <div class="media_action"><img src="media/file/tempRM2_3087--nfl_mezz_1280_1024.jpg"></div>
+            <div class="media_action"><img src="media/file/Seattle_Seahawks_NFL_Football.jpg"></div>
+            <div class="media_action"><img src="media/file/Seahawks_0005.jpg"></div>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses">Comments Toggle <i
+                            class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end of response -->
+
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/72/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post comment -->
+            </div>
+            <!-- end of marginleft10 -->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="72" class="full_post span6">
+    <div id="post_72" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/1"><img width="32" height="24" class="circle photo-border"
+                                                  src="media/cache/da/14/da14e9a00de987cb9dcd3da79b163e54.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/1" class="post_author_name"><span>todd sweeney</span></a>
+            <span class="timestamp">3 months, 2 weeks ago <span class="icon icon-gametime"><img
+                    src="media/images/gametime_icon-mini.png" alt="gametime_icon-mini" width="16"
+                    height="15"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-72" class="vote-status-72 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('72', 'up');" href="#vote-status-72"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">2</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('72', 'down');" href="#vote-status-72"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>Oh yay, can't wait!</p>
+
+            <div class="media_action"><img src="media/file/seahawks_3.jpg"></div>
+            <div class="media_action"><img src="media/file/seattle_seahawks_stadium-10117.jpg"></div>
+            <div class="media_action"><img src="media/file/tempRM2_3087--nfl_mezz_1280_1024.jpg"></div>
+            <div class="media_action"><img src="media/file/Seattle_Seahawks_NFL_Football.jpg"></div>
+            <div class="media_action"><img src="media/file/Seahawks_0005.jpg"></div>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses">Comments Toggle <i
+                            class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end of response -->
+
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/72/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post comment -->
+            </div>
+            <!-- end of marginleft10 -->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+<div post_id="72" class="full_post span6">
+    <div id="post_72" class="post">
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="/account/profile/1"><img width="32" height="24" class="circle photo-border"
+                                                  src="media/cache/da/14/da14e9a00de987cb9dcd3da79b163e54.jpg"></a>
+            </div>
+            <!--/post img-->
+            <a href="/account/profile/1" class="post_author_name"><span>todd sweeney</span></a>
+            <span class="timestamp">3 months, 2 weeks ago in <span class="icon icon-fanzone"><img
+                    src="media/images/fanzone_icon-mini.png" alt="fanzone_icon-mini" width="16"
+                    height="16"/></span></span>
+
+            <div class="post-votes">
+						<span id="vote-status-72" class="vote-status-72 vote"> 
+							<div class="vote_like">
+                                <a onclick="vote('72', 'up');" href="#vote-status-72"><i
+                                        class="icon-thumbs-up icon-left"></i></a>
+                                <span class="sidebar-total single">2</span>
+                            </div><!-- end of like -->
+							<div class="vote_dislike">
+                                <a onclick="vote('72', 'down');" href="#vote-status-72"><i
+                                        class="icon-thumbs-down icon-left"></i></a>
+                                <span class="sidebar-total single">1</span>
+                            </div>
+						</span>
+            </div>
+            <!-- end of post-votes -->
+        </div>
+        <!-- end of name action -->
+        <div class="clearfix"></div>
+        <div class="post_body">
+            <p>Oh yay, can't wait!</p>
+
+            <div class="media_action"><img src="media/file/seahawks_3.jpg"></div>
+            <div class="media_action"><img src="media/file/seattle_seahawks_stadium-10117.jpg"></div>
+            <div class="media_action"><img src="media/file/tempRM2_3087--nfl_mezz_1280_1024.jpg"></div>
+            <div class="media_action"><img src="media/file/Seattle_Seahawks_NFL_Football.jpg"></div>
+            <div class="media_action"><img src="media/file/Seahawks_0005.jpg"></div>
+        </div>
+        <!-- end of post body -->
+
+        <div class="friend_comments">
+            <div class="marginleft10">
+                <div class="response">
+                    <!-- if there are more than 3 comments add the class of 'hidden' to ul. then we will add the span to toggle the rest-->
+                    <span class="toggle-post-responses">Comments Toggle <i
+                            class="icon-caret-down icon-right"></i></span>
+                    <ul class="unstyled post-responses" style="display:none;">
+                        <li>
+                            <a href="/account/profile/54"><img width="32" height="24"
+                                                               class="friend_img hidden-phone circle photo-border"
+                                                               src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg"><span
+                                    class="red friend_name">Ruben Inocencio</span></a>
+
+                            <div id="c17" class="friend_response">niners all day!</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end of response -->
+
+                <div class="post-comment">
+                    <form method="POST" class="comment-form" action="/post/comment/72/create">
+                        <div style="display:none"><input type="hidden" value="Sx90VAvmSlgJ0LDuFJx0jrpr13tDvIOM"
+                                                         name="csrfmiddlewaretoken"></div>
+                        <a href="/account/profile/4"><img width="32" height="20"
+                                                          src="media/cache/6f/0d/6f0d32e51bb5899dbd7daad237534353.jpg"
+                                                          class="hidden-phone circle photo-border"></a>
+                        <input type="text" placeholder="Leave a comment..." class="response_comment" name="body">
+                        <button type="submit" class="btn">Post</button>
+                        <ul class="socialPost">
+                            <li class="facebook"><i class="icon-facebook icon-left"></i></li>
+                            <li class="twitter"><i class="icon-twitter icon-right"></i></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of post comment -->
+            </div>
+            <!-- end of marginleft10 -->
+        </div>
+        <!--/friend comments-->
+
+    </div>
+    <!--/post-->
+</div>
+<!--/full post-->
+
+</div>
+<!-- end of post container -->
+
+
+<!-- ***************** END OF THE MAIN FEED **************** -->
+
+
+<!-- 
+*********************************
+START OF FOOTER
+*********************************
+-->
+
+</div>
+<!-- end of container container-bg -->
+</div>
+<!--/wrap-->
+
+<div class="clearfix"></div>
+
+<div id="footer">
+    <div class="container">
+        <div class="span4">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a><span class="divider"> | </span></li>
+                <li><a href="/about-us/">About Us</a><span class="divider"> | </span></li>
+                <li><a href="/terms/">Terms</a><span class="divider"> | </span></li>
+                <li><a href="/faq/">Faq</a><span class="divider"> | </span></li>
+                <li><a href="/privacy/">Privacy</a><span class="divider"> | </span></li>
+                <li><a href="/contact-us">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="span4">
+            <ul class="unstyled social">
+                <li style="width: auto">Follow Us&nbsp;</li>
+                <li><a href="#"><i class="icon-facebook-sign icon-large"></i></a></li>
+                <li><a href="#"><i class="icon-twitter-sign icon-large"></i></a></li>
+                <li><a href="#"><i class="icon-youtube-sign icon-large"></i></a></li>
+            </ul>
+        </div>
+
+        <p class="copyright span4">&copy; Copyright 2013 <a href="/">famdates inc</a>. All Rights Reserved</p>
+    </div>
+    <!-- end of container -->
+</div>
+<!-- end of footer -->
+
+<!-- modal -->
+<div class="modal hide fade" id="loginModal" aria-hidden="true">
+    <div class="modal-header">
+        <h1><span class="red">Sports</span><span class="white">Freak</span> Login</h1>
+    </div>
+    <!-- end of modal heading -->
+    <div class="modal-body">
+        <form class="form-inline loginForm standard" class="editable" method="POST" action="{% url login_page %}">
+            <div class="row-fluid">
+                <div class="control-group span5">
+                    <a class="btn btn-info btn-facebook" type="submit" href=""><i class="icon-facebook"></i>Login with
+                        Facebook</a>
+                    <a class="btn btn-info btn-twitter" type="submit" href=""><i class="icon-twitter"></i>Login with
+                        Twitter</a>
+                </div>
+                <p class="span1 combo">or</p>
+
+                <div class="span6">
+                    <div class="alert" style="display:none">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                    <p style="display: none;"><input type="hidden" name="next" value=""/></p>
+
+                    <div class="control-group">
+                        <input type="text" id="iemail" name="email" placeholder="Email" class="">
+                    </div>
+                    <!-- end of control group -->
+                    <div class="control-group">
+                        <input class="" name="password" id="appendedInputButton" type="password" placeholder="Password">
+                    </div>
+                    <!-- end of control group -->
+                    <div class="control-group">
+                        <button class="span4 btn btn-red pull-right" type="submit">Login</button>
+                        <span class="login_error_msg" style="color: red"></span>
+                    </div>
+                </div>
+                <!-- end of span6  -->
+            </div>
+            <!-- end of row-fluid -->
+        </form>
+    </div>
+    <!-- end of modal body -->
+    <div class="modal-footer">
+        <p><a href="/account/reset/">Forgot Your Password?</a>&nbsp;&nbsp;Need an Account? <a href="">Register Now!</a>
+        </p>
+    </div>
+    <!-- end of modal footer -->
+</div>
+<!-- end of modal -->
+
+<script src="static/js/md5.js"></script>
+<script src="static/js/bootstrap.js"></script>
+<script src="static/js/holder.js"></script>
+<script src="static/js/bootstrap-datepicker.js"></script>
+<script src="static/js/jquery.cookie.js"></script>
+<script src="static/js/jquery.fancybox.pack.js?v=2.1.4"></script>
+<script src="static/js/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script src="static/js/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script src="static/js/helpers/jquery.fancybox-media.js?v=1.0.5"></script>
+<script src="static/js/underscore-min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="static/flowplayer/flowplayer.min.js"></script>
+<script src="static/js/chosen.jquery.min.js"></script>
+<script src="static/js/classie.js"></script>
+<script src="static/js/gnmenu.js"></script>
+<script src="static/js/app.js"></script>
+<script src="static/js/jquery.tmpl.min.js"></script>
+<script type="text/javascript">
+
+
+    jQuery(document).ready(function ($) {
+
+
+        $(".fancybox").fancybox();
+        $('.sf-tooltip').tooltip({html: true})
+
+
+        $('input[name=similar_users]').focus(function () {
+            $(this).siblings('ul').show()
+        }).blur(function () {
+            $(this).siblings('ul').hide()
+        });
+
+        $('input[name=similar_users]').keyup(function () {
+            var t = $(this).val();
+            $(this).siblings('ul').find('li').each(function () {
+                var _t = $(this).text();
+                $(this).toggle(_t.indexOf(t) != -1);
+            });
+            return false;
+        }).siblings('ul').find('li').click(function () {
+                    $('input[name=similar_users]').val($(this).text()).siblings('ul').hide();
+                })
+    });
+</script>
+
+<style>
+    .sui {
+        position: relative;
+    }
+
+    .sui .chzn-results {
+        display: none;
+        position: absolute;
+        width: 100%;
+        background: white;
+        margin: 5px 10px;
+        padding: 3px;
+    }
+</style>
+</body>
+</html>

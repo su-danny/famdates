@@ -1,0 +1,463 @@
+{% extends "user_base.html" %}
+{% load i18n %}
+{% load gravatar %}
+{% load follow_tags %}
+{% load thumbnail %}
+{% load humanize %}
+<!-- Begin page content -->
+{% load upload_tags %}
+{% block content %}
+    <div class="span12 alpha">
+    <!-- ******************************
+        each view has a mainheader
+    ******************************* -->
+    <div class="mainHeader clearfix">
+        <ul class="btn-group">
+            <li class="active"><a href="#requested" data-toggle="tab" class="btn plain">requested</a></li>
+            <li><a href="#upcoming" data-toggle="tab" class="btn secondary">upcoming</a></li>
+            <li><a href="#previous" data-toggle="tab" class="btn secondary">previous</a></li>
+        </ul>
+        <div class="right clearfix">
+            <a href="#addPlaydateModal" class="btn primary" data-toggle="modal">create new</a>
+        </div>
+    </div>
+
+    <div class="tab-content">
+    <!-- **************************************
+            load each tab content via ajax request.
+            this will save on the loading of the page.
+            only load content when it is requested
+        *************************************** -->
+    <div class="tab-pane active" id="requested">
+
+    <!-- *********************************************************
+    starting the recommendation profiles. This is a loop
+********************************************************** -->
+    <div class="profile med event left clearfix">
+
+        <div class="profileInfo clearfix">
+            <div class="header clearfix">
+                <h3 class="date"><span>today</span>03/14/2014
+                </h3>
+
+                <h3 class="title">Bring the Kids to the Park</h3>
+
+                <h2><a href="#">Rochelle Chase</a> <em>and</em></h2>
+
+                <div class="left profileThumb">
+                    <img class="thumb" src="http://placehold.it/80x80&amp;text=profile+thumbnail">
+                </div>
+                <div class="left children profileThumb">
+                    <!-- show the children thumbs -->
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                </div>
+                <a href="#" class="link"><span>//</span>view rochelle's profile</a>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+        <div class="clearfix"></div>
+        <div class="matchInfo eventInfo clearfix">
+            <div class="locationInfo">
+                <h3 class="location">Location: <a href="" class="city">The Park</a></h3>
+                <span class="highlight">Pacific Heights, San Francisco</span>
+                <a href="" class="link"><span>//</span>map it!</a>
+            </div>
+            <div class="timeInfo">
+                <h3>Time: <span>10:30am - 12:30pm</span></h3>
+                <a href="#" class="link"><span>//</span>change it</a>
+            </div>
+            <div class="description clearfix">
+                <!-- need the description to be an excerpt of roughly this length so it doesn't go over 5 lines in length -->
+                <p>I am a working mother with two sons and one daugher who is looking to pair them with other children
+                    in the area. My kids love sports arts, dancing and the occasional trip to Great America.</p>
+
+            </div>
+            <a href="" class="btn yellow full">invite more</a>
+            <a href="" class="btn babyblue full">reschedule/edit</a>
+            <a href="" class="btn secondary half">cancel</a>
+            <a href="" class="btn primary half">accept</a>
+        </div>
+        <!-- end of requestInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile med event left clearfix">
+
+        <div class="profileInfo clearfix">
+            <div class="header clearfix">
+                <h3 class="date"><span>today</span>03/14/2014
+                </h3>
+
+                <h3 class="title">Bring the Kids to the Park</h3>
+
+                <h2><a href="#">Rochelle Chase</a> <em>and</em></h2>
+
+                <div class="left profileThumb">
+                    <img class="thumb" src="http://placehold.it/80x80&amp;text=profile+thumbnail">
+                </div>
+                <div class="left children profileThumb">
+                    <!-- show the children thumbs -->
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                </div>
+                <a href="#" class="link"><span>//</span>view rochelle's profile</a>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+        <div class="clearfix"></div>
+        <div class="matchInfo eventInfo clearfix">
+            <div class="locationInfo">
+                <h3 class="location">Location: <a href="" class="city">The Park</a></h3>
+                <span class="highlight">Pacific Heights, San Francisco</span>
+                <a href="" class="link"><span>//</span>map it!</a>
+            </div>
+            <div class="timeInfo">
+                <h3>Time: <span>10:30am - 12:30pm</span></h3>
+                <a href="#" class="link"><span>//</span>change it</a>
+            </div>
+            <div class="description clearfix">
+                <!-- need the description to be an excerpt of roughly this length so it doesn't go over 5 lines in length -->
+                <p>I am a working mother with two sons and one daugher who is looking to pair them with other children
+                    in the area. My kids love sports arts, dancing and the occasional trip to Great America.</p>
+
+            </div>
+            <a href="" class="btn yellow full">invite more</a>
+            <a href="" class="btn babyblue full">reschedule/edit</a>
+            <a href="" class="btn secondary half">cancel</a>
+            <a href="" class="btn primary half">accept</a>
+        </div>
+        <!-- end of requestInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile med event left clearfix">
+
+        <div class="profileInfo clearfix">
+            <div class="header clearfix">
+                <h3 class="date"><span>today</span>03/14/2014
+                </h3>
+
+                <h3 class="title">Bring the Kids to the Park</h3>
+
+                <h2><a href="#">Rochelle Chase</a> <em>and</em></h2>
+
+                <div class="left profileThumb">
+                    <img class="thumb" src="http://placehold.it/80x80&amp;text=profile+thumbnail">
+                </div>
+                <div class="left children profileThumb">
+                    <!-- show the children thumbs -->
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                </div>
+                <a href="#" class="link"><span>//</span>view rochelle's profile</a>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+        <div class="clearfix"></div>
+        <div class="matchInfo eventInfo clearfix">
+            <div class="locationInfo">
+                <h3 class="location">Location: <a href="" class="city">The Park</a></h3>
+                <span class="highlight">Pacific Heights, San Francisco</span>
+                <a href="" class="link"><span>//</span>map it!</a>
+            </div>
+            <div class="timeInfo">
+                <h3>Time: <span>10:30am - 12:30pm</span></h3>
+                <a href="#" class="link"><span>//</span>change it</a>
+            </div>
+            <div class="description clearfix">
+                <!-- need the description to be an excerpt of roughly this length so it doesn't go over 5 lines in length -->
+                <p>I am a working mother with two sons and one daugher who is looking to pair them with other children
+                    in the area. My kids love sports arts, dancing and the occasional trip to Great America.</p>
+
+            </div>
+            <a href="" class="btn yellow full">invite more</a>
+            <a href="" class="btn babyblue full">reschedule/edit</a>
+            <a href="" class="btn secondary half">cancel</a>
+            <a href="" class="btn primary half">accept</a>
+        </div>
+        <!-- end of requestInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile med event left clearfix">
+
+        <div class="profileInfo clearfix">
+            <div class="header clearfix">
+                <h3 class="date"><span>today</span>03/14/2014
+                </h3>
+
+                <h3 class="title">Bring the Kids to the Park</h3>
+
+                <h2><a href="#">Rochelle Chase</a> <em>and</em></h2>
+
+                <div class="left profileThumb">
+                    <img class="thumb" src="http://placehold.it/80x80&amp;text=profile+thumbnail">
+                </div>
+                <div class="left children profileThumb">
+                    <!-- show the children thumbs -->
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                </div>
+                <a href="#" class="link"><span>//</span>view rochelle's profile</a>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+        <div class="clearfix"></div>
+        <div class="matchInfo eventInfo clearfix">
+            <div class="locationInfo">
+                <h3 class="location">Location: <a href="" class="city">The Park</a></h3>
+                <span class="highlight">Pacific Heights, San Francisco</span>
+                <a href="" class="link"><span>//</span>map it!</a>
+            </div>
+            <div class="timeInfo">
+                <h3>Time: <span>10:30am - 12:30pm</span></h3>
+                <a href="#" class="link"><span>//</span>change it</a>
+            </div>
+            <div class="description clearfix">
+                <!-- need the description to be an excerpt of roughly this length so it doesn't go over 5 lines in length -->
+                <p>I am a working mother with two sons and one daugher who is looking to pair them with other children
+                    in the area. My kids love sports arts, dancing and the occasional trip to Great America.</p>
+
+            </div>
+            <a href="" class="btn yellow full">invite more</a>
+            <a href="" class="btn babyblue full">reschedule/edit</a>
+            <a href="" class="btn secondary half">cancel</a>
+            <a href="" class="btn primary half">accept</a>
+        </div>
+        <!-- end of requestInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile med event left clearfix">
+
+        <div class="profileInfo clearfix">
+            <div class="header clearfix">
+                <h3 class="date"><span>today</span>03/14/2014
+                </h3>
+
+                <h3 class="title">Bring the Kids to the Park</h3>
+
+                <h2><a href="#">Rochelle Chase</a> <em>and</em></h2>
+
+                <div class="left profileThumb">
+                    <img class="thumb" src="http://placehold.it/85x80&amp;text=profile+thumbnail">
+                </div>
+                <div class="left children profileThumb">
+                    <!-- show the children thumbs -->
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                    src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                </div>
+                <a href="#" class="link"><span>//</span>view rochelle's profile</a>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+        <div class="clearfix"></div>
+        <div class="matchInfo eventInfo clearfix">
+            <div class="locationInfo">
+                <h3 class="location">Location: <a href="" class="city">The Park</a></h3>
+                <span class="highlight">Pacific Heights, San Francisco</span>
+                <a href="" class="link"><span>//</span>map it!</a>
+            </div>
+            <div class="timeInfo">
+                <h3>Time: <span>10:30am - 12:30pm</span></h3>
+                <a href="#" class="link"><span>//</span>change it</a>
+            </div>
+            <div class="description clearfix">
+                <!-- need the description to be an excerpt of roughly this length so it doesn't go over 5 lines in length -->
+                <p>I am a working mother with two sons and one daugher who is looking to pair them with other children
+                    in the area. My kids love sports arts, dancing and the occasional trip to Great America.</p>
+
+            </div>
+            <a href="" class="btn yellow full">invite more</a>
+            <a href="" class="btn babyblue full">reschedule/edit</a>
+            <a href="" class="btn secondary half">cancel</a>
+            <a href="" class="btn primary half">accept</a>
+        </div>
+        <!-- end of requestInfo -->
+    </div>
+    <!-- end of profile -->
+
+
+    <!-- *************************************************
+        this is the end of each profile for the loop
+    ************************************************** -->
+
+
+    </div>
+    <!-- end of requested -->
+
+    <div class="tab-pane" id="upcoming">
+
+        <div class="profile med event left clearfix">
+
+            <div class="profileInfo clearfix">
+                <div class="header clearfix">
+                    <h3 class="date"><span>today</span>03/14/2014
+                    </h3>
+
+                    <h3 class="title">Bring the Kids to the Park</h3>
+
+                    <h2><a href="#">Rochelle Chase</a> <em>and</em></h2>
+
+                    <div class="left profileThumb">
+                        <img class="thumb" src="http://placehold.it/80x80&amp;text=profile+thumbnail">
+                    </div>
+                    <div class="left children profileThumb">
+                        <!-- show the children thumbs -->
+                        <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                        src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                        <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                        src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                        <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                        src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    </div>
+                    <a href="#" class="link"><span>//</span>view rochelle's profile</a>
+                </div>
+                <!-- end of header -->
+            </div>
+            <!-- end of profileInfo -->
+            <div class="clearfix"></div>
+            <div class="matchInfo eventInfo clearfix">
+                <div class="locationInfo">
+                    <h3 class="location">Location: <a href="" class="city">The Park</a></h3>
+                    <span class="highlight">Pacific Heights, San Francisco</span>
+                    <a href="" class="link"><span>//</span>map it!</a>
+                </div>
+                <div class="timeInfo">
+                    <h3>Time: <span>10:30am - 12:30pm</span></h3>
+                    <a href="#" class="link"><span>//</span>change it</a>
+                </div>
+                <div class="description clearfix">
+                    <!-- need the description to be an excerpt of roughly this length so it doesn't go over 5 lines in length -->
+                    <p>I am a working mother with two sons and one daugher who is looking to pair them with other
+                        children in the area. My kids love sports arts, dancing and the occasional trip to Great
+                        America.</p>
+
+                </div>
+                <a href="" class="btn yellow full">invite more</a>
+                <a href="" class="btn babyblue full">reschedule/edit</a>
+                <a href="" class="btn secondary full">cancel</a>
+
+            </div>
+            <!-- end of requestInfo -->
+        </div>
+        <!-- end of profile -->
+
+    </div>
+    <!-- end of upcoming -->
+
+    <div class="tab-pane" id="previous">
+
+        <div class="profile med event left clearfix">
+
+            <div class="profileInfo clearfix">
+                <div class="header clearfix">
+                    <h3 class="date">03/14/2014
+                    </h3>
+
+                    <h3 class="title">Bring the Kids to the Park</h3>
+
+                    <h2><a href="#">Rochelle Chase</a> <em>and</em></h2>
+
+                    <div class="left profileThumb">
+                        <img class="thumb" src="http://placehold.it/80x80&amp;text=profile+thumbnail">
+                    </div>
+                    <div class="left children profileThumb">
+                        <!-- show the children thumbs -->
+                        <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                        src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                        <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                        src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                        <span class="clearfix childName left">Timmy<img class="thumb"
+                                                                        src="http://placehold.it/50x50&amp;text=profile+thumbnail"></span>
+                    </div>
+                    <a href="#" class="link"><span>//</span>view rochelle's profile</a>
+                </div>
+                <!-- end of header -->
+            </div>
+            <!-- end of profileInfo -->
+            <div class="clearfix"></div>
+            <div class="matchInfo eventInfo clearfix">
+                <div class="locationInfo">
+                    <h3 class="location">Location: <a href="" class="city">The Park</a></h3>
+                    <span class="highlight">Pacific Heights, San Francisco</span>
+                    <a href="" class="link"><span>//</span>map it!</a>
+                </div>
+                <div class="timeInfo">
+                    <h3>Time: <span>10:30am - 12:30pm</span></h3>
+                </div>
+                <div class="description clearfix">
+                    <!-- need the description to be an excerpt of roughly this length so it doesn't go over 5 lines in length -->
+                    <p>I am a working mother with two sons and one daugher who is looking to pair them with other
+                        children in the area. My kids love sports arts, dancing and the occasional trip to Great
+                        America.</p>
+
+                </div>
+
+                <a href="" class="btn babyblue full">schedule again</a>
+
+            </div>
+            <!-- end of requestInfo -->
+        </div>
+        <!-- end of profile -->
+
+    </div>
+    <!-- end of previous -->
+    </div>
+
+
+    </div>
+{% endblock %}
+
+
+{% block footer_js %}
+    <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+    <script src="{{ STATIC_URL }}js/tmpl.min.js"></script>
+    <script src="{{ STATIC_URL }}js/load-image.min.js"></script>
+    <script src="{{ STATIC_URL }}js/canvas-to-blob.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-image-gallery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.iframe-transport.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.fileupload.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.fileupload-fp.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.fileupload-ui.js"></script>
+    <script src="{{ STATIC_URL }}js/locale.js"></script>
+    <script src="{{ STATIC_URL }}js/fileupload_main.js"></script>
+    <script src="{{ STATIC_URL }}js/csrf.js"></script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

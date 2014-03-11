@@ -1,0 +1,460 @@
+{% extends "user_base.html" %}
+{% load i18n %}
+
+
+{% block extra_head %}
+    <link href="{{ STATIC_URL }}css/chosen.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bootstrap-wysihtml5-0.0.2.css"/>
+    <script src="/static/js/wysihtml5-0.3.0_rc2.js"></script>
+    <script src="/static/js/bootstrap-wysihtml5-0.0.2.js"></script>
+    <script src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>
+{% endblock %}
+
+{% load i18n %}
+{% load url from future %}
+{% load gravatar %}
+{% load thumbnail %}
+
+{% block bodyclass %}about{% endblock %}
+{% block page_content %}
+
+<div class="container">
+    <style>
+        .wysihtml5-sandbox {
+            width: 730px !important;
+            height: 150px !important;
+        }
+
+        .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+            width: 940px;
+        }
+    </style>
+    <div class="box">
+
+    <div id="message-center">
+
+    <!-- first layer icon navigation -->
+    <ul class="nav nav-tabs nav-stacked component-nav">
+        <li class="active"><a href="#createMessageCenter" class="firstOn" data-toggle="tab"><i
+                class="icon icon-pencil"></i><span>compose</span></a></li>
+        <li class=""><a href="#messageCenter" data-toggle="tab"><i class="icon icon-envelope-alt"></i><span
+                class="badge badge-info">{{ message_count }}</span><span>Messages</span></a></li>
+        <li class=""><a href="#commentCenter" data-toggle="tab" id="commentCenterlink"><i
+                class="icon icon-comments"></i><span>Comments</span></a></li>
+        <li class=""><a href="#eventCenter" data-toggle="tab"><i class="icon icon-calendar"></i><span>Events</span></a>
+        </li>
+        <li class=""><a href="#notificationCenter" data-toggle="tab"><i
+                class="icon icon-flag"></i><span>Notifications</span></a></li>
+    </ul>
+
+    <!-- *******************************************
+            MAIN WRAPPER FOR ALL THE TABS
+    ************************************************ -->
+    <div class="tab-content" id="messageArea">
+
+    <!-- *******************************************
+            CREATE MESSAGE PANEL
+    ************************************************ -->
+    <div class="tab-pane itemList active" id="createMessageCenter">
+        <div class="tab-content itemListContent">
+            <form>
+                <div class="tab-pane active" id="createMessageCenterEditor">
+                    <form id="composeMessage" action="" method="post">
+                        {% csrf_token %}
+                        <div class="control-group">
+                            <label class="control-label" for="inputTo">To:</label>
+
+                            <div class="controls">
+                                {{ compose_form.recipient }}
+                            </div>
+                        </div>
+                        <textarea id="messageComposer" name="body" placeholder="Enter your message…"></textarea>
+
+                        <div class="controls">
+                            {#                                                {{ compose_form }}#}
+                            <input class="btn btn-red" type="submit" value="Send Message"/>
+                        </div>
+                        <div class="alert alert-success" style="display: none;"></div>
+                    </form>
+                </div>
+                <!-- end of createMessageCenterEditor -->
+                <script type="text/javascript">
+                    jQuery(document).ready(function ($) {
+                        /* fetch notification */
+                        $.ajax({
+                                url: '/notification',
+                                type: 'GET',
+                                dataType: 'json',
+                                data: $(this).serialize(),
+                                success: function (result) {
+                                    console.log(result)
+                                    var compiled = _.template("<%_.each(notifications, function(notification) { %> <li><%= notification.title %></li> <% }); %>");
+                                    $('#notificationCenter ul').html(compiled({notifications: result}))
+                                }
+                        });
+
+
+                        $("#createMessageCenter form").submit(function () {
+                            $.ajax({
+                                url: '/message/compose/',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: $(this).serialize(),
+                                success: function (result) {
+                                    add_class = result.success ? 'alert-success' : 'alert-error';
+                                    console.log(result)
+                                    $('#createMessageCenterEditor .alert').removeClass('alert-success').removeClass('alert-error').addClass(add_class).html(result.message).hide().fadeIn(1000,
+                                            function () {
+                                                $(this).fadeOut(3000, function () {
+                                                    window.location.href = '/message/inbox/#createMessageCenter';
+                                                })
+                                            })
+                                }
+                            })
+
+                            return false;
+                        })
+
+                        $('#id_recipient').chosen();
+                    });
+
+                </script>
+            </form>
+        </div>
+        <!-- end fo tab-content for createMessageCenter tab-pane -->
+
+    </div>
+    <!-- create Message Center pane -->
+
+
+    <!-- *******************************************
+            MESSAGE CENTER PANEL
+    ************************************************ -->
+    <div class="tab-pane itemList" id="messageCenter" style="">
+
+    <ul class="nav nav-tabs nav-stacked innerNav">
+        {% for message in message_list %}
+            {% with user_profile=message.sender.get_profile %}
+                <li>
+                    <a class="messageLink" href="#messageOne" data-toggle="tab">
+
+                        <div class="post_author_thumb">
+                            {% if user_profile.use_gravatar or not user_profile.avatar %}
+                                <img src="{% gravatar_url message.sender.email 65 %}" class="circle photo-border">
+                            {% else %}
+                                {% thumbnail user_profile.avatar "32x32" crop="center" as im %}
+                                    <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"
+                                         class="circle photo-border sf-tooltip" data-toggle="tooltip"
+                                         title="<span class='profileName'>{{ user_profile.get_pretty_name }}</span>">
+                                {% endthumbnail %}
+                            {% endif %}
+                        </div>
+                        <!--/post img-->
+                        <div class="messageActions">
+                            <span class="timestamp">{{ message.sent_at|date:_("DATETIME_FORMAT") }}</span>
+                            <i class="icon icon-envelope"></i>
+                            <!-- confirm the trash first with modal and then delete the message-->
+                            {#												<a href="#deleteMessageCenter" class="firstOn" data-toggle="tab"><i class="icon icon-left icon-trash"></i></a>#}
+                            <i class="icon icon-left icon-trash delete-message-icon"
+                               message_id="{{ message.id }}"></i>
+                        </div>
+
+
+                        <div class="messageInfo">
+                            <span>{{ user_profile }}</span>
+                            <span class="eventDate">{{ message.subject }}</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+
+                    <div class="clearfix"></div>
+                </li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".messageLink").click(function () {
+                $.get("/message/view/" + $("#message_id").val(), function () {
+                })
+            });
+            $(".delete-message-icon").click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var self = $(this);
+                $.get("/message/delete/" + self.attr("message_id"), function (data) {
+                    console.log(self.closest('li'));
+                    self.closest('li').hide('slow');
+                })
+            })
+        })
+    </script>
+
+
+    <div class="tab-content itemListContent" style="">
+        <button><a href="#messageCenter"><i class="icon-chevron-left icon-left icon"></i>Back</a></button>
+
+        <div class="tab-pane" id="messageOne" style="display:none">
+            <div class="conversationMeta">
+                <h5>From: {{ message.sender.get_profile }}</h5>
+                {#												<h6>Subject: This is my Subject</h6>#}
+            </div>
+            <div class="conversationActions">
+                <span class="timestamp">Aug 14, 2013 at 6:41am</span>
+                <i class="icon icon-reply icon-left"></i>
+                <i class="icon icon-right icon-trash"></i>
+            </div>
+            <div class="clearfix"></div>
+
+            <form>
+                <div class="tab-pane active" id="createMessageCenterEditor">
+                    <form id="composeMessage" action="" method="post">
+                        {% csrf_token %}
+                        <div class="control-group">
+                            <label class="control-label" for="inputTo">To:</label>
+
+                            <div class="controls">
+                                {{ compose_form.recipient }}
+                            </div>
+                        </div>
+                        <textarea id="messageReply" class="reply-text-area" name="body"
+                                  placeholder="Enter your message…"></textarea>
+
+                        <div class="controls">
+                            {#                                                {{ compose_form }}#}
+                            <input class="btn btn-red" type="submit" value="Send Message"/>
+                        </div>
+                        <div class="alert alert-success" style="display: none;"></div>
+                    </form>
+
+                </div>
+                <!-- end of createMessageCenterEditor -->
+
+            </form>
+            <script type="text/javascript">
+                jQuery(document).ready(function ($) {
+
+                    $('textarea').each(function () {
+                        $(this).wysihtml5();
+                    });
+                    $("#messageReply form").submit(function () {
+                        $.ajax({
+                            url: '/message/compose/',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: $(this).serialize(),
+                            success: function (result) {
+                                add_class = result.success ? 'alert-success' : 'alert-error';
+                                console.log(result)
+                                $('#createMessageCenterEditor .alert').removeClass('alert-success').removeClass('alert-error').addClass(add_class).html(result.message).hide().fadeIn(1000,
+                                        function () {
+                                            $(this).fadeOut(3000, function () {
+                                                window.location.reload()
+                                            })
+                                        })
+                            }
+                        })
+
+                        return false;
+                    })
+
+                    $('.chosen-form').chosen();
+                    $(".chosen-container").css("width", "220px");
+                });
+
+            </script>
+
+            <div class="conversationThread">
+                <ul>
+                    {% for message in message_list %}
+                        {% with user_profile=message.sender.get_profile %}
+                            {% if user.id == user_profile.id %}
+
+                                <li class="" style="float:right">
+                                    <div class="post_author_thumb">
+                                        <img width="32" height="20" class="circle photo-border"
+                                             src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg">
+                                    </div>
+                                    <!--/post img-->
+                                    <div class="conversationComment right">
+                                        <div class="arrow"></div>
+                                        <div class="conversationCommentContent">
+                                            <p>
+                                                {{ message.body|safe }}
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            {% else %}
+                                <li class="">
+                                    <div class="post_author_thumb">
+                                        <img width="32" height="20" class="circle photo-border"
+                                             src="media/cache/3f/12/3f12bf107bdd5cc366897373cfca1691.jpg">
+                                    </div>
+                                    <!--/post img-->
+                                    <div class="conversationComment right">
+                                        <div class="arrow"></div>
+                                        <div class="conversationCommentContent">
+                                            <p>
+                                                {{ message.body|safe }}
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endwith %}
+                        </br>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- end of conversationThread -->
+            <div class="clearfix"></div>
+
+
+        </div>
+
+    </div>
+    <!-- end of messageCenter tab content -->
+
+    </div>
+    <!-- end of #messageCenter .tab-pane -->
+
+
+    <!-- *******************************************
+            COMMENTS PANEL
+    ************************************************ -->
+    <div class="tab-pane itemList" id="commentCenter" style="">
+        <ul class="nav nav-tabs nav-stacked innerNav" id="results">
+        </ul>
+
+        <script>
+
+            $("#commentCenterlink").click(function () {
+                $.ajax({
+                    url: "/post/comments",
+                    dataType: 'json',
+                    success: function (data) {
+                        var json = data;
+                        var str = "";
+                        $(json).each(function (index, item) {
+                            str += '<li>' +
+                                    '<a class="messageLink" href="#commentOne" data-toggle="tab">' +
+                                    '<div class="post_author_thumb">' +
+                                    '<img width="32" height="20" class="circle photo-border">' +
+                                    '</div>' +
+                                    '<div class="messageActions">' +
+                                    '<span class="' + item.timestamp + '"></span>' +
+                                    '<i class="icon icon-comments"></i>' +
+                                    '<i class="icon icon-left icon-trash delete-message-icon" message_id="' + item.id + '"></i>' +
+                                    '</div>' +
+                                    '<div class="messageInfo">' +
+                                    '<span data-bind="author">' + item.author + '</span><span> commented:</span>' +
+                                    '<span class="eventDate" data-bind="body">' + item.body + '</span>' +
+                                    '</div>' +
+                                    '<div class="clearfix"></div>' +
+                                    '</a>' +
+                                    '<div class="clearfix"></div>' +
+                                    '</li>'
+                        });
+                        $("#results").html(str)
+                    },
+                    error: function (data) {
+                        console.log('er');
+                    }
+                });
+            })
+        </script>
+        <div class="tab-content itemListContent" style="">
+            <button><a href="#commentCenter"><i class="icon-chevron-left icon-left icon"></i>Back</a></button>
+            <div class="tab-pane" id="commentOne" style="display:none">
+                <p>This is comment One</p>
+            </div>
+            <!-- end of commentOne -->
+
+        </div>
+        <!-- end of commentCenter tab content -->
+
+    </div>
+    <!-- end of #commentCenter .tab-pane -->
+
+
+    <!-- *******************************************
+            EVENTS PANEL
+    ************************************************ -->
+    <div class="tab-pane itemList" id="eventCenter" style="">
+
+        <ul class="nav nav-tabs nav-stacked innerNav">
+            {% for e in event_list %}
+                <li><a class="messageLink" href="#event{{ e.id }}" data-toggle="tab">{{ e.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <div class="tab-content itemListContent" style="">
+            <button><a href="#eventCenter"><i class="icon-chevron-left icon-left icon"></i>Back</a></button>
+
+            <!-- end of eventOne -->
+            {% for e in event_list %}
+            <div class="tab-pane" id="event{{ e.id }}" style="display:none">
+                <p>{{ e.duration }}</p></br>
+                <p>{{ e.frequency }}</p>
+            </div>
+            {% endfor %}
+
+        </div>
+        <!-- end of eventCenter tab content -->
+
+    </div>
+    <!-- end of #eventCenter .tab-pane -->
+    <script>
+        jQuery(document).ready(function ($) {
+            $.ajax({
+                url: "/account/event",
+                dataType: 'json',
+                success: function (data) {
+                    var json = data;
+                    var str = "";
+                    $(json).each(function (index, event) {
+                        str += '<div class="tab-pane" id="eventOne" style="display:none">'+
+                                   '<p>Time'+ event.time + '</p></br>'+
+                                   '<p>Time'+ event.beginning + '</p>'+
+                               '</div>'
+                    });
+                    $("#results").html(str)
+                },
+                error: function (data) {
+                    console.log('er');
+                }
+            });
+        })
+    </script>
+
+    <!-- *******************************************
+            NOTIFICATION PANEL
+    ************************************************ -->
+    <div class="tab-pane itemList" id="notificationCenter" style="">
+
+        <ul class="nav nav-tabs nav-stacked innerNav">
+
+        </ul>
+
+
+    </div>
+    <!-- end of #NotificationCenter .tab-pane -->
+
+
+    <div class="clearfix"></div>
+    </div>
+    <!-- end of messageArea -->
+    <div class="clearfix"></div>
+    </div>
+    <!-- end of message center -->
+
+    <div class="clearfix"></div>
+    </div><!-- end of box -->
+
+</div>
+{% endblock %}
+

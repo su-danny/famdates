@@ -1,0 +1,275 @@
+[
+    {
+        "pk": 30,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Benefits"
+        }
+    },
+    {
+        "pk": 49,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Beveiliging"
+        }
+    },
+    {
+        "pk": 48,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Bezienswaardigheden"
+        }
+    },
+    {
+        "pk": 32,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Boat Covers"
+        }
+    },
+    {
+        "pk": 33,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Boat Emergency Services"
+        }
+    },
+    {
+        "pk": 35,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Boat Repair"
+        }
+    },
+    {
+        "pk": 31,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Boat Storages"
+        }
+    },
+    {
+        "pk": 37,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Boot kopen"
+        }
+    },
+    {
+        "pk": 42,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Bootvervoer"
+        }
+    },
+    {
+        "pk": 23,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Bridge And Sluis Times"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Business"
+        }
+    },
+    {
+        "pk": 19,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Discounts/ Coupons"
+        }
+    },
+    {
+        "pk": 47,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Eten en drinken aan het water"
+        }
+    },
+    {
+        "pk": 20,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Events"
+        }
+    },
+    {
+        "pk": 16,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Information"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Inspiration"
+        }
+    },
+    {
+        "pk": 29,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Insurances"
+        }
+    },
+    {
+        "pk": 41,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Jachthavens"
+        }
+    },
+    {
+        "pk": 38,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Keuringen"
+        }
+    },
+    {
+        "pk": 26,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Marinas"
+        }
+    },
+    {
+        "pk": 39,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Motoren"
+        }
+    },
+    {
+        "pk": 46,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Musea"
+        }
+    },
+    {
+        "pk": 24,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "News"
+        }
+    },
+    {
+        "pk": 40,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Onderdelen en accessoires"
+        }
+    },
+    {
+        "pk": 51,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Onderhoud en service"
+        }
+    },
+    {
+        "pk": 50,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Pechservice"
+        }
+    },
+    {
+        "pk": 36,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Restaurant"
+        }
+    },
+    {
+        "pk": 21,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Routes"
+        }
+    },
+    {
+        "pk": 27,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Rules On The Water"
+        }
+    },
+    {
+        "pk": 18,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Security"
+        }
+    },
+    {
+        "pk": 22,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Sightseeing Locations"
+        }
+    },
+    {
+        "pk": 34,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Technical Help"
+        }
+    },
+    {
+        "pk": 52,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Vaaropleidingen"
+        }
+    },
+    {
+        "pk": 43,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Verhuur & charter"
+        }
+    },
+    {
+        "pk": 53,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Verzekeringen"
+        }
+    },
+    {
+        "pk": 28,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Vip Treatments"
+        }
+    },
+    {
+        "pk": 44,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Watersportverenigingen"
+        }
+    },
+    {
+        "pk": 45,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Watersportwinkels"
+        }
+    },
+    {
+        "pk": 25,
+        "model": "tagging.tag",
+        "fields": {
+            "name": "Weather"
+        }
+    }
+]

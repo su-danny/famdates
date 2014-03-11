@@ -1,0 +1,17 @@
+<div id="div_{{ label_id }}" class="control-group{% if errors %} error{% endif %}">
+    <label class="control-label" for="{{ label_id }}">{{ label }}</label>
+
+    <div class="controls input-append bootstrap-timepicker-component">
+        {{ bf }}
+        <span class="add-on">
+        <i class="icon-time"></i>
+    	</span>
+        {% if errors %}
+            <span class="help-inline">{{ errors }}</span>
+        {% endif %}
+        {% if help_text %}
+            {{ help_text }}
+        {% endif %}
+    </div>
+</div> <!-- /clearfix -->
+

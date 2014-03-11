@@ -1,0 +1,561 @@
+/*
+* Skeleton V1.2
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 6/20/2012
+*/
+
+
+/*
+* Based of Skeleton V1.1
+* converted to 12 column layout using bootstrap naming convention
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* changes made by Dennis T Elder (http://dnnsldr.com)
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 8/17/2011
+*/
+
+/* #Reset & Basics (Inspired by E. Meyers)
+================================================== */
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline; }
+	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+		display: block; }
+	body {
+		line-height: 1; }
+	ol, ul {
+		list-style: none; }
+	blockquote, q {
+		quotes: none; }
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none; }
+	table {
+		border-collapse: collapse;
+		border-spacing: 0; }
+
+/* #Basic Styles
+================================================== */
+	body {
+		background: #fff;
+		font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		color: #444;
+		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+		-webkit-text-size-adjust: 100%;
+ }
+
+
+/* #Base 960 Grid
+================================================== */
+
+    .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container, .navbar .container  {  width: 960px; margin: 0 auto; padding: 0; }
+    .column, .columns                           	{ float: left; display: inline; margin-left: 10px; margin-right: 10px; }
+    /*.row-fluid                                	{ margin-bottom: 20px; }*/
+
+    /* Nested Column Classes */
+    .column.alpha, .columns.alpha, .alpha      	{ margin-left: 0; }
+    .column.omega, .columns.omega, .omega         { margin-right: 0; }
+
+    /* Base Grid */
+    .container .span1					   	   	{ width: 60px;  }
+    .container .span2                   	   	{ width: 140px; }
+    .container .span3                   	   	{ width: 220px; }
+    .container .span4                   	   	{ width: 300px; }
+    .container .span5                   	   	{ width: 380px; }
+    .container .span6                   	   	{ width: 460px; }
+    .container .span7                   	   	{ width: 540px; }
+    .container .span8                  		   	{ width: 620px; }
+    .container .span9                   	   	{ width: 700px; }
+    .container .span10                  	   	{ width: 780px; }
+    .container .span11                  	   	{ width: 860px; }
+    .container .span12                  	   	{ width: 940px; }
+
+    .container .one-third.column                { width: 300px; }
+    .container .two-thirds.column               { width: 620px; }
+    
+    .span1				   			{ width: 60px;  }
+    .span2                   	   	{ width: 140px; }
+    .span3                   	   	{ width: 220px; }
+    .span4                   	   	{ width: 300px; }
+    .span5                   	   	{ width: 380px; }
+    .span6                   	   	{ width: 460px; }
+    .span7                   	   	{ width: 540px; }
+    .span8                  	   	{ width: 620px; }
+    .span9                   	   	{ width: 700px; }
+    .span10                  	   	{ width: 780px; }
+    .span11                  	   	{ width: 860px; }
+    .span12                  	   	{ width: 940px; }
+
+    .container .one-third.column    { width: 300px; }
+    .container .two-thirds.column	{ width: 620px; }
+
+    /* Offsets */
+    .container .offset1                  	   { padding-left: 60px;  }
+    .container .offset2                   	   { padding-left: 140px; }
+    .container .offset3                 	   { padding-left: 220px; }
+    .container .offset4                  	   { padding-left: 300px; }
+    .container .offset5                  	   { padding-left: 380px; }
+    .container .offset6                   	   { padding-left: 460px; }
+    .container .offset7                 	   { padding-left: 540px; }
+    .container .offset8                	   	   { padding-left: 620px; }
+    .container .offset9                  	   { padding-left: 700px; }
+    .container .offset10                   	   { padding-left: 780px; }
+    .container .offset11                	   { padding-left: 860px; }
+
+	.right							   {float: right}
+	.left 							   {float: left}
+
+/* #Tablet (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 768px */
+
+    @media only screen and (min-width: 768px) and (max-width: 959px) {
+        .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container 															{ width: 744px; }
+        .container .column,
+        .container .columns                         { margin-left: 10px; margin-right: 10px;  }
+        .column.alpha, .columns.alpha               { margin-left: 0; margin-right: 10px; }
+        .column.omega, .columns.omega               { margin-right: 0; margin-left: 10px; }
+
+        .container .span1                      	  	{ width: 42px; }
+        .container .span2                     	  	{ width: 104px; }
+        .container .span3                   		{ width: 166px; }
+        .container .span4                    	  	{ width: 228px; }
+        .container .span5                    	  	{ width: 290px; }
+        .container .span6                     	  	{ width: 352px; }
+        .container .span7                   	 	{ width: 414px; }
+        .container .span8                   		{ width: 476px; }
+        .container .span9                    	  	{ width: 538px; }
+        .container .span10                     	  	{ width: 600px; }
+        .container .span11                  		{ width: 662px; }
+        .container .span12                  		{ width: 744px; }
+
+        .container .one-third.column                { width: 228px; }
+        
+        .span1                      	{ width: 42px; }
+        .span2                     	  	{ width: 104px; }
+        .span3                   		{ width: 166px; }
+        .span4                    	    { width: 228px; }
+        .span5                    	    { width: 290px; }
+        .span6                     	  	{ width: 352px; }
+        .span7                   	 	{ width: 414px; }
+        .span8                   		{ width: 476px; }
+        .span9                    	    { width: 538px; }
+        .span10                     	{ width: 600px; }
+        .span11                  		{ width: 662px; }
+        .span12                  		{ width: 744px; }
+
+        one-third.column                { width: 228px; }
+
+        /* Offsets */
+        .container .offset1                   	  	{ padding-left: 42px; }
+        .container .offset2                   	  	{ padding-left: 104px; }
+        .container .offset3                 	  	{ padding-left: 166px; }
+        .container .offset4                  	  	{ padding-left: 228px; }
+        .container .offset5                  	  	{ padding-left: 290px; }
+        .container .offset6                   	  	{ padding-left: 352px; }
+        .container .offset7                 		{ padding-left: 414px; }
+        .container .offset8                		  	{ padding-left: 476px; }
+        .container .offset9                  	  	{ padding-left: 538px; }
+        .container .offset10                   	  	{ padding-left: 600px; }
+        .container .offset11                		{ padding-left: 662px; }
+        
+       	.thumbnail .details 			{ min-height: 50%; }
+		.no-opacity .thumbnail .details { min-height: 50%; }
+		
+		
+        
+    }
+
+
+/*  #Mobile (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 320px */
+
+    @media only screen and (max-width: 767px) {
+        .container 						{ width: 280px; }
+        .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {width: 420px}
+        .columns, .column 				{ margin: 0; }
+
+        .container .span1,
+        .container .span2,
+        .container .span3,
+        .container .span4,
+        .container .span5,
+        .container .span6,
+        .container .span7,
+        .container .span8,
+        .container .span9,
+        .container .span10,
+        .container .span11,
+        .container .span12,
+        .container .one-third.column,
+        .container .two-thirds.column  { width: 280px; }
+        
+        .span1,
+        .span2,
+        .span3,
+        .span4,
+        .span5,
+        .span6,
+        .span7,
+        .span8,
+        .span9,
+        .span10,
+        .span11,
+        .span12,
+        .one-third.column,
+        .two-thirds.column 				{ width: 280px; }
+
+        /* Offsets */
+        .container .offset1,
+        .container .offset2,
+        .container .offset3,
+        .container .offset4,
+        .container .offset5,
+        .container .offset6,
+        .container .offset7,
+        .container .offset-by-eight,
+        .container .offset9,
+        .container .offset10,
+        .container .offset11 			{ padding-left: 0; }
+        
+        .hire 							{ opacity: 0; }
+		.thumbnail .details 			{ min-height: 40%; }
+		.no-opacity .thumbnail .details { min-height: 40%; }
+		#footer p 						{ font-size: 15px; }
+		
+		form textarea 					{ width: 240px; }
+		
+		.home 							{ margin: 10px 0 20px; }
+		
+
+    }
+
+
+/* #Mobile (Landscape)
+================================================== */
+
+    /* Note: Design for a width of 480px */
+
+    @media only screen and (min-width: 480px) and (max-width: 767px) {
+        .container 						{ width: 420px; }
+        .columns, .column 				{ margin: 0; }
+
+        .container .span1,
+        .container .span2,
+        .container .span3,
+        .container .span4,
+        .container .span5,
+        .container .span6,
+        .container .span7,
+        .container .span8,
+        .container .span9,
+        .container .span10,
+        .container .span11,
+        .container .span12,
+        .container .one-third.column,
+        .container .two-thirds.column 	{ width: 420px; }
+        
+        .span1,
+        .span2,
+        .span3,
+        .span4,
+        .span5,
+        .span6,
+        .span7,
+        .span8,
+        .span9,
+        .span10,
+        .span11,
+        .span12,
+        .one-third.column,
+        .two-thirds.column 				{ width: 420px; }
+        
+        .hire 							{ opacity: 0; }
+		.thumbnail .details 			{ min-height: 30%; }
+		.no-opacity .thumbnail .details { min-height: 30%; }
+		
+		/*form input { width: 380px; }
+		form textarea { width: 380px; }*/
+		
+		.home 							{ margin: 10px 0 20px; }
+		
+		
+    }
+    
+
+
+/* #Clearing
+================================================== */
+
+    /* Self Clearing Goodness */
+    .container:after { content: "\0020"; display: block; height: 0; clear: both; visibility: hidden; }
+
+    /* Use clearfix class on parent to clear nested columns,
+    or wrap each row of columns in a <div class="row"> */
+    .clearfix:before,
+    .clearfix:after,
+    .row-fluid:before,
+    .row-fluid:after {
+      	content: '\0020';
+      	display: block;
+      	overflow: hidden;
+      	visibility: hidden;
+      	width: 0;
+      	height: 0; 
+     }
+    .row-fluid:after,
+    .clearfix:after {
+      	clear: both; 
+     }
+    .row-fluid,
+    .clearfix {
+      	zoom: 1; 
+     }
+
+    /* You can also use a <br class="clear" /> to clear columns */
+    .clear {
+      clear: both;
+      display: block;
+      overflow: hidden;
+      visibility: hidden;
+      width: 0;
+      height: 0;
+    }
+
+/* Table of Content
+==================================================
+	#Reset & Basics
+	#Basic Styles
+	#Site Styles
+	#Typography
+	#Links
+	#Lists
+	#Images
+	#Buttons
+	#Forms
+	#Misc */
+
+
+
+
+/* #Typography
+================================================== */
+	h1, h2, h3, h4, h5, h6 {
+		color: #181818;
+		font-family: "Georgia", "Times New Roman", serif;
+		font-weight: normal; }
+	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
+	h1 { font-size: 46px; line-height: 50px; margin-bottom: 14px;}
+	h2 { font-size: 35px; line-height: 40px; margin-bottom: 10px; }
+	h3 { font-size: 28px; line-height: 34px; margin-bottom: 8px; }
+	h4 { font-size: 21px; line-height: 30px; margin-bottom: 4px; }
+	h5 { font-size: 17px; line-height: 24px; }
+	h6 { font-size: 14px; line-height: 21px; }
+	.subheader { color: #777; }
+
+	p { margin: 0 0 20px 0; }
+	p img { margin: 0; }
+	p.lead { font-size: 21px; line-height: 27px; color: #777;  }
+
+	em { font-style: italic; }
+	strong { font-weight: bold; color: #333; }
+	small { font-size: 80%; }
+
+/*	Blockquotes  */
+	blockquote, blockquote p { font-size: 17px; line-height: 24px; color: #777; font-style: italic; }
+	blockquote { margin: 0 0 20px; padding: 9px 20px 0 19px; border-left: 1px solid #ddd; }
+	blockquote cite { display: block; font-size: 12px; color: #555; }
+	blockquote cite:before { content: "\2014 \0020"; }
+	blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color: #555; }
+
+	hr { border: solid #ddd; border-width: 1px 0 0; clear: both; margin: 10px 0 30px; height: 0; }
+
+
+/* #Links
+================================================== */
+	a, a:visited { color: #333; text-decoration: underline; outline: 0; }
+	a:hover, a:focus { color: #000; }
+	p a, p a:visited { line-height: inherit; }
+
+
+/* #Lists
+================================================== */
+	ul, ol { margin-bottom: 20px; }
+	ul { list-style: none outside; }
+	ol { list-style: decimal; }
+	ol, ul.square, ul.circle, ul.disc { margin-left: 30px; }
+	ul.square { list-style: square outside; }
+	ul.circle { list-style: circle outside; }
+	ul.disc { list-style: disc outside; }
+	ul ul, ul ol,
+	ol ol, ol ul { margin: 4px 0 5px 30px; font-size: 90%;  }
+	ul ul li, ul ol li,
+	ol ol li, ol ul li { margin-bottom: 6px; }
+	li { line-height: 18px; margin-bottom: 12px; }
+	ul.large li { line-height: 21px; }
+	li p { line-height: 21px; }
+
+/* #Images
+================================================== */
+
+	img.scale-with-grid {
+		max-width: 100%;
+		height: auto; }
+
+
+/* #Buttons
+================================================== */
+/*
+	.button,
+	button,
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"] {
+		background: #eee; 
+		background: #eee -moz-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%); 
+		background: #eee -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,.2)), color-stop(100%,rgba(0,0,0,.2))); 
+		background: #eee -webkit-linear-gradient(top, rgba(255,255,255,.2) 0%,rgba(0,0,0,.2) 100%);
+		background: #eee -o-linear-gradient(top, rgba(255,255,255,.2) 0%,rgba(0,0,0,.2) 100%); 
+		background: #eee -ms-linear-gradient(top, rgba(255,255,255,.2) 0%,rgba(0,0,0,.2) 100%); 
+		background: #eee linear-gradient(top, rgba(255,255,255,.2) 0%,rgba(0,0,0,.2) 100%); 
+	  border: 1px solid #aaa;
+	  border-top: 1px solid #ccc;
+	  border-left: 1px solid #ccc;
+	  -moz-border-radius: 3px;
+	  -webkit-border-radius: 3px;
+	  border-radius: 3px;
+	  color: #444;
+	  display: inline-block;
+	  font-size: 11px;
+	  font-weight: bold;
+	  text-decoration: none;
+	  text-shadow: 0 1px rgba(255, 255, 255, .75);
+	  cursor: pointer;
+	  margin-bottom: 20px;
+	  line-height: normal;
+	  padding: 8px 10px;
+	  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+	.button:hover,
+	button:hover,
+	input[type="submit"]:hover,
+	input[type="reset"]:hover,
+	input[type="button"]:hover {
+		color: #222;
+		background: #ddd; 
+		background: #ddd -moz-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%); 
+		background: #ddd -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,.3)), color-stop(100%,rgba(0,0,0,.3))); 
+		background: #ddd -webkit-linear-gradient(top, rgba(255,255,255,.3) 0%,rgba(0,0,0,.3) 100%); 
+		background: #ddd -o-linear-gradient(top, rgba(255,255,255,.3) 0%,rgba(0,0,0,.3) 100%); 
+		background: #ddd -ms-linear-gradient(top, rgba(255,255,255,.3) 0%,rgba(0,0,0,.3) 100%); 
+		background: #ddd linear-gradient(top, rgba(255,255,255,.3) 0%,rgba(0,0,0,.3) 100%); 
+	  border: 1px solid #888;
+	  border-top: 1px solid #aaa;
+	  border-left: 1px solid #aaa; }
+
+	.button:active,
+	button:active,
+	input[type="submit"]:active,
+	input[type="reset"]:active,
+	input[type="button"]:active {
+		border: 1px solid #666;
+		background: #ccc; 
+		background: #ccc -moz-linear-gradient(top, rgba(255,255,255,.35) 0%, rgba(10,10,10,.4) 100%); 
+		background: #ccc -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,.35)), color-stop(100%,rgba(10,10,10,.4))); 
+		background: #ccc -webkit-linear-gradient(top, rgba(255,255,255,.35) 0%,rgba(10,10,10,.4) 100%); 
+		background: #ccc -o-linear-gradient(top, rgba(255,255,255,.35) 0%,rgba(10,10,10,.4) 100%); 
+		background: #ccc -ms-linear-gradient(top, rgba(255,255,255,.35) 0%,rgba(10,10,10,.4) 100%); 
+		background: #ccc linear-gradient(top, rgba(255,255,255,.35) 0%,rgba(10,10,10,.4) 100%);  }
+
+	.button.full-width,
+	button.full-width,
+	input[type="submit"].full-width,
+	input[type="reset"].full-width,
+	input[type="button"].full-width {
+		width: 100%;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		text-align: center; }
+*/
+	/* Fix for odd Mozilla border & padding issues */
+	button::-moz-focus-inner,
+	input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+	}
+
+
+/* #Forms
+================================================== */
+
+	form {
+		margin-bottom: 20px; }
+	fieldset {
+		margin-bottom: 20px; }
+	input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	textarea,
+	select {
+		border: 1px solid #ccc;
+		padding: 6px 4px;
+		outline: none;
+		-moz-border-radius: 2px;
+		-webkit-border-radius: 2px;
+		border-radius: 2px;
+		font: 13px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		color: #777;
+		margin: 0;
+		width: 210px;
+		max-width: 100%;
+		display: block;
+		margin-bottom: 20px;
+		background: #fff; }
+	select {
+		padding: 0; }
+	input[type="text"]:focus,
+	input[type="password"]:focus,
+	input[type="email"]:focus,
+	textarea:focus {
+		border: 1px solid #aaa;
+ 		color: #444;
+ 		-moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
+		-webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
+		box-shadow:  0 0 3px rgba(0,0,0,.2); }
+	textarea {
+		min-height: 60px; }
+	label,
+	legend {
+		display: block;
+		font-weight: bold;
+		font-size: 13px;  }
+	select {
+		width: 220px; }
+	input[type="checkbox"] {
+		display: inline; }
+	label span,
+	legend span {
+		font-weight: normal;
+		font-size: 13px;
+		color: #444; }
+
+/* #Misc
+================================================== */
+	.remove-bottom { margin-bottom: 0 !important; }
+	.half-bottom { margin-bottom: 10px !important; }
+	.add-bottom { margin-bottom: 20px !important; }
+
+

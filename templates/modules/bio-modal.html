@@ -1,0 +1,31 @@
+<!-- modal -->
+<div class="modal hide fade" id="bioModal" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h1>Bio</h1>
+    </div>
+    <!-- end of modal heading -->
+    <div class="modal-body">
+        {% if profile.get_age %}
+            <div class="row-fluid">
+                <span>Age: </span> {{ profile.get_age }}
+            </div>
+        {% endif %}
+
+            <div class="row-fluid">
+                <span>Birthday: </span> {{ profile.birthday }}
+            </div>
+            <div class="row-fluid">
+                <span>Occupation: </span> {{ profile.occupation }}
+            </div>
+            <div class="row-fluid">
+                {{ about_me }}
+            </div>
+            <div>
+                <button class="btn pull-right" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+    </div>
+    <!-- end of row-fluid -->
+
+</div>
+<!-- end of modal body -->

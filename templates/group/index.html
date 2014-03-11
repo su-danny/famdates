@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load humanize %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load voting_tags %}
+
+{% block title %}Select your interest{% endblock %}
+
+{% block head %}
+    <link href="{{ STATIC_URL }}css/chosen.css" rel="stylesheet">
+{% endblock %}
+
+{% block footer_js %}
+    <script src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>
+    {% include 'modules/registration_js.html' with edit='True' %}
+
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            var hash = window.location.hash;
+            hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+            $('body,html').animate({
+                scrollTop: 0
+            }, 100);
+
+            // $('select').chosen();
+            setTimeout(function () {
+                $('select').chosen()
+            }, 2000);
+
+            $("input[type=file][name=default_image]").change(function () {
+                var input = this;
+                try {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            //the only jQuery line.  All else is the File API.
+                            $('#avatar').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                } catch (e) {
+                    // do nothing now
+                }
+            });
+
+            $('#group_edit_form').submit(function (e) {
+                e.preventDefault();
+                $("button[type=submit]").attr('disabled', 'disabled');
+                $('html body').css('cursor', 'wait');
+                var formData = new FormData(this);
+
+                if (true) {
+                    var form = $("#group_edit_form");
+                    var data = form.serialize();
+                    $.ajax({
+                        url: form.attr('action'),
+                        data: formData,
+                        type: 'post',
+                        xhr: function () {// custom xhr
+                            myXhr = $.ajaxSettings.xhr();
+                            if (myXhr.upload) {// check if upload property exists
+                                // for handling the progress of the upload
+                                myXhr.upload.addEventListener('progress', function (e) {
+                                    console.log(e.lengthComputable);
+                                }, false);
+                            }
+                            return myXhr;
+                        },
+                        success: function (json) {
+                            $('html body').css('cursor', 'auto');
+                            if (json.errors !== undefined) {
+                                var errors = json.errors;
+                                $('#group_edit_form').find('.status_msg').text('Invalid');
+
+                            } else {
+
+                                $('#group_edit_form div').removeClass('error');
+                                $('#group_edit_form').find('.status_msg').text('Group has been created.');
+
+                                setTimeout(function () {
+                                    window.location.href = "/group/#my_groups";
+                                    window.location.reload();
+                                }, 3000);
+                            }
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });
+                }
+            });
+
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    <style>
+        #wrap .registrationForm ul {
+            list-style-type: none;
+        }
+
+        .interest-page .tab-content li {
+            float: left;
+            width: 165px;
+        }
+
+        .interest-page .tab-content .nav-tabs li {
+            width: auto;
+        }
+
+    </style>
+    <div class="group-page inner">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span4">
+                    {% include "modules/left_side_bar.html" %}
+                </div>
+                <!-- end of span4 -->
+                <div class="span8">
+                    <h2>{{ request.user.get_profile.get_pretty_name }}'s Groups</h2>
+
+                    <div class="tabbable">
+
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active"><a href="#all_groups" data-toggle="tab">All Groups</a></li>
+                            <li><a href="#my_groups" data-toggle="tab">My Groups</a></li>
+                            <li><a href="#create_a_group" data-toggle="tab">Create A Group</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="all_groups">
+                                <h3>All Groups</h3>
+
+                                <div class="row-fluid">
+                                    <div class="groups">
+                                        {% for group in all_groups %}
+                                            <div class="span4 group well">
+                                                <div class="row-fluid">
+                                                    <div class="span6">
+                                                        {% if group.default_image %}
+                                                            {% thumbnail group.default_image "93x93" crop="center" as im %}
+                                                                <img src="{{ im.url }}" width="{{ im.x }}"
+                                                                     height="{{ im.y }}" class="circle photo-border">
+                                                            {% endthumbnail %}
+                                                        {% else %}
+                                                            <img style="width:93px;height:93px;"
+                                                                 src="{{ STATIC_URL }}images/avatar.png" id="avatar"
+                                                                 class="circle photo-border"/>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="span6">
+                                                        <p>Name: {{ group.name }}</p>
+
+                                                        <p>Member count: {{ group.get_member_count }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row-fluid">
+                                                    <div class="span12">
+                                                        <p>About us: {{ group.about }}</p>
+                                                        <a class="btn btn-red" href="{% url group_detail group.pk %}">View
+                                                            Group</a>
+                                                    </div>
+                                                </div>
+                                                <!-- end of row-fluid -->
+                                            </div><!-- end of span6 well -->
+                                        {% endfor %}
+                                    </div>
+                                    <!-- end of groups -->
+                                </div>
+                                <!-- end of row-fluid -->
+                            </div>
+                            <!-- end of tab pane -->
+
+                            <div class="tab-pane" id="create_a_group">
+                                {% include "group/form.html" %}
+                            </div>
+
+                            <div class="tab-pane" id="my_groups">
+                                <h3>My Groups</h3>
+
+                                <div class="row-fluid">
+                                    {% for group in my_groups %}
+                                        <div class="span4 group well">
+                                            <div class="row-fluid">
+                                                <div class="span6">
+                                                    {% if group.default_image %}
+                                                        {% thumbnail group.default_image "63x63" as im %}
+                                                            <img src="{{ im.url }}" width="{{ im.x }}"
+                                                                 height="{{ im.y }}" class="circle photo-border">
+                                                        {% endthumbnail %}
+                                                    {% else %}
+                                                        <img style="width:63px;height:63px;"
+                                                             src="{{ STATIC_URL }}images/avatar.png" id="avatar"
+                                                             class="photo-border circle"/>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="span6">
+                                                    <p>{{ group.name }}</p>
+                                                    <a class="btn btn-red" href="{% url group_edit group.pk %}">Edit</a>
+                                                </div>
+
+                                            </div>
+                                            <!-- end of row-fluid -->
+                                        </div><!-- end of group well -->
+                                    {% endfor %}
+                                </div>
+                                <!-- end of row-fluid -->
+                            </div>
+                            <!-- end of tab pane -->
+
+                        </div>
+                        <!-- end of tab content -->
+                    </div>
+                    <!-- end of tabbable -->
+                </div>
+                <!-- end of span8 -->
+            </div>
+            <!-- end of row-fluid -->
+        </div>
+        <!-- end of container -->
+
+    </div><!-- end of group page -->
+
+{% endblock %}

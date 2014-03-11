@@ -1,0 +1,44 @@
+{% extends "account/profile.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+
+{% block title %}Edit your images{% endblock %}
+
+{% block right_panel %}
+
+    <style>
+        .photoStream {
+            position: relative;
+        }
+
+        .btn-remove-image {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        .photoStream, .thumbnail {
+            width: 65px;
+            display: inline-block;
+        }
+
+    </style>
+
+    <div class="row-fluid">
+        <h2 style="margin-top: 20px;">View Interests</h2>
+        <ul class="thumbnails">
+            {% for interest in interests %}
+                <li>
+                    <a href="#" data-toggle="tooltip" class="thumbnail sf-tooltip"
+                       data-original-title="{{ interest.name }}"> <img src="holder.js/65x65" alt=""></a>
+                </li>
+            {% empty %}
+                No Interest
+            {% endfor %}
+        </ul>
+    </div><!-- end of row-fluid -->
+
+{% endblock %}

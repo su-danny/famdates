@@ -1,0 +1,62 @@
+{% extends "user_base.html" %}
+{% load i18n %}
+{% load gravatar %}
+{% load follow_tags %}
+{% load thumbnail %}
+{% load humanize %}
+<!-- Begin page content -->
+{% load upload_tags %}
+{% block content %}
+    <div class="container user-home">
+        <div class="">
+             <img src="{{interest.get_thumb|default:"/static/images/weight-lift.png"}}">
+        </div>
+        <div class="">
+            <h4>{{event.name }}</h4>
+            <h4>{{ event.beginning|naturalday}} @ {{ event.time }}
+                <span class="icon icon-{{interest.get_type}}"><img src="/static/images/{{interest.get_type}}_icon-mini.png" /></span></span>
+            </h4>
+            <p>
+                {{ event.details }}
+            </p>
+        </div>
+        {% if request.user.is_authenticated %}
+        <div class="">
+            {% if event.id in joined_events %}
+            <span class="btn success-button" >Joined</span>
+            {% else %}
+            <span class="btn success-button join-event-btn" link="{% url join_event event.id%}">Join the Game</span>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+
+
+{% block footer_js %}
+<script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+<script src="{{ STATIC_URL }}js/tmpl.min.js"></script>
+<script src="{{ STATIC_URL }}js/load-image.min.js"></script>
+<script src="{{ STATIC_URL }}js/canvas-to-blob.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap-image-gallery.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.iframe-transport.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.fileupload.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.fileupload-fp.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.fileupload-ui.js"></script>
+<script src="{{ STATIC_URL }}js/locale.js"></script>
+<script src="{{ STATIC_URL }}js/fileupload_main.js"></script>
+<script src="{{ STATIC_URL }}js/csrf.js"></script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

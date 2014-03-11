@@ -1,0 +1,527 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Responsive*/
+
+@media screen and (max-width : 640px) {
+
+    .navbar-inner {
+        width: 100% !important;
+    }
+
+    .hero_bg {
+        min-width: 320px !important;
+        width: 100% !important;
+        background: url(../images/welcome_sm.png) no-repeat #666;
+    }
+
+    .navbar .brand {
+        margin-left: 15px !important;
+        font-size: 1.5em !important;
+    }
+
+    .welcome {
+        width: 90% !important;
+        font-size: 1.2em !important;
+
+    }
+
+    .sub-welcome {
+        width: 90% !important;
+        font-size: 0.8em !important;
+    }
+
+    .homepage-register {
+
+        width: 80% !important;
+        margin-bottom: 25px !important;
+    }
+
+    .detail_left {
+        display: none;
+    }
+
+    .slant {
+        width: 100% !important;
+        min-height: 0px !important;
+
+    }
+
+    .hello {
+        padding-top: 50px !important;
+    }
+
+    .homepage-zones {
+        width: 100% !important;
+        padding: 0 10px;
+        background: #333;
+    }
+
+    .bg {
+        background: #333;
+    }
+}
+
+/*Screen*/
+
+.padding-top5 {
+    padding-top: 5px;
+}
+
+.padding-top10 {
+    padding-top: 10px;
+}
+
+.padding-top15 {
+    padding-top: 15px;
+}
+
+.hero_bg {
+    width: 100% !important;
+    background: url(../images/welcome.png) no-repeat #2c2c2c;
+    height: 599px;
+}
+
+.navbar-inner {
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.8);
+    height: 75px;
+    border-bottom: none !important;
+    filter: none;
+
+}
+
+.brand {
+    text-transform: uppercase;
+    font-size: 2.3em !important;
+    text-shadow: none !important;
+    font-weight: bold;
+    margin: 15px 0 0 -46px !important;
+}
+
+.red {
+    color: #ff3030;
+}
+
+.white {
+    color: #FFFFFF;
+}
+
+.hello {
+    padding-top: 150px;
+}
+
+.transparent-black {
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.welcome {
+    padding: 8px 13px;
+    color: #FFF;
+    text-transform: uppercase;
+    width: 660px;
+}
+
+.sub-welcome {
+    color: #FFF;
+    font-size: 1.1em;
+    font-weight: 100;
+    margin-top: -5px;
+    padding: 0px 8px;
+    text-transform: uppercase;
+    width: 412px;
+}
+
+.homepage-register {
+    color: #FFF;
+    margin-left: -1px;
+    padding: 12px 0 12px 21px;
+    width: 240px;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+.uneditable-input {
+    border: 1px solid #393939;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    margin: 0 0 10px 0;
+    color: #FFF;
+}
+
+.motto {
+    margin: 25px 0 0 29px !important;
+}
+
+.motto, .homepage-login, .modal-header {
+    color: #FFF;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.motto li {
+    padding-right: 5px !important;
+}
+
+.homepage-login {
+    margin-top: 25px !important;
+}
+
+.homepage-login li {
+    padding-right: 7px;
+}
+
+.login-style {
+    margin-top: -9px;
+}
+
+.gray {
+    color: #878686;
+}
+
+.slant {
+    background: url(../images/homepage_slant_bg.png) repeat #333;
+    width: 100% !important;
+    height: 345px;
+}
+
+.detail_left {
+    background: url(../images/detail_left.png) no-repeat;
+    width: 80px;
+    height: 118px;
+    clear: both;
+    float: left;
+    margin-top: -33px;
+}
+
+.detail_right {
+    background: url(../images/detail_right.png) no-repeat;
+    width: 65px;
+    height: 91px;
+    clear: both;
+    float: right;
+    margin-top: -57px;
+}
+
+.homepage-zones {
+    font-size: 12px;
+    color: #9c9c9c;
+}
+
+.sub-zone {
+    color: #FFF;
+    font-size: 1.6em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.zone_icons {
+    width: 89px;
+    height: 86px;
+    margin-top: 30px;
+}
+
+.homepage-footer {
+    color: #FFF;
+    font-size: 12px;
+    margin-top: 30px !important;
+}
+
+.homepage-footer li {
+    padding-right: 10px;
+}
+
+.footer {
+    height: 75px;
+    margin-bottom: 0px !important;
+}
+
+.inc {
+    color: #FFF;
+    font-size: 12px;
+    margin-top: 30px;
+}
+
+.modal, .modal-footer {
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-header, .modal-footer, .modal {
+    border: none !important;
+}
+
+.modal-footer {
+    border: none !important;
+}
+
+.zocial, .facebook {
+    background-color: #4863ae;
+}
+
+.zocial,
+a.zocial {
+    border: 1px solid #777;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-bottom-color: #333;
+    border-bottom-color: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    -moz-box-shadow: inset 0 0.08em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.1em rgba(255, 255, 255, 0.9);
+    -webkit-box-shadow: inset 0 0.08em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.1em rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 0.08em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.1em rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    display: inline-block;
+    font: bold 100%/2.1 "Lucida Grande", Tahoma, sans-serif;
+    padding: 0 .95em 0 0;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    position: relative;
+
+    -moz-border-radius: .3em;
+    -webkit-border-radius: .3em;
+    border-radius: .3em;
+}
+
+.zocial:before {
+    content: "";
+    border-right: 0.075em solid rgba(0, 0, 0, 0.1);
+    float: left;
+    font: 120%/1.65 zocial;
+    font-style: normal;
+    font-weight: normal;
+    margin: 0 0.5em 0 0;
+    padding: 0 0.5em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+
+    -moz-box-shadow: 0.075em 0 0 rgba(255, 255, 255, 0.25);
+    -webkit-box-shadow: 0.075em 0 0 rgba(255, 255, 255, 0.25);
+    box-shadow: 0.075em 0 0 rgba(255, 255, 255, 0.25);
+
+    -moz-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.zocial:active {
+    outline: none; /* outline is visible on :focus */
+}
+
+/* Buttons can be displayed as standalone icons by adding a class of "icon" */
+
+.zocial.icon {
+    overflow: hidden;
+    max-width: 2.4em;
+    padding-left: 0;
+    padding-right: 0;
+    max-height: 2.15em;
+    white-space: nowrap;
+}
+
+.zocial.icon:before {
+    padding: 0;
+    width: 2em;
+    height: 2em;
+
+    box-shadow: none;
+    border: none;
+}
+
+/* Gradients */
+
+.zocial {
+    background-image: -moz-linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05) 49%, rgba(0, 0, 0, .05) 51%, rgba(0, 0, 0, .1));
+    background-image: -ms-linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05) 49%, rgba(0, 0, 0, .05) 51%, rgba(0, 0, 0, .1));
+    background-image: -o-linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05) 49%, rgba(0, 0, 0, .05) 51%, rgba(0, 0, 0, .1));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .1)), color-stop(49%, rgba(255, 255, 255, .05)), color-stop(51%, rgba(0, 0, 0, .05)), to(rgba(0, 0, 0, .1)));
+    background-image: -webkit-linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05) 49%, rgba(0, 0, 0, .05) 51%, rgba(0, 0, 0, .1));
+    background-image: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .05) 49%, rgba(0, 0, 0, .05) 51%, rgba(0, 0, 0, .1));
+}
+
+.zocial:hover, .zocial:focus {
+    background-image: -moz-linear-gradient(rgba(255, 255, 255, .15) 49%, rgba(0, 0, 0, .1) 51%, rgba(0, 0, 0, .15));
+    background-image: -ms-linear-gradient(rgba(255, 255, 255, .15) 49%, rgba(0, 0, 0, .1) 51%, rgba(0, 0, 0, .15));
+    background-image: -o-linear-gradient(rgba(255, 255, 255, .15) 49%, rgba(0, 0, 0, .1) 51%, rgba(0, 0, 0, .15));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .15)), color-stop(49%, rgba(255, 255, 255, .15)), color-stop(51%, rgba(0, 0, 0, .1)), to(rgba(0, 0, 0, .15)));
+    background-image: -webkit-linear-gradient(rgba(255, 255, 255, .15) 49%, rgba(0, 0, 0, .1) 51%, rgba(0, 0, 0, .15));
+    background-image: linear-gradient(rgba(255, 255, 255, .15) 49%, rgba(0, 0, 0, .1) 51%, rgba(0, 0, 0, .15));
+}
+
+.zocial:active {
+    background-image: -moz-linear-gradient(bottom, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0) 30%, transparent 50%, rgba(0, 0, 0, .1));
+    background-image: -ms-linear-gradient(bottom, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0) 30%, transparent 50%, rgba(0, 0, 0, .1));
+    background-image: -o-linear-gradient(bottom, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0) 30%, transparent 50%, rgba(0, 0, 0, .1));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .1)), color-stop(30%, rgba(255, 255, 255, 0)), color-stop(50%, transparent), to(rgba(0, 0, 0, .1)));
+    background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0) 30%, transparent 50%, rgba(0, 0, 0, .1));
+    background-image: linear-gradient(bottom, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0) 30%, transparent 50%, rgba(0, 0, 0, .1));
+}
+
+/* Zocial Icons */
+
+.zocial,
+a.zocial {
+    border: 1px solid #777;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-bottom-color: #333;
+    border-bottom-color: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    -moz-box-shadow: inset 0 0.08em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.1em rgba(255, 255, 255, 0.9);
+    -webkit-box-shadow: inset 0 0.08em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.1em rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 0.08em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.1em rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    display: inline-block;
+    font: bold 100%/2.1 "Lucida Grande", Tahoma, sans-serif;
+    padding: 0 .95em 0 0;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    position: relative;
+
+    -moz-border-radius: .3em;
+    -webkit-border-radius: .3em;
+    border-radius: .3em;
+}
+
+.zocial:before {
+    content: "";
+    border-right: 0.075em solid rgba(0, 0, 0, 0.1);
+    float: left;
+    font: 120%/1.65 zocial;
+    font-style: normal;
+    font-weight: normal;
+    margin: 0 0.5em 0 0;
+    padding: 0 0.5em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+
+    -moz-box-shadow: 0.075em 0 0 rgba(255, 255, 255, 0.25);
+    -webkit-box-shadow: 0.075em 0 0 rgba(255, 255, 255, 0.25);
+    box-shadow: 0.075em 0 0 rgba(255, 255, 255, 0.25);
+
+    -moz-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.zocial:active {
+    outline: none; /* outline is visible on :focus */
+}
+
+/* Buttons can be displayed as standalone icons by adding a class of "icon" */
+
+.zocial.icon {
+    overflow: hidden;
+    max-width: 2.4em;
+    padding-left: 0;
+    padding-right: 0;
+    max-height: 2.15em;
+    white-space: nowrap;
+}
+
+.zocial.icon:before {
+    padding: 0;
+    width: 2em;
+    height: 2em;
+
+    box-shadow: none;
+    border: none;
+}
+
+.zocial.facebook:before {
+    content: "f";
+    border: 1px solid #aaa;
+    border-color: rgba(0, 0, 0, 0.3);
+    border-bottom-color: #777;
+    border-bottom-color: rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 0 0.08em 0 rgba(255, 255, 255, 0.7), inset 0 0 0.08em rgba(255, 255, 255, 0.5);
+    -webkit-box-shadow: inset 0 0.08em 0 rgba(255, 255, 255, 0.7), inset 0 0 0.08em rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0.08em 0 rgba(255, 255, 255, 0.7), inset 0 0 0.08em rgba(255, 255, 255, 0.5);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.red-bar {
+    background: #ff3030;
+    height: 100px;
+    margin-top: 19px;
+}
+
+.profile-brand {
+    font-size: 1.8em;
+    text-transform: uppercase;
+
+}
+
+.navbar-profile {
+    height: 75px !important;
+    padding-top: 20px;
+}
+
+.circle {
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+    behavior: url(PIE.htc);
+
+    width: 50px;
+    height: 50px;
+    padding: 8px;
+
+    background: #fff;
+    border: 4px solid #FFFz;
+    color: #666;
+    text-align: center;
+}
+
+.avatar {
+    border: 1px solid #FFF;
+    border-radius: 45px;
+    display: block;
+    height: 80px;
+    width: 80px;
+}
+
+.avatar {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.avatar img {
+    border: 5px solid rgba(255, 255, 255, 0.9);
+    border-radius: 45px; /* must be width + border */
+    width: 70px;
+    height: 70px;
+}
+
+.profile-name {
+    text-transform: uppercase;
+}

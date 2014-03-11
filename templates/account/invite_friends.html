@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% block title %}Registration{% endblock %}
+{% block head %}
+    <link href="{{ STATIC_URL }}css/chosen.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <style type="text/css">
+            /*
+                .fullHeight {
+                    height: 1200px;
+                }
+                .registrationForm input[type='checkbox'] {
+                    width: auto;
+                    display: inline-block;
+                    margin-top: 0;
+                }
+
+                .control-group li {
+                    list-style: none;
+                }
+
+                .control-group ul {
+                    margin: 0 0 0 0;
+                }
+
+                #avatar {
+                    height: 50px;
+                }*/
+    </style>
+    {% if request.user.is_authenticated %}
+        <!-- do nothing -->
+    {% else %}
+        <div class="container container-bg">
+    {% endif %}
+    <div class="static">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="page-header">
+                    <div class="transparent general-page-header hidden-phone"><span class="red">Invite</span> Friends
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="registrationSlider well">
+                    <div class="row-fluid">
+                        <ul class="friend-emails friend" data-bind="foreach: fbFriends">
+                            <li class="span2">
+                                <img src=""
+                                     data-bind="attr: {'src': 'http://graph.facebook.com/' + $data.id + '/picture'}"/>
+                                <input id="" type="checkbox"
+                                       data-bind="attr: {'ID': $data.id}, value: $data.id, checked:$data.checked"/>
+                                <label for="" data-bind="attr: {'for': $data.id}"></label>
+                                <span data-bind="text: $data.name"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end of row-fluid -->
+                    <div class="row-fluid emailInvites">
+                        <ul class="friend-emails" data-bind="foreach: friendEmails">
+                            <li>
+                                <input data-bind="value: $data.email" placeholder="Email address"/>
+                                <input data-bind="value: $data.name" placeholder="Full Name"/>
+                            </li>
+                        </ul>
+                        <p>Your email address will NOT be visible to the public and we will NOT distribute</p>
+                        <button class="btn" data-bind="click: $root.addFriendEmail">Add email</button>
+                        <button class="btn" data-bind="click: $root.done">Done</button>
+                        <button class="btn" data-bind="click: $root.skip">Skip</button>
+                    </div>
+                </div>
+                <!-- end of registrationSlide -->
+            </div>
+            <!-- end of row-fluid -->
+        </div>
+        <!-- end of static -->
+    </div><!-- container bg -->
+{% endblock %}
+
+
+
+
+{% block footer_js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/knockout-2.2.1.js"></script>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+
+    <script>
+        FB.init({
+            appId: '479441518796110', cookie: true,
+            status: true, xfbml: true,
+            frictionlessRequests: true
+        });
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '{% url account_get_fb_friends %}',
+                success: function (data) {
+                    friendsView.fbFriends(data.results.data);
+                    ko.applyBindings(friendsView);
+                }
+
+            });
+
+        });
+
+        function requestCallback() {
+            window.location.href = "{% url update_interests %}";
+        }
+
+        function FriendsViewModel() {
+            this.fbFriends = ko.observableArray([]);
+            this.friendEmails = ko.observableArray([
+                {email: '', name: ''}
+            ]);
+            this.addFriendEmail = function () {
+                this.friendEmails.push({email: '', name: ''});
+            }
+
+            this.done = function () {
+                $.ajax({
+                    url: '{% url account_do_invite_friends %}',
+                    method: 'POST',
+                    data: {json: ko.toJSON(friendsView)},
+                    success: function (data) {
+                        if (data.results.length > 0) {
+                            FB.ui({method: 'apprequests',
+                                message: '{{request.user.first_name}} has invited you to join the new mobile web app The Sports Freak. We are Revolutionizing the sports & fitness world, get in the game and check it out!” ',
+                                redirect_uri: 'http://www.thefamdates.com',
+                                to: data.results
+                            }, requestCallback);
+                        } else {
+                            requestCallback();
+                        }
+                    }
+                });
+            }
+            this.skip = function () {
+                requestCallback();
+            }
+        }
+
+        window.friendsView = new FriendsViewModel();
+
+
+    </script>
+
+{% endblock %}

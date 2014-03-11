@@ -1,0 +1,67 @@
+{% load url from future %}
+<table border="1" bordercolor="#c3c3c3" cellspacing="0" cellpadding="0" width="575" align="center"
+       style="border: 1px solid #c3c3c3;margin: 20px;">
+    <tr>
+        <td>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td colspan="3">
+                        <a href="http://www.famdates.com/" target="_blank">
+                            <img src="{{ MEDIA_URL }}images/email/header.png" alt="famdates.com" width="575"
+                                 height="105"/>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                <tr height="10">
+                    <td colspan="3" height="10">&nbsp;</td>
+                </tr>
+                </tr>
+                <tr>
+                    <td width="35">&nbsp;</td>
+
+                    <td width="505"
+                        style="color:#6e6e6e;font-family: Helvetica, Arial, sans-serif;font-size:12px;line-height: 1.5em;">
+                        <!-- EMAIL CONTENT START -->
+
+                        <p>
+                            Hi!<br/><br/>
+                            You asked us to reset your password on famdates. Just click this link to create a new
+                            one:<br/>
+                            <a href="{{ protocol }}://
+                                    {{ domain }}{% url 'django.contrib.auth.views.password_reset_confirm' uidb36=uid token=token %}"
+                               target="_blank"
+                               style="color:#0054a6">{{ protocol }}://{{ domain }}{% url 'django.contrib.auth.views.password_reset_confirm' uidb36=uid token=token %}</a><br/><br/>
+                            -- The famdates team<br/>
+                            <br/>
+                        </p>
+
+                        <!-- EMAIL CONTENT END -->
+                    </td>
+                    <td width="35">&nbsp;</td>
+                </tr>
+                <tr height="10">
+                    <td width="35" height="10">&nbsp;</td>
+                    <td width="505" height="2"><img src="{{ MEDIA_URL }}images/email/line.png" alt=""/></td>
+                    <td width="35" height="10">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="35">&nbsp;</td>
+                    <td>
+                        <p style="color:#6e6e6e;font-family: Helvetica, Arial, sans-serif;font-size: 10px;line-height: 1.4em">
+                            If you did not make this request, please ignore this email.<br/>
+                            <a href="http://famdates.simpleunion.com" target="_blank" style="color:#0054a6">famdates.simpleunion.com</a>
+                        </p>
+                    </td>
+
+                    <td width="35">&nbsp;</td>
+                </tr>
+                <tr>
+                <tr height="20">
+                    <td colspan="3" height="20">&nbsp;</td>
+                </tr>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

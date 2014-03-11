@@ -1,0 +1,117 @@
+<!-- modal -->
+<div class="modal hide fade" id="signup3Modal" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h1>To better understand Games and Events around you</h1>
+    </div>
+    <!-- end of modal heading -->
+    <div class="modal-body">
+        <form class="form-inline standard form-horizontal signup3-form" method="POST" action="/account/signup/3">
+            {% csrf_token %}
+            <div class="row-fluid">
+                <div class="control-group">
+                    <label class="control-label">Address *</label>
+
+                    <div class="controls">
+                        <input id="id_address" type="text" name="address" placeholder="Street Address" class="span8" maxlength="100">
+                    </div>
+                    <div class="controls">
+                        <input id="id_attn" type="text" name="attn" class="span4" placeholder="Attn/Suite (optional)" maxlength="50">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label"></label>
+
+                    <div class="controls">
+
+                        <input id="id_city" type="text" name="city" placeholder="City"  class="span6" maxlength="100">
+                    </div>
+                    <div class="controls">
+                        <select placeholder="State" name="state" id="id_state" class="span2">
+                            <option value="" selected="selected">State</option>
+                            <option value="AL">AL</option>
+                            <option value="AK">AK</option>
+                            <option value="AS">AS</option>
+                            <option value="AZ">AZ</option>
+                            <option value="AR">AR</option>
+                            <option value="AA">AA</option>
+                            <option value="AE">AE</option>
+                            <option value="AP">AP</option>
+                            <option value="CA">CA</option>
+                            <option value="CO">CO</option>
+                            <option value="CT">CT</option>
+                            <option value="DE">DE</option>
+                            <option value="DC">DC</option>
+                            <option value="FL">FL</option>
+                            <option value="GA">GA</option>
+                            <option value="GU">GU</option>
+                            <option value="HI">HI</option>
+                            <option value="ID">ID</option>
+                            <option value="IL">IL</option>
+                            <option value="IN">IN</option>
+                            <option value="IA">IA</option>
+                            <option value="KS">KS</option>
+                            <option value="KY">KY</option>
+                            <option value="LA">LA</option>
+                            <option value="ME">ME</option>
+                            <option value="MD">MD</option>
+                            <option value="MA">MA</option>
+                            <option value="MI">MI</option>
+                            <option value="MN">MN</option>
+                            <option value="MS">MS</option>
+                            <option value="MO">MO</option>
+                            <option value="MT">MT</option>
+                            <option value="NE">NE</option>
+                            <option value="NV">NV</option>
+                            <option value="NH">NH</option>
+                            <option value="NJ">NJ</option>
+                            <option value="NM">NM</option>
+                            <option value="NY">NY</option>
+                            <option value="NC">NC</option>
+                            <option value="ND">ND</option>
+                            <option value="MP">MP</option>
+                            <option value="OH">OH</option>
+                            <option value="OK">OK</option>
+                            <option value="OR">OR</option>
+                            <option value="PA">PA</option>
+                            <option value="PR">PR</option>
+                            <option value="RI">RI</option>
+                            <option value="SC">SC</option>
+                            <option value="SD">SD</option>
+                            <option value="TN">TN</option>
+                            <option value="TX">TX</option>
+                            <option value="UT">UT</option>
+                            <option value="VT">VT</option>
+                            <option value="VI">VI</option>
+                            <option value="VA">VA</option>
+                            <option value="WA">WA</option>
+                            <option value="WV">WV</option>
+                            <option value="WI">WI</option>
+                            <option value="WY">WY</option>
+                        </select>
+                        <input id="id_zip" type="text" name="zip" class="span3" placeholder="Zip">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">How do you earn a living?</label>
+
+                <div class="controls">
+                    <input id="id_earn_living" type="text" name="earn_living" placeholder="by day, by night"
+                           maxlength="100">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <button class="btn btn-red pull-right" type="submit">Continue</button>
+                <span class="login_error_msg" style="color: red"></span>
+            </div>
+        </form>
+    </div>
+    <!-- end of row-fluid -->
+</div>
+
+

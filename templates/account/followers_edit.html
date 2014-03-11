@@ -1,0 +1,68 @@
+{% extends "account/profile.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+
+{% block title %}Users That Are Following You{% endblock %}
+
+{% block right_panel %}
+
+    {% get_following profile %}
+    <h3 class="profileName" style="margin-top: 20px;">These Users Are Following
+        {% if request.user.pk == profile.user.pk %} You {% else %}{{ profile.get_pretty_name }}{% endif %}</h3>
+    <div class="row-fluid media_edit">
+        {% for follower in followers %}
+            <div class="media_action span3 well">
+                <div class="similar-users">
+                    <a href="{% url public_profile_detail follower.id %}">
+                        {% if profile.use_gravatar or not follower.avatar %}
+                            <img src="{% gravatar_url post.author.email 93 %}" class="circle photo-border">
+                        {% else %}
+                            {% thumbnail follower.avatar "93x93" as im %}
+                                <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"
+                                     class="circle photo-border"> {% endthumbnail %}
+                        {% endif %}
+                    </a>
+                    <h4 class="name red profileName"><a
+                            href="{% url public_profile_detail follower.id %}">{{ follower.get_pretty_name }}</a></h4>
+                    <h6 class="profileName">{{ follower.city }}, {{ follower.state }}</h6>
+
+                    {% follow_form follower %}
+
+                    <form id="blockAction" class="" action="{% url block_url 'account' 'userprofile' follower.id %}"
+                          method="post">
+                        {% csrf_token %}
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i
+                                    class="icon-cogs icon-left black"></i><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {% if request.user|is_blocked:follower %}
+                                    <li>
+                                        <a id="unblockUser" href="#">Unblock User</a>
+                                        <input type="hidden" value="Unblock"/>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a id="blockUser" href="#">Block User</a>
+                                        <input type="hidden" value="block"/>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </form>
+
+                    <!-- only have this button show if we are following them -->
+                    <!-- <button class="btn btn-red btn-small" action="{% url remove_follower follower.pk %}">unfollow</button> -->
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+
+

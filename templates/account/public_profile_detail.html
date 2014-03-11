@@ -1,0 +1,17 @@
+{% extends "account/profile.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+
+{% block title %}Activity{% endblock %}
+
+{% block profile_body %}
+    <div class="post-container">
+        <h3>{{profile.get_pretty_name}}'s Activities</h3>
+        {% include 'modules/upcoming-events.html' %}
+        {% include 'modules/posts.html' %}
+    </div>
+{% endblock %}
+

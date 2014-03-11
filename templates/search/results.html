@@ -1,0 +1,84 @@
+{% extends "user_base.html" %}
+{% load humanize %}
+{% load gravatar %}
+{% load follow_tags %}
+{% load thumbnail %}
+
+{% block page-class %}seach-result-page{%endblock %}
+
+{% block page_content %}
+    <div class="box">
+            <p>
+                Result for query "{{request.GET.q}}"
+            </p>
+
+            <h2>People</h2>
+            <ul class="thumbnails margin-bottom35">
+                {% for profile in people_results %}
+                    <li>
+                        <a href="{% url public_profile_detail profile.id %}" class="thumbnail">
+                            {% if profile.user_gravatar or not profile.avatar %}
+                                <img src="{% gravatar_url profile.user.email 65 %}"> {% else %}
+                                {% thumbnail profile.avatar "65x65" crop="center" as im %}
+                                    <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"> {% endthumbnail %}
+                            {% endif %} </a>
+                        <a href="{% url public_profile_detail profile.id %}">{{ profile.get_pretty_name }}</a>
+                    </li>
+                {% empty %}
+                    No results
+                {% endfor %}
+            </ul>
+
+
+            <h2>Teams</h2>
+            <ul class="thumbnails margin-bottom35">
+                {% for group in team_results %}
+                    <li>
+                        <a href="{% url group_detail group.pk %}">
+                            {% if group.default_image %}
+                                {% thumbnail group.default_image "63x63" as im %}
+                                    <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" class="">
+                                {% endthumbnail %}
+                            {% else %}
+                                <img style="width:63px;height:63px;" src="{{ STATIC_URL }}images/avatar.png" id="avatar"/>
+                            {% endif %}
+                        </a>
+                        <a href="{% url group_detail group.pk %}">
+                            {{ group.name }}
+                        </a>
+                    </li>
+                {% empty %}
+                    No results
+                {% endfor %}
+            </ul><!-- end of span3 -->
+
+            <h2>Posts</h2>
+            <ul class="postSearch">
+                {% for post in post_results %}
+                    <li>
+                        <a href="{% url public_profile_detail post.author.get_profile.pk %}#post_{{ post.id }}"><span
+                                style="text-transform: capitalize">{{ post.author.get_profile.get_pretty_name }}</span></a>
+                        <span class="sidebar-gray">posted {{ post.created|naturaltime }} about:</span> {{ post.body|truncatechars:140 }}
+                    </li>
+                {% empty %}
+                    No results
+                {% endfor %}
+            </ul>
+
+            <h2>Interests</h2>
+            <ul class="thumbnails">
+                {% for interest in interest_results %}
+                    <li>
+                        <a href="#" data-toggle="tooltip" class="thumbnail sf-tooltip"
+                           data-original-title="{{ interest.name }}"> <img src="{{interest.get_thumb}}" alt=""></a>
+                    </li>
+                {% empty %}
+                    No results
+                {% endfor %}
+            </ul>
+    </div>
+
+{% endblock %}
+
+
+

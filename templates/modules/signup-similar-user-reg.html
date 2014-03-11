@@ -1,0 +1,49 @@
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+<div class="item item-{{forloop.counter0}} {% if forloop.first %}active{%endif%}">
+    <div class="similar-user">
+        {% thumbnail profile.avatar "93x93" as im %} <img src="{{ im.url }}" width="{{ im.x }}"
+                                                          height="{{ im.y }}"
+                                                          class="circle photo-border">
+        {% endthumbnail %}
+        <h5 class="name red">{{ profile.user.first_name }} {{ profile.user.last_name }}</h5><h6>
+        {{profile.city }}, {{ profile.state }}</h6>
+        {% with stats=profile.get_stats %}
+
+
+
+        <span>Member for {{ stats.member_in_days}} days, hosted {{ stats.hosted_event_count}} events, attended {{ stats.joined_event_count}}  </span>
+        {% endwith %}
+
+        <div class="clearfix"></div>
+
+        {% load follow_tags %}
+        <div class="span4 pull-right" style="position: absolute; right:0; top:0;">
+            <div class="profile-rate pull-right">
+                {% for star in profile.get_rate %}
+                    <i class="fa {{star}}"></i>
+                {% endfor %}
+            </div>
+            {% if not request.user|is_blocked:profile %}
+                <form class="follow-form" action="{% follow_url profile %}" class="pull-right" method="post">
+                    {% csrf_token %}
+                    <input type="button" class="btn btn-info success follow pull-right" onclick="followFormSubmit(this, '{% follow_url profile %}')" value="{% if request.user|is_following:profile %}Following{% else %}Follow{% endif %}" />
+                </form>
+            {% endif %}
+        </div>
+
+        <div class="row-fluid" style="overflow: hidden">
+            {% for i in profile.similar_interests %}
+            <div class="interest" interest_id="{{i.id}}">
+                <img src="/static/images/checked.png" class="checked-icon" alt="{{i}}">
+                <img src="{{i.get_thumb}}" class="">
+                <span>{{i.name}}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- end of similar user -->
+    <div class="clearfix"></div>
+</div>

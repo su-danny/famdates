@@ -1,0 +1,25 @@
+{% load follow_tags %}
+
+{% if not request.user|is_blocked:profile %}
+    <form id="followAction" class="" action="{% follow_url object %}" method="post">
+        {% csrf_token %}
+        {% if request.user|is_following:object %}
+            <input class="btn btn-success following" type="submit" value="Following"/>
+            <!--<input class="btn unfollow" type="submit" value="Unfollow" />-->
+        {% else %}
+            <input class="btn btn-info follow pull-right" type="submit" value="Follow"/>
+        {% endif %}
+    </form>
+{% endif %}
+
+
+<!--
+<form id="blockAction" class="" action="{% url block_url 'account' 'userprofile' object.id %}" method="post">
+	{% csrf_token %}
+	{% if object.user|is_blocked:request.user.get_profile %}
+		<input class="btn" type="submit" value="Unblock" />
+	{% else %}
+		<input class="btn btn-info" type="submit" value="Block" />
+	{% endif %}
+</form>
+-->

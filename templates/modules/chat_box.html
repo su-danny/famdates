@@ -1,0 +1,30 @@
+<div class="chat-box">
+    <div class=header>
+        <span>Toggle Chat Box</span>
+    </div>
+    {% load socketio_tags %}
+    {% socketio %}
+
+    <script>window.room = 1;</script>
+
+    <div class="chat-box-body" style="display: none;">
+        <ul id="messages">
+            <script type="text/x-jquery-tmpl">
+                <li class="${action}">
+                    <div class="chatPost">${message}<br/><span class="name"> ${name}</span> <span class="time"> at ${time}</span>
+                    </div>
+                </li>
+            </script>
+        </ul>
+        <ul id="users">
+            <script type="text/x-jquery-tmpl">
+                <li id="user-${id}">${name}</li>
+            </script>
+        </ul>
+        <div class="clearfix"></div>
+        <form>
+            <input type="hidden" id="name" name="name" value="{{ request.user.get_profile.get_pretty_name }}">
+            <input type="text" id="message" name="message" placeholder="Send a Message">
+        </form>
+    </div>
+</div>

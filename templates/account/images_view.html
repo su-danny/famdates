@@ -1,0 +1,74 @@
+{% extends "account/profile.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+
+{% block title %}Edit your images{% endblock %}
+
+{% block profile_body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+
+    <style>
+        .photoStream {
+            position: relative;
+        }
+
+        .btn-remove-image {
+            background: none repeat scroll 0 0 #252525;
+            border: 2px solid white;
+            -webkit-border-radius: 50%;
+            border-radius: 50% 50% 50% 50%;
+            box-shadow: 0 1px 2px #000000;
+            cursor: pointer;
+            padding: 2px 4px;
+            position: absolute;
+            right: -9px;
+            top: -10px;
+        }
+
+    </style>
+    <h2 style="margin-top: 20px;">Images</h2>
+    <div class="row-fluid media_edit">
+        {% for file in media %}
+            {% if file.image %}
+                <div class="media_action photoStream span3 well">
+                    <img src="{{ MEDIA_URL }}{{ file.image }}">
+                    <i class="red icon-remove icon-right btn-remove-image" action="{% url remove_image file.pk %}"></i>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for photo in photos %}
+            <div class="media_action photoStream span3 well">
+                {% thumbnail photo.image "130x130" crop="center" as im %}
+                    <img src="{{ im.url }}" width="130" height="130">
+                {% empty %}
+                    <img src="{{ MEDIA_URL }}{{ photo.image }}" width="130" height="130">
+                {% endthumbnail %}
+            </div>
+        {% endfor %}
+
+        {% if not media and not photos %}
+            Empty
+        {% endif %}
+
+    </div><!-- end of row-fluid -->
+
+    <div class="modal hide fade" id="dlg-delete-confirm" aria-hidden="true">
+        <div class="modal-body">Are you sure?</div>
+        <!-- end of modal body -->
+
+        <div class="modal-footer">
+            <a href="" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
+            <a href="" class="btn btn-red" data-dismiss="modal" aria-hidden="true" onclick="window.confirmed=true;">Delete</a>
+        </div>
+        <!-- end of modal footer -->
+    </div><!-- end of modal -->
+        </div>
+    </div>
+</div>
+{% endblock %}

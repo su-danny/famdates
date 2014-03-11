@@ -1,0 +1,129 @@
+<link href="/static/css/bootstrap.css" rel="stylesheet">
+<link href="/static/css/skeleton.css" rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+<link rel="icon" href="/static/static/images/favicon.png" type="image/png">
+<link href="/static/css/jquery.fancybox.css" rel="stylesheet">
+<link href="/static/flowplayer/skin/minimalist.css" rel="stylesheet">
+<link href="/static/css/chosen.css" rel="stylesheet">
+<link href="/static/css/datepicker.css" rel="stylesheet">
+<link href="/static/css/profile.css" rel="stylesheet">
+<link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/static/css/pricing.css" rel="stylesheet">
+<link href="/static/css/style.css" rel="stylesheet">
+<link href="/static/css/font-awesome.css" rel="stylesheet">
+<script src="/static/js/bootstrap.js"></script>
+
+{% load utils %}
+{% block content %}
+<style>
+    #wrap .registrationForm ul {
+        list-style-type: none;
+    }
+
+    .tab-fanzone .left-arrow {
+        position: absolute;
+        left: 0;
+    }
+
+    .tab-fanzone .right-arrow {
+        position: absolute;
+        right:0
+    }
+
+    .tab-fanzone .slide-container {
+        width: 100%;
+        padding: 0 50px;
+        left: 0;
+    }
+
+    .tab-fanzone .interest {
+        position: relative;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 100px;
+        float: left;
+    }
+
+    .gameZoneInterestCarousel .carousel-inner {
+       /* padding: 0 65px;*/
+    }
+
+    .gameZoneInterestCarousel .carousel-control {
+        position: absolute;
+        top: 100px;
+        z-index: 100;
+    }
+
+    .gameZoneInterestCarousel .carousel-control.left {
+        left: 0px;
+    }
+
+    .gameZoneInterestCarousel .tab-pane {
+        height: 400px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .gameZoneInterestCarousel .carousel-inner > .item {
+        overflow: auto;
+        height: 350px;
+    }
+
+</style>
+
+
+<div class="interest-page inner fanzone-interest-registration-page">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="clearfix top-icons text-center">
+                <img src="/static/images/fanzone_icon-medium.png" class="tab-fanzone" alt="FanZone">
+                <img src="/static/images/fitness_icon-medium.png" class="tab-nutrition" alt="Fitness & Nutrition">
+                <img src="/static/images/gametime_icon-medium.png" class="tab-gametime" alt="GameTime">
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <form class="form-inline registrationForm standard form-horizontal gameZoneInterestCarousel">
+                <div class="tabbable tab-fanzone">
+                    <ul class="nav nav-tabs">
+                        {% for fan_zone_groups in fan_zones %}
+                        <li class="{% if forloop.counter == 1 %}active{%endif%}">
+                            <a href="#fan_zone-tab{{forloop.counter}}" data-toggle="tab">{{fan_zone_groups.0}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="tab-content">
+                        {% for fan_zone_groups in fan_zones %}
+                        <div class="tab-pane {% if forloop.counter == 1 %}active{%endif%}"
+                             id="fan_zone-tab{{forloop.counter}}">
+
+                            <div class="slide-list carousel-inner">
+                                {% for group3s in fan_zone_groups.1 %}
+                                    <div class="item {% if forloop.counter0 == 0 %}active{%endif%}">
+                                        {% for group in group3s %}
+                                            {%if group.0 %} <h4>{{group.0}}</h4> {% endif %}
+                                                {% for i in group.1 %}
+                                                    <div class="interest" interest_id="{{i.id}}">
+                                                        <img src="/static/images/checked.png" class="checked-icon">
+                                                        <img src="{{i.get_thumb}}" class="">
+                                                        <span>{{i.name}}</span>
+                                                    </div>
+                                                {% endfor %}
+                                            <div style="clear: both"></div>
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,380 @@
+{% extends "base.html" %}
+{% block title %}Registration{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block footer_js %}
+    <script type="text/javascript">
+        $(function () {
+            // map stripe error with our form
+            var mapping = {'number': 'id_card_number', 'exp_month': 'id_expiration_date_year',
+                'exp_year': 'id_expiration_date_year', 'cvc': 'id_verification_number'}
+
+            function hide_form_errors() {
+                $('.errorlist').remove();
+            }
+
+            function display_error(field, error_text, is_checkbox) {
+                if (is_checkbox) {
+                    if (field.find('.help-inline').length > 0) {
+                        field.parent().siblings('.help-inline').text(error_text);
+                    } else {
+                        // insert help-inline to this field
+                        $span = $('<span/>', {'class': 'help-inline'});
+                        $span.html(error_text);
+                        if (field.next('.chzn-container').length > 0) {
+                            field.next('.chzn-container').after($span);
+                        } else {
+                            field.after($span);
+                        }
+                    }
+                } else {
+                    if (field.find('.help-inline').length > 0) {
+                        field.siblings('.help-inline').text(error_text);
+                    } else {
+                        // insert help-inline to this field
+                        $span = $('<span/>', {'class': 'help-inline'});
+                        $span.html(error_text);
+                        if (field.next('.chzn-container').length > 0) {
+                            field.next('.chzn-container').after($span);
+                        } else {
+                            field.after($span);
+                        }
+                    }
+                }
+            }
+
+            function process_form_errors(json, form) {
+                var curField;
+                hide_form_errors();
+                errors = json.errors;
+                $("button[type=submit]").removeAttr('disabled');
+
+                prefix = form.find(":hidden[name='prefix']").val();
+
+                prefix == undefined ? prefix = '' : prefix = prefix + '-';
+                $('.error').removeClass('error');
+                $('.help-inline').text('');
+
+                if (errors.__all__ != undefined) {
+                    // form.append(errors.__all__);
+                    // append error for email or password based on return value
+
+                    if (errors.__all__.indexOf('password') !== -1) {
+                        field = $('[name=password2]');
+                    }
+
+                    display_error(field, errors.__all__, false);
+                    field.parents('.control-group:first').addClass('error')
+                }
+
+                for (field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        curField = $('[name=' + field + '], [name=' + field + ']');
+                        if (curField.attr('type') === 'checkbox') {
+                            display_error(curField, errors[field], true);
+                        } else {
+                            display_error(curField, errors[field], false);
+                        }
+                        curField.parents('.control-group:first').addClass('error')
+                    }
+                }
+            }
+
+            function removeErrorForStripe() {
+                $('.error').each(function () {
+                    $(this).find('.help-inline').remove();
+                    $(this).removeClass('error');
+                })
+            }
+
+            function addErrorForStripe(element, message) {
+                removeErrorForStripe();
+                $span = $('<span/>', {'class': 'help-inline'});
+                $span.html(message);
+
+                element.after($span);
+                element.parents('.control-group:first').addClass('error');
+            }
+
+            function stripeResponseHandler(status, response) {
+                //response:
+                //{
+                //  id : "tok_u5dg20Gra", // String of token identifier,
+                //  card : {...}, // Dictionary of the card used to create the token
+                //  created : 1357740841, // Integer of date token was created
+                //  currency: "usd", // String currency that the token was created in
+                //  livemode: true, // Boolean of whether this token was created with a live or test API key
+                //  object: "token", // String identifier of the type of object, always "token"
+                //  used : false, // Boolean of whether this token has been used,
+                //}
+                if (response.error) {
+                    $('html body').css('cursor', 'auto');
+                    // console.log(response.error.message);
+                    $("button[type=submit]").removeAttr('disabled');
+                    addErrorForStripe($('#' + mapping[response.error.param]), response.error.message);
+                }
+                else {
+                    // add the stripe token and submit the form
+                    var form = $("#registration_form");
+                    var token = response.id;
+                    $("#id_stripe_token").val(token);
+                    var data = form.serialize();
+                    $.ajax({
+                        url: form.attr('action'),
+                        data: data,
+                        type: 'post',
+                        success: function (json) {
+                            $('html body').css('cursor', 'auto');
+                            if (json.success === false && json.errors !== undefined)
+                                process_form_errors(json, form);
+                            else {
+                                //do something if there aren't errors
+                                console.log('registration success');
+                                window.location.href = "/";
+                            }
+                        }
+                    });
+                }
+            }
+
+            $('#registration_form').submit(function (e) {
+                e.preventDefault();
+                $("button[type=submit]").attr('disabled', 'disabled');
+                $('html body').css('cursor', 'wait');
+                if ($('input:radio[name="profile_type"]').val() == 'premium_business') {
+                    var data = {
+                        number: $("#id_card_number").val(),
+                        cvc: $("#id_verification_number").val(),
+                        exp_month: $("#id_expiration_date_month").val(),
+                        exp_year: $("#id_expiration_date_year").val()
+                    };
+                    Stripe.createToken(data, stripeResponseHandler);
+                } else {
+                    var form = $("#registration_form");
+                    var data = form.serialize();
+                    $.ajax({
+                        url: form.attr('action'),
+                        data: data,
+                        type: 'post',
+                        success: function (json) {
+                            $('html body').css('cursor', 'auto');
+                            if (json.success === false && json.errors !== undefined)
+                                process_form_errors(json, form);
+                            else {
+                                //do something if there aren't errors
+                                console.log('registration success');
+                                window.location.href = "/account/business/first_time/";
+                            }
+                        }
+                    });
+                }
+            });
+
+            $('#cc_info').hide();
+
+            $('input:radio[name="profile_type"]').change(function () {
+                if ($(this).val() == 'free_business') {
+                    $('#cc_info').hide();
+                } else {
+                    $('#cc_info').show();
+                }
+            });
+        })
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+    <style type="text/css">
+        .fullHeight {
+            height: 1200px;
+        }
+
+        .registrationForm input[type='radio'] {
+            width: auto;
+            display: inline-block;
+            margin-top: 0;
+        }
+    </style>
+
+    <div class="sliderContainer fullWidth clearfix simpleSlider registrationSlider">
+        <!-- the innerSlider is only for interior pages. The last class is optional for styling only -->
+        <!-- <div id="full-width-slider" class="royalSlider rsMinW rsNight"> -->
+        <div id="full-width-slider" class="fullHeight">
+            <!-- an rsContent is used for each slider item -->
+            <div class="rsContent registration">
+                <!-- <img class="rsImg" src="http://lorempixel.com/1800/380/people/9" alt="" /> -->
+                <div class="infoBlock infoBlockLeftBlack rsABlock rsNoDrag" data-fade-effect="" data-move-offset="10"
+                     data-move-effect="bottom" data-speed="200">
+                    <h2>Registration</h2>
+
+                    <div class="clearfix"></div>
+                    <form id="registration_form" class="form-inline registrationForm standard form-horizontal"
+                          method="post" action="">
+                        {% csrf_token %}
+                        <div class="control-group {% if user_form.first_name.errors %}error{% endif %} ">
+                            <label class="control-label">First Name</label>
+
+                            <div class="controls">
+                                {{ user_form.first_name }}
+                                {% if user_form.first_name.errors %}
+                                    <span class="help-inline">{{ user_form.first_name.errors|striptags }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="control-group {% if user_form.last_name.errors %}error{% endif %}">
+                            <label class="control-label">Last Name</label>
+
+                            <div class="controls">
+                                {{ user_form.last_name }}
+                                {% if user_form.last_name.errors %}
+                                    <span class="help-inline">{{ user_form.last_name.errors|striptags }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="control-group {% if user_form.password.errors %}error{% endif %}">
+                            <label class="control-label">Password</label>
+
+                            <div class="controls">
+                                {{ user_form.password }}
+                                {% if user_form.password.errors %}
+                                    <span class="help-inline">{{ user_form.password.errors|striptags }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="control-group {% if user_form.confirm_password.errors %}error{% endif %}">
+                            <label class="control-label">Password Confirmation</label>
+
+                            <div class="controls">
+                                {{ user_form.confirm_password }}
+                                {% if user_form.confirm_password.errors %}
+                                    <span class="help-inline">{{ user_form.confirm_password.errors|striptags }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="control-group {% if user_form.email.errors %}error{% endif %}">
+                            <label class="control-label">Email</label>
+
+                            <div class="controls">
+                                {{ user_form.email }}
+                                {% if user_form.email.errors %}
+                                    <span class="help-inline">{{ user_form.email.errors|striptags }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="control-group {% if profile_form.phone.errors %}error{% endif %}">
+                            <label class="control-label">{{ profile_form.phone.label }}</label>
+
+                            <div class="controls">
+                                {{ profile_form.phone }}
+                                {% if profile_form.phone.errors %}
+                                    <span class="help-inline">{{ profile_form.phone.errors|striptags }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="control-group {% if profile_form.profile_type.errors %}error{% endif %}">
+                            <label class="control-label">{{ profile_form.profile_type.label }}</label>
+
+                            <div class="controls">
+                                <input type="radio" name="profile_type" value="free_business"/> Free Account
+                                <input type="radio" name="profile_type" value="premium_business"/> Business Premium
+                                Account
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label"></label>
+
+                            <div class="controls">
+                                <a href="#">Learn more about Premium Accounts</a>
+                            </div>
+                        </div>
+                        <div id="cc_info">
+                            <div class="control-group {% if profile_form.card_type.errors %}error{% endif %}">
+                                <label class="control-label">{{ profile_form.card_type.label }}</label>
+
+                                <div class="controls">
+                                    {{ profile_form.card_type }}
+                                </div>
+                            </div>
+                            <div class="control-group {% if profile_form.card_number.errors %}error{% endif %}">
+                                <label class="control-label">{{ profile_form.card_number.label }}</label>
+
+                                <div class="controls">
+                                    {{ profile_form.card_number }}
+                                </div>
+                            </div>
+                            <div class="control-group {% if profile_form.expiration_date.errors %}error{% endif %}">
+                                <label class="control-label">{{ profile_form.expiration_date.label }}</label>
+
+                                <div class="controls">
+                                    {{ profile_form.expiration_date }}
+                                </div>
+                            </div>
+                            <div class="control-group {% if profile_form.verification_number.errors %}error{% endif %}">
+                                <label class="control-label">{{ profile_form.verification_number.label }}</label>
+
+                                <div class="controls">
+                                    {{ profile_form.verification_number }}
+                                </div>
+                            </div>
+                            <div class="control-group {% if profile_form.card_name.errors %}error{% endif %}">
+                                <label class="control-label">{{ profile_form.card_name.label }}</label>
+
+                                <div class="controls">
+                                    {{ profile_form.card_name }}
+                                </div>
+                            </div>
+                            <div class="control-group {% if profile_form.billing_address.errors %}error{% endif %}">
+                                <label class="control-label">{{ profile_form.billing_address.label }}</label>
+
+                                <div class="controls">
+                                    {{ profile_form.billing_address }}
+                                </div>
+                            </div>
+                            <div class="control-group {% if profile_form.billing_address_2.errors %}error{% endif %}">
+                                <label class="control-label">{{ profile_form.billing_address_2.label }}</label>
+
+                                <div class="controls">
+                                    {{ profile_form.billing_address_2 }}
+                                </div>
+                            </div>
+                            <div class="control-group {% if profile_form.city.errors %}error{% endif %}">
+                                <label class="control-label">{{ profile_form.city.label }}</label>
+
+                                <div class="controls">
+                                    {{ profile_form.city }}
+                                </div>
+                            </div>
+                            <div class="control-group {% if profile_form.state.errors %}error{% endif %}">
+                                <label class="control-label">{{ profile_form.state.label }}</label>
+
+                                <div class="controls">
+                                    {{ profile_form.state }}
+                                </div>
+                            </div>
+                            <div class="control-group {% if profile_form.state.errors %}error{% endif %}">
+                                <label class="control-label">{{ profile_form.zip.label }}</label>
+
+                                <div class="controls">
+                                    {{ profile_form.zip }}
+                                    {{ profile_form.stripe_token }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="submit" value="Get Started" class="btn"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- end of full-width-slider -->
+    </div><!-- end of sliderContainer -->
+
+{% endblock %}

@@ -1,0 +1,97 @@
+<link href="/static/css/bootstrap.css" rel="stylesheet">
+<link href="/static/css/skeleton.css" rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+<link rel="icon" href="/static/static/images/favicon.png" type="image/png">
+<link href="/static/css/jquery.fancybox.css" rel="stylesheet">
+<link href="/static/flowplayer/skin/minimalist.css" rel="stylesheet">
+<link href="/static/css/chosen.css" rel="stylesheet">
+<link href="/static/css/datepicker.css" rel="stylesheet">
+<link href="/static/css/profile.css" rel="stylesheet">
+<link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/static/css/pricing.css" rel="stylesheet">
+<link href="/static/css/style.css" rel="stylesheet">
+<link href="/static/css/font-awesome.css" rel="stylesheet">
+<script src="/static/js/bootstrap.js"></script>
+
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+
+{% block content %}
+<style>
+    #wrap .registrationForm ul {
+        list-style-type: none;
+    }
+
+</style>
+
+<div class="clearfix">
+</div>
+
+<div class="interest-page inner similar-user-registration-page">
+    <div class="container">
+        <div>
+            <h4>
+                <img src="/static/images/fanzone_icon-medium.png" class="tab-fanzone" alt="FanZone">
+                <span>Best FanZone Matches</span>
+            </h4>
+
+            <div class="carousel slide" id="fanZoneCarousel">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    {% for profile in similar_profiles.fanzone %}
+                        {% include 'modules/signup-similar-user-reg.html' %}
+                    {% endfor %}
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#fanZoneCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#fanZoneCarousel" data-slide="next">&rsaquo;</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div>
+            <h4>
+                <img src="/static/images/fitness_icon-medium.png" class="tab-nutrition" alt="FanZone">
+                <span>Best GetFit Matches</span>
+            </h4>
+
+            <div class="carousel slide" id="gameTimeCarousel">
+                <!-- Carousel items -->
+                <div class="carousel-inner" >
+                    {% for profile in similar_profiles.gametime %}
+                        {% include 'modules/signup-similar-user-reg.html' %}
+                    {% endfor %}
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#gameTimeCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#gameTimeCarousel" data-slide="next">&rsaquo;</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div>
+            <h4>
+                <img src="/static/images/gametime_icon-medium.png" class="tab-gametime" alt="FanZone">
+                <span>Best GameTime Matched</span>
+            </h4>
+
+            <div class="carousel slide" id="nutritionCarousel">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    {% for profile in similar_profiles.nutrition %}
+                        {% include 'modules/signup-similar-user-reg.html' %}
+                    {% endfor %}
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#nutritionCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#nutritionCarousel" data-slide="next">&rsaquo;</a>
+            </div>
+        </div>
+
+    </div>
+    <!-- end of container -->
+</div>
+
+{% endblock %}

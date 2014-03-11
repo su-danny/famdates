@@ -1,0 +1,207 @@
+{% load i18n %}
+{% load humanize %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load voting_tags %}
+
+{% votes_by_user request.user on posts as vote_dict %}
+{% if not request.is_ajax %}
+    <div class="modal hide fade" id="dlg-delete-confirm" aria-hidden="true">
+        <div class="modal-body">
+            Are you sure?
+        </div>
+        <!-- end of modal body -->
+
+        <div class="modal-footer">
+            <a href="" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
+            <a href="" class="btn danger" data-dismiss="modal" aria-hidden="true"
+               onclick="window.confirmed=true;">Yes</a>
+        </div>
+        <!-- end of modal footer -->
+    </div><!-- end of modal -->
+{% endif %}
+{% for post in posts %}
+    <div class="full_post" post_id="{{ post.id }}">
+    {% with profile=post.author.get_profile %}
+
+        {% if post.is_sticky %}
+            <div class="post sticky" id="post_{{ post.id }}">
+        {% else %}
+            <div class="post" id="post_{{ post.id }}">
+        {% endif %}
+
+        {% if post.is_sticky %}
+            <span class="btn-close-sticky-post" item_class="full_post" action="{% url close_sticky_post post.pk %}"
+                  data="{{ post.pk }}"><i class="red icon-remove icon-right"></i></span>
+        {% elif post.author == request.user %}
+            <span class="btn-close-sticky-post" item_class="full_post" action="{% url delete_post post.pk %}"
+                  data="{{ post.pk }}"><i class="red icon-remove icon-right"></i></span>
+        {% endif %}
+
+        <div class="name_action">
+            <div class="post_author_thumb">
+                <a href="{% url public_profile_detail profile.pk %}">
+                    {% if profile.use_gravatar or not profile.avatar %}
+                        <img src="{% gravatar_url post.author.email 32 %}" class="circle photo-border"> {% else %}
+                        {% thumbnail profile.avatar "40x40" as im %}
+                            <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" class="circle photo-border">
+                        {% endthumbnail %}
+                    {% endif %} </a>
+            </div>
+            <!--/post img-->
+            <a class="post_author_name" href="{% url public_profile_detail profile.pk %}"><span>{{ post.author }}</span></a>
+
+            {% if post.feed == "fan_zone" %}
+            	<span class="timestamp">{{ post.created|naturaltime }} in <span class="icon icon-fanzone"><img src="/static/images/fanzone_icon-mini.png" /></span></span>
+            {% elif post.feed == "fitness_nutrition" %}
+            	<span class="timestamp">{{ post.created|naturaltime }} in <span class="icon icon-fitness"><img src="/static/images/fitness_icon-mini.png" /></span></span>
+            {% else %}
+            	<span class="timestamp">{{ post.created|naturaltime }} in <span class="icon icon-game-time"><img src="/static/images/gametime_icon-mini.png" /></span></span>
+            {% endif %}
+
+            {% if post.location %}
+                <span class="locationstamp"> near {{ post.location }}</span>
+                <div class="post-votes">
+                    {% dict_entry_for_item post from vote_dict as vote %}
+
+                    {% score_for_object post as score %}
+
+        	 	
+				<span class="vote-status-{{ post.pk }} vote" id="vote-status-{{ post.pk }}">
+					<!--{% if vote and vote.is_upvote %}
+						You and {{score.other_likes}} other{{ score.other_likes|pluralize }} like this
+					{% elif vote and vote.is_downvote %}
+						You and {{score.other_dislikes}} other{{ score.other_dislikes|pluralize }} dislike this
+					{% else %}
+						{{score.likes}} like{{ score.likes|pluralize }} and {{score.likes}} dislike
+                        {{ score.dislikes|pluralize }}
+					{% endif %}
+					-->
+						<div class="vote_like">
+                            <a href="#vote-status-{{ post.pk }}" onclick="vote('{{ post.pk }}', 'up');"><i
+                                    class="icon-thumbs-up icon-left"></i></a>
+                            {% if score.likes > 9 %}
+                                <span class="sidebar-total">{{ score.likes }}</span>
+                            {% else %}
+                                <span class="sidebar-total single">{{ score.likes }}</span>
+                            {% endif %}
+                        </div><!-- end of like -->
+						<div class="vote_dislike">
+                            <a href="#vote-status-{{ post.pk }}" onclick="vote('{{ post.pk }}', 'down');"><i
+                                    class="icon-thumbs-down icon-left"></i></a>
+                            {% if score.dislikes > 9 %}
+                                <span class="sidebar-total">{{ score.dislikes }}</span>
+                            {% else %}
+                                <span class="sidebar-total single">{{ score.dislikes }}</span>
+                            {% endif %}
+                        </div>
+				</span>
+                </div>
+            {% endif %}
+        </div>
+    {% endwith %}
+<div class="clearfix"></div>
+<div class="post_body">
+    <p>{{ post.body }}</p>
+    {% for media in post.media.all %}
+        {% if media.video %}
+            <object class="flowplayer" width="500" height="300" bgcolor="#000000"
+                    data="http://releases.flowplayer.org/swf/flowplayer-3.2.15.swf"
+                    type="application/x-shockwave-flash">
+                <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.15.swf"/>
+                <param name="allowfullscreen" value="true"/>
+                <param name="autoPlay" value="false"/>
+                <param name="flashvars" value='config={"clip":{"url":"http://
+                        {{ request.META.HTTP_HOST }}{{ MEDIA_URL }}{{ media.video }}","autoPlay":false}}'/>
+            </object>
+        {% endif %}
+
+        {% if media.image %}
+            <div class="media_action"><img src="{{ MEDIA_URL }}{{ media.image }}"></div>
+        {% endif %}
+
+    {% endfor %}
+
+    {% if post.default_image %}
+        <div class="media_action"><img src="{{ MEDIA_URL }}{{ post.default_image }}"></div>
+    {% endif %}
+
+    {% for image in post.image_set.all %}
+        <div class="media_action"><img src="{{ MEDIA_URL }}{{ image.mage }}"></div>
+    {% endfor %}
+
+
+</div><!-- end of post body -->
+
+
+<div class="friend_comments">
+
+    <div class="marginleft10">
+        <div class="response">
+            <span class="toggle-post-responses">{% with total=post.comments.count%} {{total}} comment{{ total|pluralize }} {% endwith %} <i class="icon-caret-down icon-right"></i></span>
+            <ul class="unstyled post-responses">
+                {% for comment in post.comments.all %}
+                    <li {% if forloop.counter > 2 %}style="display: none;"{% endif %}>
+                        {% with profile=comment.author.get_profile %}
+
+                            <a href="{% url public_profile_detail profile.pk %}">
+                                {% if profile.use_gravatar or not profile.avatar %}
+                                    <img src="{% gravatar_url comment.author.email 32 %}"
+                                         class="friend_img hidden-phone circle photo-border">
+                                    <span class="red friend_name">{{ comment.author }}</span>
+                                {% else %}
+                                    {% thumbnail profile.avatar "32x32" as im %}
+                                        <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"
+                                             class="friend_img hidden-phone circle photo-border">
+                                        <span class="red friend_name">{{ comment.author }}</span> {% endthumbnail %}
+                                {% endif %} </a>
+
+                        {% endwith %}
+
+                        <div class="friend_response" id="c{{ comment.id }}">
+                            {{ comment.body }}
+                        </div>
+                    </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- end of response -->
+        <div class="post-comment">
+            <form action="{% url create_comment post.id %}" class="comment-form" method="POST">
+                {% csrf_token %}
+                {% with profile=request.user.get_profile %}
+                    <a href="{% url public_profile_detail profile.pk %}">
+                        {% if profile.use_gravatar or not profile.avatar %}<img src="{% gravatar_url user.email 32 %}"
+                                                                                class="friend_img response_img hidden-phone circle photo-border"> {% else %}
+                            {% thumbnail profile.avatar "32x32" as im %}
+                                <img class="hidden-phone circle photo-border" src="{{ im.url }}" width="{{ im.x }}"
+                                     height="{{ im.y }}" class="friend_img response_img"> {% endthumbnail %}
+                        {% endif %} </a>
+                    <input type="text" name="body" class="response_comment" placeholder="Leave a comment...">
+                    <button class="btn" type="submit">Post</button>
+                    <ul class="socialPost">
+                        <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http://{{request.get_host}}{{request.get_full_path|urlencode}}#{{post.id}}"><i class="icon-facebook icon-left"></i></a></li>
+                        <li class="facebook"><a href="https://twitter.com/intent/tweet?text=Check it out! http://{{request.get_host}}{{request.get_full_path|urlencode}}{{'#'|urlencode}}{{post.id}}"><i class="icon-twitter icon-right"></i></a></li>
+                    </ul>
+                {% endwith %}
+            </form>
+            <!--/comment-->
+        </div>
+
+
+    </div>
+    <!--/span11-->
+</div><!--/friend comments-->
+
+</div>
+<!--/post-->
+
+</div>
+    <!--/full post-->
+
+
+
+{% endfor %}
+
+</div><!-- end of post container -->

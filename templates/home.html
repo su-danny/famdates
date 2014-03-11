@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- google fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC" rel="stylesheet" type="text/css">
+    <!-- the styles -->
+    <link href="/static/library/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/library/css/base.css" rel="stylesheet">
+    <link href="/static/library/css/docs.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="library/js/modernizr-2.7.1.js"></script>
+  <![endif]-->
+
+    <!-- lets get jquery right away from google -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="/static/library/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="/static/library/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="/static/library/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/library/images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/static/library/images/ico/favicon.png">
+</head>
+
+<body>
+
+<header>
+    <!-- NAVBAR
+      ================================================== -->
+    <div class="navbar-wrapper">
+        <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+
+
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="index.php"><img src="/static/library/images/logo.png" alt="logo"/></a>
+                    <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+                    <div class="nav-collapse collapse right">
+                        <ul class="nav right">
+                            <li><a class="signup" href="#signUpForm">sign up</a></li>
+                            <li class="marks">//</li>
+                            <li><a class="login" href="#loginForm">login</a></li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+                <!-- end of container -->
+            </div>
+            <!-- /.navbar-inner -->
+        </div>
+        <!-- /.navbar -->
+
+    </div>
+    <!-- /.navbar-wrapper -->
+
+    <div id="formContainer" class="span6">
+        <form id="signUpForm" class="span6" style="display:none">
+            <h4><span class="marks">//</span> sign up</h4>
+
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">Email</label>
+
+                <div class="controls">
+                    <input type="text" id="inputEmail">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="inputPassword">Password</label>
+
+                <div class="controls">
+                    <input type="password" id="inputPassword">
+                </div>
+            </div>
+            <div class="control-group password">
+                <label class="control-label" for="verifyPassword">Verify Password</label>
+
+                <div class="controls">
+                    <input type="password" id="verifyPassword">
+                </div>
+            </div>
+
+            <div class="control-group terms">
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox"> i agree to the <a href="#">terms & conditions</a>
+                    </label>
+                </div>
+            </div>
+            <div class="control-group submit">
+                <button class="btn" type="submit">Sign Me Up</button>
+            </div>
+        </form>
+
+        <form id="loginForm" class="" style="display:none" method="POST" action="{% url login_page %}">
+            {% csrf_token %}
+            <h4><span class="marks">//</span> login</h4>
+
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">Email</label>
+
+                <div class="controls">
+                    <input type="text" id="inputEmail">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="inputPassword">Password</label>
+
+                <div class="controls">
+                    <input type="password" id="inputPassword">
+                </div>
+            </div>
+
+            <div class="control-group submit">
+                <button class="btn" type="submit">Login</button>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+    <!-- end of form container -->
+</header>
+
+<!-- styles specific for the marketing homepage -->
+<style>
+
+
+    /* CUSTOMIZE THE CAROUSEL
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .carousel {
+        margin-bottom: 0;
+    }
+
+    .carousel .container {
+        position: relative;
+        z-index: 9;
+    }
+
+    .carousel-control {
+        height: 51px;
+        margin-top: 0;
+        font-size: 80px;
+        text-shadow: none;
+        background-color: rgba(255, 255, 255, .75);
+        border: 0;
+        z-index: 10;
+        text-decoration: none;
+        color: rgba(0, 0, 0, .2);
+        border-radius: 0
+    }
+
+    .carousel-control.right {
+        right: 0
+    }
+
+    .carousel-control.left {
+        left: 0
+    }
+
+    .carousel .item {
+        background: url(/static/library/images/slides/slide1.jpg) no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
+        -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
+        max-height: 918px;
+    }
+
+    .carousel img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        height: 100%;
+    }
+
+    .carousel-caption {
+        background: rgba(215, 217, 11, .93);
+        position: absolute;
+        padding: 20px 30px;
+        bottom: 90px;
+        left: auto !important;
+        right: 40px;
+
+    }
+
+    .carousel-caption .lead {
+        margin: 0;
+        line-height: 1.25;
+        color: #000203;
+        text-shadow: none;
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .carousel-caption .lead span {
+        color: rgba(0, 2, 3, .24);
+        position: relative;
+        font-weight: 600;
+    }
+
+    .carousel-caption .lead span.leftQuote {
+        margin-right: 6px;
+    }
+
+    .carousel-caption .lead span.rightQuote {
+        margin-left: 6px;
+    }
+
+    .carousel-caption .quoteAuthor {
+        color: #055265;
+        text-align: right;
+        font-size: 18px;
+        font-weight: 600;
+        font-variant: small-caps
+    }
+
+    .carousel-caption .btn {
+        margin-top: 10px;
+    }
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketingWrapper {
+        background: url(/static/library/images/grid.jpg) repeat;
+    }
+
+    .marketing .span4 {
+        text-align: center;
+    }
+
+    .marketing h2 {
+        font-weight: 600;
+        font-size: 20px;
+        color: #54b3cf;
+        line-height: 20px;
+        margin-bottom: 20px;
+    }
+
+    .marketing h2 span {
+        color: #d7d90b;
+        margin: 0 5px;
+    }
+
+    .marketing .span4 p {
+        margin-left: 10px;
+        margin-right: 10px;
+        color: #012d44
+    }
+
+    .marketing a {
+        color: #54b3cf
+    }
+
+    .marketing .feature {
+        padding: 20px 0;
+    }
+
+    .marketing .span4:hover {
+        background: #ebf0f2;
+        cursor: pointer
+    }
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+    @media (max-width: 979px) {
+        .carousel .item {
+
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 100%;
+        }
+
+    }
+
+    @media (max-width: 767px) {
+
+        .carousel {
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+
+        .carousel .container {
+
+        }
+
+        .carousel .item {
+            height: 300px;
+        }
+
+        .carousel img {
+            height: 300px;
+        }
+
+        .carousel-caption {
+            margin-top: 100px;
+            padding: 20px 30px;
+
+        }
+
+        .carousel-caption .lead,
+        .carousel-caption .btn {
+            font-size: 18px;
+        }
+
+        .marketing .span4 + .span4 {
+            margin-top: 40px;
+        }
+
+    }
+</style>
+<!-- specific javascript for the marketing page -->
+<script>
+    !function ($) {
+        $(function () {
+
+            // carousel demo
+            $('#myCarousel').carousel()
+        })
+    }(window.jQuery);
+    function fluid() {
+        mWidth = $(window).width(),
+                mHeight = $(window).height();
+        mRatio = eval(mWidth / mHeight);
+
+        if (mRatio > 1.527137546) {
+            $('.item').css('backgroundSize', '100% auto');
+            $('.item').css('min-height', mHeight);
+            $('.item .container').css('min-height', mHeight);
+        } else {
+            $('.item').css('backgroundSize', 'cover');
+            $('.item').css('min-height', 'auto');
+            $('.item .container').css('min-height', mHeight);
+        }
+    }
+    $(window).resize(function () {
+        fluid();
+    });
+
+    $(document).ready(function () {
+        fluid();
+        //grab the url from trio on the marketing page and make the whole box clickable
+        jQuery(".marketing .span4").click(function () {
+            var url = $(this).find('a').attr('href');
+            window.open(url, '_blank');
+            return false;
+        });
+        //thats all folks
+    });
+</script>
+
+
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide">
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="container">
+                <div class="carousel-caption span3 right">
+                    <p class="lead"><span class="leftQuote">&ldquo;</span>FamDates has helped me stay active & social!<span
+                            class="rightQuote">&rdquo;</span></p>
+
+                    <p class="quoteAuthor">- shelly</p>
+                </div>
+            </div>
+        </div>
+        <!-- end of item -->
+        <div class="item">
+            <img src="/static/library/images/slides/slide-02.jpg" alt="">
+
+            <div class="container">
+                <div class="carousel-caption span3 right">
+                    <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+                        porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <a class="btn btn-large btn-primary" href="#">Learn more</a>
+                </div>
+            </div>
+        </div>
+        <!-- end of item -->
+
+        <div class="item">
+            <img src="/static/library/images/slides/slide-03.jpg" alt="">
+
+            <div class="container">
+                <div class="carousel-caption span3 right">
+                    <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+                        porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <a class="btn btn-large btn-primary" href="#">Browse gallery</a>
+                </div>
+            </div>
+        </div>
+        <!-- end of item -->
+    </div>
+    <!-- end of carousel inner -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+<!-- /.carousel -->
+
+
+<!-- Marketing Trio
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+<div class="marketingWrapper">
+    <div class="container">
+        <div class="marketing">
+
+            <!-- Three columns of text below the carousel -->
+            <div class="row">
+                <div class="span4">
+                    <div class="feature">
+                        <img src="/static/library/images/featureA.png" alt="featureA"/>
+
+                        <h2><span>//</span>Our Story<span>\\</span></h2>
+
+                        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh
+                            ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at
+                            eros....<a class="btn" href="#">more</a></p>
+                    </div>
+                    <!-- end of feature -->
+                </div>
+                <!-- /.span4 -->
+
+                <div class="span4">
+                    <div class="feature">
+                        <img src="/static/library/images/featureB.png" alt="featureB"/>
+
+                        <h2><span>//</span>How It Works<span>\\</span></h2>
+
+                        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec
+                            elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus...<a class="btn"
+                                                                                                       href="#">more</a>
+                        </p>
+                    </div>
+                    <!-- end of feature -->
+                </div>
+                <!-- /.span4 -->
+
+                <div class="span4">
+                    <div class="feature">
+                        <img src="/static/library/images/featureC.png" alt="featureC"/>
+
+                        <h2><span>//</span>What You Can Do<span>\\</span></h2>
+
+                        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum
+                            id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo...<a
+                                    class="btn" href="#">more</a></p>
+                    </div>
+                    <!-- end of feature -->
+                </div>
+                <!-- /.span4 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- end of marketing -->
+
+    </div>
+    <!-- end of the marketing container -->
+</div>
+<!-- end of the marketing wrapper -->
+
+
+<!-- lets grab the marketing footer -->
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+
+        <p>&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </div>
+    <!-- end of footer -->
+</footer>
+
+</div><!-- /.container wrapper for whole site-->
+
+
+<!-- javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/library/js/bootstrap.js"></script>
+<script src="/static/library/js/holder.js"></script>
+<script src="/static/library/js/jquery.tooltipster.min.js"></script>
+<script src="/static/library/js/app.js"></script>
+
+
+</body>
+</html>

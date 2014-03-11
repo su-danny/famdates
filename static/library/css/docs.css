@@ -1,0 +1,366 @@
+/*
+* Customized Styles
+* converted to 12 column layout using bootstrap naming convention
+* changes made by Dennis T Elder (http://dnnsldr.com)
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 8/17/2011
+*/
+
+
+    /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+
+    body {
+      padding-bottom: 40px;
+      color: #012d44;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      background: #fefefe;
+    }
+
+	h1,h2,h3,h4,h5,h6 {font-family: 'Open Sans', sans-serif;font-weight: 600;color: #012d44;margin-bottom: 10px;}
+	h1 {font-size: 20px;line-height: 20px}
+	h2 {font-size: 18px;line-height: 18px;}
+	h3 {font-size: 15px;line-height: 15px;}
+	
+	
+	a {text-decoration: none;color: #1bb7d6}
+	a: hover {text-decoration: none}
+	a:focus, a:active, .btn:active, .btn:focus {outline:none}
+	a.link {font-size: 13px;color: #1bb7d6;font-variant: small-caps;display: inline-block;text-decoration: none}
+	a.link span {color: #d7d90b;display: inline-block;margin-right: 4px;}
+	
+	.highlight {color: #7c98a5;font-size: 10px;line-height: 12px}
+	
+	input, button, select, textarea {font-family: inherit}
+	
+	.icon-left {margin-right: 3px;}
+	.icon-right {margin-left: 3px;}
+	
+	.attention {color: #1bb7d6}
+	
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      margin-top: 0;
+      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+    }
+    .navbar-wrapper .navbar {
+
+    }
+
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+      border: 0;
+      -webkit-box-shadow: none;
+         -moz-box-shadow: none;
+              box-shadow: none;
+      border-radius: 0;
+      background: url(../images/navbar.png) repeat;
+      padding-right: 0;
+    }
+
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: none;
+    }
+
+    	/* Navbar links: increase padding for taller navbar */
+   	.navbar .nav > li {display: inline-block;float: none;font-size: 18px}
+
+    	/* Offset the responsive button for proper vertical alignment */
+    	.navbar .btn-navbar {
+      	margin-top: 10px;
+    	}
+    
+    	.nav-collapse ul {background: rgba(108,198,224,.77);padding: 20px 40px 5px;text-align: center;margin: 0}
+    	.navbar .nav {margin: 0}
+	.navbar-inverse .brand, .navbar-inverse .nav > li > a {color: #fff;text-shadow: none;font-size: 18px;font-variant: small-caps}
+	.navbar-inverse .nav li.marks {color: #d7d90b;position: relative;font-family: 18px;margin-bottom: 0;}
+	ul.nav li.messages {position: absolute;left: -33px;top: 11px } 
+	ul.nav li.messages i.fa-envelope {color: #f1ea46;font-size: 28px;}
+	ul.nav li.messages .notification {background: none repeat scroll 0 0 #FFFFFF;border: 3px solid #EBEBEB;border-radius: 18px;color: #1BB7D6;font-size: 10px;left: 32px;padding: 0 6px;position: absolute;top: 2px;}
+	
+	.wrapper {margin-top: 90px;}
+	.gridWrapper {background: url(../images/grid.jpg) repeat;margin-bottom: 20px;padding-bottom: 30px;}
+	
+	#mainNav {background: #e6eef1;padding: 10px 0;border-top: 1px solid #54b3cf;margin-bottom: 0;}
+	#mainNav .nav li {display: inline-block;float:left;margin: 0 8px;font-size: 15px;}
+	#mainNav .nav li.divider {color: #1bb7d6;font-size: 12px;line-height: 12px;position: relative;top: 2px}
+	#mainNav .nav li a {color: #7c98a5;}
+	#mainNav .nav li.active a {color:#012d44}
+	
+	#formContainer {position: absolute;top: 0;margin: 0 auto;z-index: 9999}
+	#formContainer form {background: rgba(34,123,145,.93);position: relative;z-index: 1000;padding: 10px 20px;box-shadow: 0 0px 4px rgba(0,0,0,.5)}
+	#formContainer form input {background: #e1edf0;color: #009abf;border: 3px solid #0e88a6;width: 71%;text-align: right}
+	#formContainer form h4 {color: #d7d90b;font-size: 20px;font-variant: small-caps}
+	#formContainer form h4 span.marks {color: #fff;}
+	
+	#formContainer .control-group {position: relative;margin:0 ;}
+	#formContainer .control-label {position: relative;top: 30px;margin: 0 20px 0 10px;width: 25%;display: inline-block;color: #94a6ad;font-size: 15px;font-weight: 400}
+	#formContainer .controls input {padding-left: 25%;font-size: 15px;color: #009abf;font-weight: 400;margin-bottom: 0; /*this matches the width of the label*/}
+	#formContainer .control-group.password {margin-top: -20px;}
+	#formContainer .control-group.terms {background: rgba(84,179,207,.55);padding: 6px;margin-top: 10px;width: 210px;margin-right: 20px;float: left;height: 40px;}
+	#formContainer .control-group.submit {margin-top: 10px;float: left;text-align: center;width: 210px;}
+	
+	
+	#formContainer .control-group.terms label.checkbox {font-weight: 400px;font-size: 12px;color: #d7d90b;font-variant: small-caps;line-height: 14px;}
+	#formContainer .control-group.terms label.checkbox a {display: block;color: #fff;text-decoration: underline}
+	#formContainer .control-group.terms input[type="checkbox"] {width: 20px;height: 20px;margin-right: 10px;}
+	
+	#formContainer button {background: #d7d90b;color:#014353;border: none;-moz-border-radius: 0;-webkit-border-radius: 0;border-radius: 0;font-size: 18px;font-weight: 400;position: relative;text-shadow: none;height: 52px;width: 100%;}
+	#formContainer button:active, #formContainer button:focus {box-shadow: none}
+
+
+/*****************
+PROFILE HEADER
+*****************/
+.thumb {padding: 5px;background: #fdfdfd;border: 1px solid #ccc;box-shadow: 0 1px 2px rgba(0,0,0,.25);}	
+#profile h2, .profile h2 {margin-bottom: 3px}
+.family li {display: inline-block;float:left;margin-bottom: 0;padding-bottom: 12px;}
+#profile p, #profile li, .profile p, .profile li {font-size: 15px;color: #012d44}
+#profile .header {padding: 5px 20px 20px 30px;border-bottom: 1px solid #ccc;position:relative}
+.header .location {color: #012d44;}
+.header .location a {color: #1bb7d6}
+#profile .header .greeting {position: absolute;left: -25px;top: 7px;color:#54b3cf;font-size: 23px;background: #eff107;padding: 5px 10px;border: 3px solid #fff;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;font-weight: 600}
+#profile .header .greeting:before {border-color: rgba(0, 0, 0, 0) #FFFFFF;border-style: solid;border-width: 6px 6px 6px 0;content: " ";display: inline-block;left: -9px;position: absolute;top: 9px;}
+#profile .header .greeting:after {border-color: rgba(0, 0, 0, 0) #eff107;border-style: solid;border-width: 6px 6px 6px 0;content: " ";display: inline-block;left: -4px;position: absolute;top: 9px;}
+#profile .profileInfo {border-right: 1px solid #ccc;}
+#profile .family li {width: 109px;}
+#profile .family li:first-child {border-right: 1px solid #ccc;}
+
+.mainHeader {/*background: #fefefe;*/padding: 20px 0 0;}
+.mainHeader h2 {display: inline-block}
+.mainHeader a {text-align: right}
+.mainHeader p.highlight {text-align: right}
+
+.family li span {display: block;text-align: center;}
+.family li span.number {color: #1bb7d6;font-size: 34px;}
+.family li span.gender {color: #a6cbd2;font-variant: small-caps;font-size: 13px;line-height: 26px;padding: 15px 0}
+.family li span img {position: relative;top: 6px;margin-right: 3px;}
+
+.progressInfo h4 {text-align: center;font-size: 13px;color: #7C98A5;font-weight: 400}
+#progressContainer {height: 80px;}
+.progressInfo p {text-align: center}
+
+/* all profiles except the user main profile which is above */
+.profile {background: #fdfdfd;}
+.profile.med.family {padding-bottom: 0}
+.profile .header {position: relative;}
+.profile h3.location {margin-bottom: 0}
+.profile .family {margin-bottom: 0;margin-top: 8px;}
+
+.profile .matchInfo {border-top: 1px solid #ccc;padding: 15px;}
+.profile.med.family .matchInfo {border: none;padding: 15px 15px 0}
+.profile .description p {font-size: 12px;line-height: 14px}
+.profile .family li.inactive span.number {color: #a6cbd3}
+.profile .profileThumb .actions {margin-left: 25px;margin-bottom: 5px;}
+.profile .profileThumb .actions li {display: inline;margin: 0 3px}
+.profile .profileThumb .actions li a {color: #A6CBD2}
+.profile .profileThumb .actions li a:hover {color: #1bb7d6}
+
+/* used for the recommedations profile */
+.profile.med {width: 305px;margin: 10px;border: 10px solid #e3ebed;padding-bottom: 10px;}
+.profile.med .header {margin: 7px 5px 0 10px;}
+.profile.med:nth-child(2n-1) {margin-right: 20px;}
+.profile.med.family:nth-child(2n-1) {margin-right: 10px;}
+.profile.med .profileThumb {margin-left: -20px;margin-top: 8px;width: 112px;}
+.profile.med .profileInfo {width: 213px}
+
+
+.profile.med .family li {width: 90px;padding-bottom: 10px;margin-bottom: 0}
+.profile.med .family li:first-child {border-right: 1px solid #ccc;width: 94px;margin-right: 13px;}
+.profile.med .family li span.gender {margin-left: 10px;padding: 7px 0}
+.profile.med .family li span.number {font-size: 28px}
+
+
+.profile.med.family ul.interests li {display: inline-block;font-size: 10px;line-height: 11px;margin: 0;width: 81px;}
+.profile.med.family .header h2, .profile.med.family .header h3 {margin-bottom: 5px;}
+.profile.med.family .matchInfo h3 {color: #1BB7D6;font-weight: 400}
+.profile.med.family .profileInfo {width: 181px;}
+
+/*profile small */
+/*used for the sidebar*/
+.profile.small h2 {font-size: 15px;margin-bottom: 10px}	
+.profile.small h3.location {font-size: 13px;}
+.profile.small a {font-size: 12px;}
+
+/*used by the events (playdates)*/
+.profile.med.event	{width: 266px;}
+.profile.med.family {width: 273px}
+.profile.med.event .profileThumb {margin: 0;width: 110px;}
+.profile.med.event .profileInfo {width: 305px;padding-bottom: 10px;}
+.profile.med.event .profileInfo h2 em {font-size: 15px;}
+.profile.med.event .children.profileThumb {width: 146px;}
+.profile.med.event .children.profileThumb span.childName {font-size: 8px;text-align: center;width: 73px;font-variant: small-caps;color: #7C98A5;line-height: 12px}
+.profile.med.event .children.profileThumb img {margin-bottom: 5px;}
+.profile.med.event .profileInfo .header h2 {margin-bottom: 10px;}
+.profile.med.event .profileInfo .header h3.date {color: #1bb7d6;margin-bottom: 3px;}
+.profile.med.event .profileInfo .header h3.date span {color: #d7d90b;font-variant: small-caps;margin-right: 5px;font-size: 18px}
+.profile.med.event .profileInfo .header h3.title {margin-bottom: 16px;}
+.profile.med.event .locationInfo {margin-bottom: 15px;}
+.profile.med.event .timeInfo {margin-bottom: 15px}
+.profile.med.event .timeInfo h3 {margin-bottom: 3px;}
+.profile.med.event h3.location {margin-bottom: 3px;}
+.profile.med.event .eventInfo .highlight {display: block}
+.profile.med.event .btn.full {width: 222px;}
+
+
+/*used also in the friends horizontal profile*/
+
+.profile.horizontal {width: 305px;margin: 10px;border: 10px solid #e3ebed;padding-bottom: 0;}
+.profile.horizontal .header {margin: 7px 5px 0 10px;}
+.profile.horizontal .header a.link {font-size: 15px;}
+.profile.horizontal .header h3.location {font-size: 13px;}
+.profile.horizontal:nth-child(2n-1) {margin-right: 20px;}
+.profile.horizontal .profileThumb {margin-left: -20px;margin-top: 8px;width: 92px;}
+.profile.horizontal .family {margin-top: 2px;margin-bottom: 3px;}
+.profile.horizontal .family li {width: 109px;margin-bottom: 0;padding-bottom: 0;}
+.profile.horizontal .family li span.gender {margin-left: 0;padding: 4px 0 8px;display: inline-block}
+.profile.horizontal .family li span.gender.girl, .profile.horizontal .family li span.gender.boy  {margin-right: 5px}
+.profile.horizontal .family li span.number {font-size: 20px;display: inline-block;position: relative;top: 2px;}
+
+/* ratings system */
+#rating {width: 110px;margin-bottom: 5px;}
+.glyphicon-rating-empty {background: url(../images/girl-rating-empty.gif) no-repeat;height: 21px;width: 22px;margin: 0;display: inline-block }
+.glyphicon-rating {background: url(../images/girl-icon.gif) no-repeat;height: 21px;width: 22px;margin: 0;display: inline-block}
+.glyphicon-rating-empty:nth-child(2n) {background: url(../images/boy-rating-empty.gif) no-repeat}
+.glyphicon-rating:nth-child(2n) {background: url(../images/boy-icon.gif) no-repeat}
+
+
+/******************
+FRIENDS
+*****************/
+.mainHeader .form-search {position: relative;top: -22px;display:inline-block;margin-bottom: 0}
+.mainHeader .form-search .control-group {position: relative;margin:0 ;}
+.mainHeader .form-search .control-label {position: relative;top: 26px;margin: 0 0 0 10px;width: 25px;display: inline-block;color: #94a6ad;font-size: 15px;font-weight: 400}
+.mainHeader .form-search .controls input {padding-left: 25px;font-size: 15px;color: #009abf;font-weight: 400;margin-bottom: 0; /*this matches the width of the label*/}
+
+/****************
+buttons
+***************/
+.btn {color: #fff;padding: 6px;-moz-border-radius: 0;-webkit-border-radius: 0;border-radius: 0;font-variant: small-caps}
+.btn.yellow {background: #d7d90b;color:#fff}
+.btn.babyblue {background: #8bcee1;color: #fff}
+.btn.primary {background: #54b3cf;color: #fff}
+.btn.secondary {background: #e3eced;color: #7d969b}
+.btn.plain {background: #fff;color: #7c98a5}
+.btn.plain.action {color: #1bb7d6}
+.btn.half {width: 49%}
+.btn.half:first-child {margin-right: 2%}
+.btn.full {display: block;width: 100%;margin-bottom: 3px;}
+
+.profile.med .btn.half {width: 43%}
+
+.btn-group li {display: inline-block;margin-right: 2px;}
+.btn-group li .btn {padding: 6px 30px;}
+
+
+/*****************
+SIDEBAR
+****************/
+
+.sidebar {margin-top: 25px;padding: 0 10px;}
+.sidebar h2 {margin-bottom: 20px;}
+#playDate.sidebar .profile {border: 3px solid #ccc;background: #f2f6f7;margin-bottom: 15px;}
+#playDate.sidebar .profileInfo {margin-bottom: 5px;}
+#playDate.sidebar .profile .profileThumb {width: 80px;margin: 0;padding: 0;}
+#playDate.sidebar .profile .date {width: 114px;text-align: center;padding-top: 7px;border-bottom: 1px solid #ccc;background: #fff}
+#playDate.sidebar .profile .date h3 {color: #1BB7D6;font-size: 20px;line-height: 21px;}
+#playDate.sidebar .profile .date h3 span {display: block;color: #7c98a5;font-size: 14px;}
+.date {color: #7c98a5;font-size: 14px;}
+#playDate.sidebar .profile .profileInfo {padding: 5px 10px;}
+#playDate.sidebar .profile .header span.highlight {position:relative;display:block}
+#playDate.sidebar .profile .matchInfo {border:none;padding: 0}
+#playDate.sidebar .profile .matchInfo a {font-weight: 600}
+#playDate.sidebar .btn.half {width: 81px}
+#playDate.sidebar .btn.half:first-child {margin-right: -2px;}
+
+.sidebar .profile.horizontal {width: 210px;border: 3px solid #e3ebed;margin: 10px 0}
+.sidebar .profile.horizontal .profileInfo {width: 155px;}
+.sidebar .profile.horizontal .profileThumb {width: 75px;}
+.sidebar .profile.horizontal .family li {width: 70px;}
+
+
+/*MODALS*/
+.modal820 {width: 820px;margin-left: -410px;}
+.modal .profile {background: none}
+.modal820 .half {width:385px;}
+.modal820 .half .profileThumb {margin-right: 10px;}
+.modal820 .half textarea {width: 385px;}
+.modal820 .half ul.interests li {width: 125px;}
+.modal820 #childInterests {margin-right: 10px;}
+
+.questions h3.heading {display: inline;line-height: 12px;margin-bottom: 0;margin-right: 5px;}
+.questions p.subheading {font-size: 11px;line-height: 12px;display: inline}
+.questions .steps-content .control-group label {display: inline-block;margin: 0 5px;}
+
+.miniModal {position: relative}
+.addFriendModal {background: none repeat scroll 0 0 #FFFFFF;border: 3px solid #e3ebed;margin-top: 3px;padding: 10px;position: absolute;z-index: 9999;}
+
+.modal .childrenInvited li {display: inline-block; width: 125px;}
+.modal .half {width: 235px;margin: 0}
+.modal .half.first {margin-right: 15px;}
+.modal .full {width: 96%}
+/*****************
+Footer
+****************/
+footer {padding: 30px 0 10px;font-size: 12px;}
+
+
+/*Responsive*/
+/* Standard Desktop */
+@media (min-width: 960px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+      .navbar-inner {
+        border-radius: 0;
+        margin: 0;
+      }
+}
+
+/* Note: Design for a width of 768px */
+/* Tablet Portrait */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+	#formContainer .control-group.terms {margin-right: 10px;}
+	#formContainer .control-group.submit, #formContainer .control-group.terms {
+ 		width: 162px;
+ 	}
+
+}
+
+/* Note: Design for a width of 320px */
+/* Mobile Portrait */
+@media only screen and (max-width: 767px) {
+
+      .navbar-inner {
+        margin: 0;
+      }
+}
+/* Note: Design for a width of 480px */
+/* Mobile Landscape */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+	#formContainer .control-group.terms {margin-right: 10px;}
+	#formContainer .control-group.submit, #formContainer .control-group.terms {
+ 		width: 195px;
+ 	}
+
+}

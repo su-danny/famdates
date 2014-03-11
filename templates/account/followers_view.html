@@ -1,0 +1,69 @@
+{% extends "account/profile.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+
+{% block title %}Edit your images{% endblock %}
+
+{% block profile_body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+
+            <style>
+                .photoStream {
+                    position: relative;
+                }
+
+                .btn-remove-image {
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                }
+
+                .photoStream, .thumbnail {
+                    width: 65px;
+                    display: inline-block;
+                }
+
+            </style>
+            <h3 class="profileName" style="margin-top: 20px;">These Users Are Following
+                {% if request.user.pk == profile.user.pk %}You {% else %}{{ profile.get_pretty_name }}{% endif %}</h3>
+
+            <div class="row-fluid media_edit">
+                {% get_following profile %}
+                {% for profile in followers %}
+                <div class="media_action span3 well">
+                    <div class="similar-users">
+                        <a href="{% url public_profile_detail profile.id %}">
+
+                            {% if profile.user_gravatar or not profile.avatar %}
+                            <img src="{% gravatar_url profile.user.email 93 %}" class="circle photo-border">
+                            {% else %}
+                            {% thumbnail profile.avatar "93x93" crop="center" as im %}
+                            <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"
+                                 class="circle photo-border"> {% endthumbnail %}
+                            {% endif %} </a>
+
+                        <h4 class="name red profileName"><a
+                                href="{% url public_profile_detail profile.id %}">{{ profile.get_pretty_name }}</a></h4>
+                        <h6 class="profileName">{{ profile.city }}, {{ profile.state }}</h6>
+
+                        {% follow_form profile %}
+                    </div>
+                    <!-- end of similar users -->
+
+                </div>
+                <!-- end of media_action well -->
+                {% empty %}
+                Empty
+                {% endfor %}
+            </div>
+            <!-- end of row-fluid -->
+
+        </div>
+    </div>
+</div>
+{% endblock %}

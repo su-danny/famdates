@@ -1,0 +1,77 @@
+<!-- modal -->
+<div class="modal hide fade" id="signup4Modal" aria-hidden="true">
+    <div class="modal-header">
+        <span class="skip-link pull-right" onclick="initStep5();">skip it already »</span>
+        <h1>Customize SF Profile</h1>
+    </div>
+    <!-- end of modal heading -->
+    <div class="modal-body">
+            <form class="form-inline standard form-horizontal" method="POST" action="/account/signup/4">
+            {% csrf_token %}
+
+            <div class="row-fluid">
+                <div class="control-group">
+                    <label class="control-label">Profile Photo *</label>
+                    <div class="controls">
+                        <div class="gravatar-preview hide"><a href="#" target="_blank"><img src="/static/images/profile_photo.png"></a></div>
+
+                        <input id="id_profile_photo" type="file" name="avatar" data-upload-url="/ajax-upload/" data-filename="" data-required=""><br>
+                        <input type="checkbox" name="use_gravatar"><label>Use Gravatar Instead</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="control-group">
+                    <label class="control-label">Background Image</label>
+
+                    <div class="controls">
+                        <input id="id_background_photo" type="file" name="background" data-upload-url="/ajax-upload/" data-filename="" data-required="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="control-group">
+                    <label class="control-label">A Bit about you</label>
+
+                    <div class="controls">
+                        <textarea id="id_intro" class="span8" name="about_me" placeholder="Tell us a little bit about who you are and what you're about"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <button class="btn btn-red pull-right" type="submit">Continue</button>
+                <span class="login_error_msg" style="color: red"></span>
+            </div>
+         </form>
+    </div>
+    <!-- end of row-fluid -->
+</div>
+
+<script>
+    $(document).ready(function(){
+         new AjaxUploadWidget($('#id_profile_photo'), {
+            onComplete: function() {
+                $('.gravatar-preview').hide();
+                $('input[name=use_gravatar]').prop('checked', false);
+            }
+         });
+
+        new AjaxUploadWidget($('#id_background_photo'), {
+        // options
+         });
+
+
+        var email = window.email || 'johnc@simpleunion.com';
+
+        $('input[name=use_gravatar]').click(function(){
+            $('.gravatar-preview').toggle('hide');
+            $('.gravatar-preview img').attr('src', 'http://www.gravatar.com/avatar/' + md5(email));
+            $('.ajax-upload-preview-area').toggle('hide');
+        });
+
+
+    });
+</script>

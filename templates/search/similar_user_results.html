@@ -1,0 +1,42 @@
+{% extends "account/profile.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+
+{% block title %}{% endblock %}
+
+{% block right_panel %}
+
+    <h2 style="margin-top: 20px;">Search</h2>
+
+    <h3>Results</h3>
+    <div class="row-fluid" id="recommenedUsers">
+        {% for profile in similar_profiles %}
+            <div class="span3">
+                <div class="similar-user">
+                    {% thumbnail profile.avatar "93x93" as im %}
+                        <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"
+                             class="circle photo-border"> {% endthumbnail %}
+                    <h4 class="name red">{{ profile.user.first_name }} {{ profile.user.last_name }}</h4><span
+                        class="follow">{% follow_form profile %}</span>
+
+                    <div class="clearfix"></div>
+                    <p>{{ profile.about_me }}</p>
+                    <h4 class="title">Similar interests</h4>
+                    <ul>
+                        {% for interest in profile.similar_interests %}
+                            <li class="interest"><i class="icon-tag"></i>{{ interest }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- end of similar user -->
+                <div class="clearfix"></div>
+            </div><!-- end of span6 -->
+        {% endfor %}
+    </div><!-- end of row-fluid -->
+    <a class="btn btn-red pull-right" href="{% url account_profile %}">Continue</a>
+
+
+{% endblock %}

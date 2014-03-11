@@ -1,0 +1,155 @@
+<form class="form-inline groupForm standard form-horizontal" method="post" id="group_edit_form" action=""
+      enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <!-- invite members to join -->
+    {% if form.instance.pk %}
+        <section>
+            <h4>Invite a Member to Join</h4>
+
+            <div class="user-list">
+                {% for user_group in form.instance.usergroup_set.all %}
+                    {% if user_group.user.pk != request.user.pk %}
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="text" name="username" value="{{ user_group.user.email }}"
+                                       placeholder="Type the follower name or email address"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="text" name="first_name" value="{{ user_group.user.first_name }}"
+                                       placeholder="First Name"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="text" name="last_name" value="{{ user_group.user.last_name }}"
+                                       placeholder="Last Name"/>
+                            </div>
+                        </div>
+
+                        {% if user_group.invitation_accepted %}
+                        {% else %}
+
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <a href="#" class="btn btn-red addMember"><i class="icon-plus icon-left"></i>Invite Members</a>
+        </section><!-- invitemember -->
+    {% endif %}
+
+
+    <h4>Edit Group Details</h4>
+
+    <div class="control-group step-1 {% if user_form.first_name.errors %}error{% endif %} ">
+        <label class="control-label">Name</label>
+
+        <div class="controls">
+            {{ form.name }}
+            {% if form.name.errors %}
+                <span class="help-inline">{{ form.name.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="control-group step-1 {% if form.group_type.errors %}error{% endif %}">
+        <label class="control-label">Type</label>
+
+        <div class="controls">
+            {{ form.group_type }}
+            <span class="help-inline">{{ form.group_type.errors|striptags }}</span>
+        </div>
+    </div>
+    <div class="control-group step-2 {% if form.region.errors %}error{% endif %}">
+        <label class="control-label">{{ form.city.label }}</label>
+
+        <div class="controls">
+            {{ form.city }}
+            {% if form.city.errors %}
+                <span class="help-inline">{{ form.city.errors|striptags }}</span>
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="control-group step-2 {% if form.about.errors %}error{% endif %}">
+        <label class="control-label">{{ form.about.label }}</label>
+
+        <div class="controls">
+            {{ form.about }}
+            {% if form.about.errors %}
+                <span class="help-inline">{{ form.about.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="control-group step-2 {% if form.default_image.errors %}error{% endif %}">
+        <label class="control-label">{{ form.default_image.label }}</label>
+
+        <div class="controls">
+
+            {% if not form.instance.default_image %}
+                <img src="{{ STATIC_URL }}images/avatar.png" id="avatar"/>
+            {% else %}
+                <img style="width:60px;height:60px;" src="{{ STATIC_URL }}{{ form.instance.default_image }}"
+                     id="avatar"/>
+            {% endif %}
+
+            {{ form.default_image }}
+            {% if form.default_image.errors %}
+                <span class="help-inline">{{ form.default_image.errors|striptags }}</span>
+            {% endif %}
+            <br/>
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if form.is_private.errors %}error{% endif %}">
+        <label class="control-label">{{ form.is_private.label }}</label>
+
+        <div class="controls">
+            {{ form.is_private }}
+            {% if form.is_private.errors %}
+                <span class="help-inline">{{ form.is_private.errors|striptags }}</span>
+            {% endif %}
+            <br/>
+        </div>
+    </div>
+
+    {% if form.instance.pk %}
+        <div class="control-group">
+            <label class="control-label">Invite member to join</label>
+
+            <div class="user-list">
+                {% for user_group in form.instance.usergroup_set.all %}
+                    {% if user_group.user.pk != request.user.pk %}
+                        <div class="controls">
+                            <input type="text" name="name_or_email" value="{{ user_group.user.email }}"
+                                   placeholder="Type the follower name or email address"/>
+                            <input type="text" name="first_name" value="{{ user_group.user.first_name }}"
+                                   placeholder="First Name"/>
+                            <input type="text" name="last_name" value="{{ user_group.user.last_name }}"
+                                   placeholder="Last Name"/>
+
+                            {% if user_group.invitation_accepted %}
+                            {% else %}
+                                <input type="button" value="Re-send" onclick="resend(this)">
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="controls">
+                <i class="icon-plus"></i>
+            </div>
+        </div>
+    {% endif %}
+
+
+    <div class="control-group">
+        <div class="controls">
+            <input type="submit" {% if form.instance.pk %} value="Update" {% else %} value="Create" {% endif %}
+                   class="btn"/>
+            <a href="/group" class="button btn">Cancel</a>
+            <span class="status_msg"></span>
+        </div>
+    </div>
+</form>

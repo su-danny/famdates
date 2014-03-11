@@ -1,0 +1,79 @@
+{% extends "user_base.html" %}
+{% load i18n %}
+{% load humanize %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load upload_tags %}
+{% block page_content %}
+
+
+    {% include 'modules/post_dialog.html' %}
+
+    {% include 'modules/posts.html' %}
+    <div class="waiting-icon" style="display: none;width: 100%;">
+        <img src="/static_old/img/loading.gif" style="margin: auto;width:30px;display: block;"/>
+    </div>
+{% endblock %}
+{% block footer_js %}
+    <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+    <script src="{{ STATIC_URL }}js/tmpl.min.js"></script>
+    <script src="{{ STATIC_URL }}js/load-image.min.js"></script>
+    <script src="{{ STATIC_URL }}js/canvas-to-blob.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-image-gallery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.iframe-transport.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.fileupload.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.fileupload-fp.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.fileupload-ui.js"></script>
+    <script src="{{ STATIC_URL }}js/locale.js"></script>
+    <script src="{{ STATIC_URL }}js/fileupload_main.js"></script>
+    <script src="{{ STATIC_URL }}js/csrf.js"></script>
+
+    {% upload_js %}
+
+    <script>
+        var processing = false;
+        $(document).ready(function () {
+            $(document).scroll(function (e) {
+                if (processing)
+                    return false;
+
+                if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.85) {
+                    processing = true;
+
+                    $('.waiting_icon').show().fadeIn();
+
+                    $.ajax({
+                        url: '{% url post_list %}',
+                        data: {
+                            lt: $('.full_post:last').attr('post_id'),
+                            feed: selectedFeeds.join(',') ? selectedFeeds.join(',') : '{{ feed_type }}'
+                        },
+                        success: function (data) {
+//                            $(".post-container").append(data);
+                            data = $(data);
+                            for(var i=0; i< data.length;i++) {
+                                var elem = $(data[i]);
+                                $('.post-container').masonry().append( elem ).masonry( 'appended', elem );
+                            }
+
+                            initDeletePostButton();
+                            processing = false;
+                            $('.waiting_icon').fadeOut();
+                        },
+                        error: function (data) {
+                            processing = false;
+                            $('.waiting_icon').fadeOut();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
+
+
+
+
+

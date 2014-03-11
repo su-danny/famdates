@@ -1,0 +1,5 @@
+{"_module": "oauth2client.client", "token_expiry": "2013-06-05T05:30:39Z", "access_token": "ya29.AHES6ZThKdoQyRoqXI6dsuCtiPgHkj8srBmy25nNsmDgSBPEgQqcu-Y", "token_uri": "https://accounts.google.com/o/oauth2/token", "invalid": false, "token_response": {
+    "access_token": "ya29.AHES6ZThKdoQyRoqXI6dsuCtiPgHkj8srBmy25nNsmDgSBPEgQqcu-Y",
+    "token_type": "Bearer",
+    "expires_in": 3600
+}, "client_id": "243550284729-k682q1ok3lsik4ti1podn7u2drq9nmh7.apps.googleusercontent.com", "id_token": null, "client_secret": "dsn1kDxWxcsj0-KOu2HsobD-", "revoke_uri": "https://accounts.google.com/o/oauth2/revoke", "_class": "OAuth2Credentials", "refresh_token": "1/KvN5GhLu-BL_AcXLv7fFiskkDvNmDmf0tyMTupItwpE", "user_agent": null}

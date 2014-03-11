@@ -1,0 +1,50 @@
+[
+    {
+        "pk": 1,
+        "model": "notification.notificationtemplate",
+        "fields": {
+            "name": "new_message",
+            "created": "2013-06-20T08:10:59"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "notification.notificationtemplate",
+        "fields": {
+            "name": "new_follower",
+            "created": "2013-06-20T04:44:51"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "notification.notificationtemplate",
+        "fields": {
+            "name": "account_signup",
+            "created": "2013-06-17T22:02:17"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "notification.notificationtemplate",
+        "fields": {
+            "name": "password_reset",
+            "created": "2013-06-17T22:09:16"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "notification.notificationtemplate",
+        "fields": {
+            "name": "group_invite",
+            "created": "2013-06-17T23:40:33"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "notification.notificationtemplate",
+        "fields": {
+            "name": "friend_invite",
+            "created": "2013-06-20T08:11:42"
+        }
+    }
+]

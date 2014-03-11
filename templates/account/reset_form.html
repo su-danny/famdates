@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+    Reset Password
+{% endblock %}
+{% block content %}
+
+
+    <div class="container container-bg">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="page-header">
+                    <div class="transparent general-page-header hidden-phone"><span class="red">password</span> reset
+                    </div>
+                </div>
+                <div id="userProfilePage">
+                    <section id="userResetForm">
+                        {% if success %}
+                            <p id="userResetSuccess">Please check your email to reset your password.</p>
+                        {% else %}
+                            <p id="formIntro">Please enter in your email below so we can reset your password.</p>
+                            <form action="" method="post">{% csrf_token %}
+                                <div class="formLeft">
+                                    <label for="email"{% if form.email.errors %} class="error"{% endif %}>E-mail
+                                        Address</label>
+                                </div>
+                                <div class="formRight">
+                                    <div class="formField">{{ form.email }}</div>
+                                    {{ form.email.errors }}
+                                    <button id="formSubmitButton" type="submit" class="btn btn-red">Reset</button>
+                                </div>
+                                <div class="clear spacer0">&nbsp;</div>
+                            </form>
+                        {% endif %}
+                    </section>
+                </div>
+                <!--end userProfilePage -->
+            </div>
+            <!-- end span12 -->
+        </div>
+        <!-- end row -->
+    </div><!-- end of container container-bg -->
+{% endblock %}

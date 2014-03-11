@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load humanize %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load voting_tags %}
+
+{% block title %}Select your interest{% endblock %}
+
+{% block head %}
+    <link href="{{ STATIC_URL }}css/chosen.css" rel="stylesheet">
+{% endblock %}
+
+{% block footer_js %}
+    <script src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>
+    {% include 'modules/registration_js.html' with edit='True' %}
+
+    <script ty;e="text/javascript">
+    $(document).ready(function($) {
+    var hash = window.location.hash;
+
+    hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+    // $('select').chosen();
+    setTimeout(function() {
+    $('select').chosen()
+    }, 2000);
+
+    $("input[type=file][name=default_image]").change(function() {
+    var input = this;
+    try {
+    if(input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+    //the only jQuery line.  All else is the File API.
+    $('#avatar').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+    }
+    } catch(e) {
+    // do nothing now
+    }
+    });
+
+    $('.join-group-form').submit(function(e) {
+    e.preventDefault();
+    $form = $(this);
+
+    $.ajax({
+    url : $form.attr('action'),
+    data : $form.serialize(),
+    type : 'post',
+    success : function(res) {
+    var msg = "Joined successfully"
+    if (!res.success) {
+    msg = res.message;
+    }
+
+    $form.find('.status_message').text(msg);
+    setTimeout(function() {
+    $form.hide();
+    window.location.reload();
+    }, 3000);
+
+    }});
+    });
+
+    $('.group-create-message').submit(function(e) {
+    e.preventDefault();
+    $("button[type=submit]").attr('disabled', 'disabled');
+    $('html body').css('cursor', 'wait');
+    var formData = new FormData(this);
+
+    if(true) {
+    var form = $(this);
+    var data = form.serialize();
+    $.ajax({
+    url : form.attr('action'),
+    data : formData,
+    type : 'post',
+    xhr : function() {// custom xhr
+    myXhr = $.ajaxSettings.xhr();
+    if(myXhr.upload) {// check if upload property exists
+    // for handling the progress of the upload
+    myXhr.upload.addEventListener('progress', function(e) {
+    console.log(e.lengthComputable);
+    }, false);
+    }
+    return myXhr;
+    },
+    success : function(json) {
+    $('html body').css('cursor', 'auto');
+    if(json.errors !== undefined) {
+    var errors = json.errors;
+    $('#group_edit_form').find('.status_msg').text('Invalid');
+
+    } else {
+    form.find('div').removeClass('error');
+    form.find('.status_msg').text('message is sent.');
+    setTimeout(function() {
+    window.location.reload();
+    }, 3000);
+    }
+    },
+    cache : false,
+    contentType : false,
+    processData : false
+    });
+    }
+    });
+
+    });
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    <style >
+    #wrap.registrationForm ul {
+    list - style - type
+:
+    none;
+}
+
+    .interest - page.tab - content li {
+    float: left;
+    width: 165
+    px;
+}
+
+    .interest - page.tab - content.nav - tabs li {
+    width: auto;
+}
+
+    </style>
+
+< div class= "group-page inner" >
+        < div class= "container" >
+        < div class= "row-fluid" >
+
+        < div class= "span4" >
+        {% include "modules/left_side_bar.html"%}
+        < /div><!-- end of span4 -->
+        < div class= "span8" >
+        < h3 >{{group.name}} < /h3>
+        < ul class= "groupInfo row-fluid" >
+        < li class= "span2" >
+        {% if group.default_image %}
+            {% thumbnail group.default_image "93x93" as im %}
+                <img src = "{{ im.url }}" width = "{{ im.x }}" height = "{{ im.y }}" class="circle photo-border" / >
+            {% endthumbnail %}
+        {% else %}
+        <img style = "width:93px;height:93px;" src = "{{STATIC_URL}}images/avatar.png" id = "avatar"
+            class="circle photo-border" / >
+        {% endif %}
+< /li>
+< li class= "span10" >{{group.about_us}} < /li>
+        < li class= "span10" >
+        < span > Member count: {{group.get_member_count}}</span>
+{% if not joined %}
+    <form method = "POST" action = "{% url group_join group.pk %}" class= "join-group-form" >
+        {% csrf_token %}
+        < button type = "submit" class= "join-group btn btn-red" > Join < /button>
+        < div class="status_msg" > < /div>
+        < /form>
+{% endif %}
+< /li>
+< /ul>
+
+< !--
+< ul class= "unstyled" >
+        {% for message in group.message_set.all %}
+            <li>
+            {% with profile=message.author.get_profile %}
+                <ahref = "{% url public_profile_detail profile.pk %}" >
+                    {% if profile.use_gravatar or not profile.avatar %} <img
+                        src = "{% gravatar_url comment.author.email 30 %}" class= "friend_img hidden-phone" > < span
+                        class= "red friend_name" >{{messages.author}} < /span> {% else %}
+                            {% thumbnail profile.avatar "63x63" as im %} <img src = "{{ im.url }}" width = "{{ im.x }}"
+                                height = "{{ im.y }}" class= "friend_img circle photo-border" > < span
+                                class="red friend_name" > {{messages.author}}s < /span> {% endthumbnail %}
+                    {% endif %} < /a>
+            {% endwith %}
+
+        <p>
+        {{message.content}}
+        </p>
+        </li>
+        {% endfor %}
+< li >
+< form action = "{% url group_create_message group.id %}" method = "POST" class= "group-create-message" >
+        {% csrf_token %}
+        {% with profile=request.user.get_profile %}
+            <ahref = "{% url public_profile_detail profile.pk %}" > {% if profile.use_gravatar or not profile.avatar %}
+            <img src = "{% gravatar_url comment.author.email 30 %}" class= "friend_img hidden-phone" > < span class
+            = "red friend_name" >{{messages.author}} < /span> {% else %}
+                    {% thumbnail profile.avatar "63x63" as im %} <img src = "{{ im.url }}" width = "{{ im.x }}"
+                        height = "{{ im.y }}" class= "friend_img circle photo-border" > < span
+                        class="red friend_name" > {{messages.author}}s < /span> {% endthumbnail %}
+        {% endif %} < /a>
+        {% endwith %}
+< textarea name = "content" class= "span8" placeholder = "Leave a message..." > < /textarea>
+        < button class= "btn" type = "submit" >
+        Post
+        < /button>
+        < div class= "status_msg" > < /div>
+        < /form>
+        < /li>
+        < /ul>
+    -- >
+
+        <!-- lets make this like the post dialog and post feed like all the other feeds -->
+            {% block right_panel %}
+
+                {% block post_dialog %}
+                    {% include 'modules/post_dialog.html' %}
+                {% endblock %}
+
+                {% include 'modules/posts.html' %}
+
+            {% endblock %}
+
+
+
+            < /div><!-- end of span8 -->
+            < /div><!-- end of row-fluid -->
+            < /div>
+    < /div>
+
+{% endblock %}

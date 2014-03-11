@@ -1,0 +1,68 @@
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.lightbox-0.5.js"></script>
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.lightbox-0.5.css"/>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.slideImageContainer a').lightBox();
+        $('.lightbox').lightBox();
+        $('.album .slideImageContainer:nth-child(8)').addClass('last');
+        $('#entire_gallery').attr('href', $('.album .slideImageContainer:first a').attr('href'));
+    });
+</script>
+<style type="text/css">
+    .album .footerImage {
+        width: 106px;
+        display: inline-block;
+        margin-right: 12px;
+        height: 80px;
+        margin-top: 10px;
+        overflow: hidden;
+    }
+
+    .album .slideImageContainer:nth-child(8), .album .slideImageContainer.last {
+        margin-right: 0;
+    }
+</style>
+
+<!-- {% if not images %}
+<div id="randomHeader">
+	<img id="noimages" src="{{ MEDIA_URL }}images/no-images.png" alt="No images" />
+</div>
+{% else %}
+	{% for image in images %}
+	<div class="slideImageContainer{% if forloop.counter <= 4 and forloop.counter > 1 %} footerImage{% endif %}">
+	    <a {% if forloop.last %}id="entire_gallery"{% endif %} href="
+    {% firstof image.medium image.get_flickr_slide_url %}">
+	    {% if forloop.first %}
+	        <img class="slideImage" src="{% firstof image.medium image.get_flickr_slide_url %}" alt="" />
+	    {% else %}
+	       {% if forloop.counter <= 4 %}
+	       <img class="slideImage" src="{% firstof image.medium image.get_flickr_slide_url %}" alt="" />
+	       {% endif %}
+	    {% endif %}
+	    {% if forloop.last %}
+	    View Entire Gallery
+	    {% endif %}
+	    </a>
+	</div>
+	{% endfor %}
+{% endif %} -->
+
+<div class="slideImageContainer">
+    <a href="{{ MEDIA_URL }}img/profile.png"><img class="slideImage" src="{{ MEDIA_URL }}img/profile.png" alt=""/></a>
+</div>
+
+<div class="slideImageContainer footerImage">
+    <a href="{{ MEDIA_URL }}img/profile.png"><img class="slideImage" src="{{ MEDIA_URL }}img/profile.png" alt=""/></a>
+</div>
+
+<div class="slideImageContainer footerImage">
+    <a href="{{ MEDIA_URL }}img/profile.png"><img class="slideImage" src="{{ MEDIA_URL }}img/profile.png" alt=""/></a>
+</div>
+
+<div class="slideImageContainer footerImage">
+    <a href="{{ MEDIA_URL }}img/profile.png"><img class="slideImage" src="{{ MEDIA_URL }}img/profile.png" alt=""/></a>
+</div>
+
+<div class="slideImageContainer footerImage">
+    <a href="{{ MEDIA_URL }}img/profile.png">View Entire Gallery</a>
+</div>

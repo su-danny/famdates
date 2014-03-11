@@ -1,0 +1,31 @@
+{% extends "chat_base.html" %}
+
+{% block title %}{{ room }}{% endblock %}
+
+{% block extra_js %}
+    <script src="/static_old/js/jquery.js"></script>
+    <script src="/static_old/js/jquery.tmpl.min.js"></script>
+    {% load socketio_tags %}
+    {% socketio %}
+    <script src="{{ STATIC_URL }}js/chat.js"></script>
+    <script>window.room = {{ room.id }};</script>
+{% endblock %}
+
+{% block main %}
+    <ul id="messages">
+        <script type="text/x-jquery-tmpl">
+            <li class="${action}">(${time}) ${name}: ${message}</li>
+        </script>
+    </ul>
+    <ul id="users">
+        <script type="text/x-jquery-tmpl">
+            <li id="user-${id}">${name}</li>
+        </script>
+    </ul>
+
+    <form>
+        <input type="text" id="message" name="message">
+    </form>
+{% endblock %}
+
+

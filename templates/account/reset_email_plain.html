@@ -1,0 +1,10 @@
+{% load url from future %}{% autoescape off %}Hi!
+    You asked us to reset your password on famdates. Just visit this link to create a new one:
+    {{ protocol }}://{{ domain }}{% url 'django.contrib.auth.views.password_reset_confirm' uidb36=uid token=token %}
+
+    -- The Sports Freak team
+
+    If you did not make this request, please ignore this email.
+    www.famdates.com
+{% endautoescape %}
+

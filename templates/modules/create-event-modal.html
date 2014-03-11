@@ -1,0 +1,136 @@
+{% load utils %}
+
+<!-- modal -->
+<div class="modal hide fade" id="createEventModal" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h1>Create Event</h1>
+    </div>
+
+    <!-- end of modal heading -->
+    <div class="modal-body">
+        <form class="form-inline create-event-form form-horizontal standard" method="POST"
+              action="{% url create_event %}">
+            {% csrf_token %}
+            <div class="row-fluid">
+
+                <div class="control-group">
+                    <label class="control-label">Name</label>
+
+                    <div class="controls">
+                        <input class="span8" name="name" id="name" type="text"
+                               placeholder="Name">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Details*</label>
+
+                    <div class="controls">
+                        <textarea class="span8" name="details" id="details"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Type</label>
+
+                    <div class="controls">
+                        <select name="type" id="type" class="span4">
+                            <option value="pub">Public</option>
+                            <option value="per">Personal</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">When</label>
+                    <input type="hidden" value="00:00:00" name="time">
+                    <div class="controls bootstrap-timepicker">
+                        <div class="input-append date span4" id="date_picker" data-date="" data-date-format="mm/dd/yyyy">
+                          <input class="span12" size="16" type="text" name="beginning" value="">
+                          <span class="add-on"><i class="icon-th"></i></span>
+
+                        </div>
+                    </div>
+
+
+                </div><!-- end of control group -->
+               <div class="control-group">
+               	<label class="control-label">Duration</label>
+                    <div class="controls">
+                    	<div class="input-append bootstrap-timepicker span4">
+                            <input id="timepicker2" type="text" name="duration" class="span12">
+                            <span class="add-on">
+                                <i class="icon-time"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Interest</label>
+
+                    <div class="controls">
+                        <select name="interests" multiple class="span4">
+                            {% for i in interests %}
+                            <option value="{{i.id}}">{{i}}</option>
+                            {% endfor %}
+                            {% for i in gametime %}
+                            <option value="{{i.id}}">{{i}}</option>
+                            {% endfor %}
+                            {% for i in nutrition %}
+                            <option value="{{i.id}}">{{i}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <!-- end of control group -->
+
+                <div class="control-group">
+                    <label class="control-label"></label>
+
+                    <div class="controls">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                        <button class="btn btn-red" type="submit">Create</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <!-- end of row-fluid -->
+</div>
+<!-- end of modal body -->
+
+<script>
+    $(document).ready(function () {
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+        $('#date_picker').datepicker('setValue', now);
+
+        $('#timepicker2').timepicker({
+                minuteStep: 1,
+                template: 'modal',
+                appendWidgetTo: 'body',
+                showSeconds: true,
+                showMeridian: false,
+                defaultTime: "00:00:00"
+        });
+
+        setTimeout(function () {
+            $('select[name=interests]').chosen();
+        }, 500);
+
+
+    });
+</script>
+
+<style>
+    .chosen-container {
+        width: 100% !important;
+        margin-top: 8px;
+    }
+
+    .input-append .add-on{
+        height: 30px;
+        line-height: 20px;
+    }
+
+</style>

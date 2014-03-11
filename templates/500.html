@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="initial-scale=0.69818,minimum-scale=0.69818,maximum-scale=1.0,user-scalable=yes,width=1100"/>
+    <title>Park Visitor&trade;</title>
+    <style type="text/css">
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline
+        }
+
+        body {
+            line-height: 1
+        }
+
+        ol, ul {
+            list-style: none
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        caption, th, td {
+            text-align: left;
+            font-weight: normal;
+            vertical-align: middle
+        }
+
+        q, blockquote {
+            quotes: none
+        }
+
+        q:before, q:after, blockquote:before, blockquote:after {
+            content: "";
+            content: none
+        }
+
+        a img {
+            border: none
+        }
+
+        article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+            display: block
+        }
+
+        img {
+            border: none
+        }
+
+        textarea, input {
+            outline: none
+        }
+
+        .hidden {
+            display: none
+        }
+
+        .clear {
+            clear: both
+        }
+
+        .floatLeft {
+            float: left
+        }
+
+        .floatRight {
+            float: right
+        }
+
+        .spacer0 {
+            height: 0
+        }
+
+        .bold {
+            font-weight: bold
+        }
+
+        .relativePos {
+            position: relative
+        }
+
+        .colorBlue {
+            color: #0079c2
+        }
+
+        html {
+            width: 100%;
+            height: 100%
+        }
+
+        body {
+            background: #fff url(http://media.parkvisitor.com/images/background-grad.png) repeat-x top center;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            color: #555;
+            width: 100%;
+            height: 100%
+        }
+
+        a {
+            color: #0079c2;
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        #wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 100%;
+            z-index: 1;
+            background: url(http://media.parkvisitor.com/images/clouds-and-shadows.png) top center no-repeat
+        }
+
+        #container {
+            position: relative;
+            margin: 0 auto;
+            width: 960px;
+            z-index: 2
+        }
+
+        #footer {
+            background: #ececec;
+            font-size: 13px;
+            line-height: 16px;
+            margin: 16px 0 0;
+            padding: 0 20px;
+            clear: both
+        }
+
+        #footer ul {
+            float: left;
+            margin: 30px 10px 0;
+            width: 90px
+        }
+
+        #footer ul li {
+            margin: 0 0 6px;
+            white-space: nowrap
+        }
+
+        #footer ul li a {
+            color: #555;
+            text-decoration: none
+        }
+
+        #footer ul li a:hover {
+            color: #1c90d2;
+            text-decoration: none
+        }
+
+        #footer #footerSocialContainer {
+            position: relative;
+            float: left;
+            background: url(http://media.parkvisitor.com/images/footerGra.jpg) no-repeat;
+            width: 130px;
+            height: 218px;
+            margin: 0 0 0 10px
+        }
+
+        #footer #footerSocialContainer ul {
+            margin: 30px 20px 0
+        }
+
+        #footer #footerSocialContainer ul li {
+            margin: 0 0 4px
+        }
+
+        #footer #footerSocialContainer ul li img {
+            vertical-align: -6px;
+            margin-right: 6px
+        }
+
+        #footer #footerBrand {
+            height: 70px;
+            width: 270px;
+            margin: 65px 0 0 30px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-indent: 150%;
+            background: url(http://media.parkvisitor.com/images/brand.png) 10px 9px no-repeat;
+            float: left;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: ignore;
+            cursor: default
+        }
+
+        #footer #footerBrand a {
+            display: block;
+            height: 71px;
+            text-decoration: none
+        }
+
+        #copyright {
+            position: relative;
+            float: left;
+            width: 100%;
+            color: #7e7e7e;
+            font-size: 11px;
+            text-align: left;
+            padding-bottom: 20px;
+            margin: 16px 0 0 4px
+        }
+
+        #copyright a {
+            color: #7e7e7e;
+            text-decoration: none
+        }
+
+        #copyright a:hover {
+            color: #333
+        }
+
+        #copyright img {
+            vertical-align: -8px
+        }
+
+        #header {
+            width: 960px;
+            height: 71px;
+            background: url(http://media.parkvisitor.com/images/500-header.png) no-repeat;
+        }
+
+        #header h1 {
+            height: 71px;
+            width: 270px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-indent: 150%;
+            float: left;
+        }
+
+        #header p {
+            float: left;
+            width: 162px;
+            height: 42px;
+            background: url(http://media.parkvisitor.com/images/button-blue-big.png) no-repeat;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 14px 130px;
+        }
+
+        #header p a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            height: 42px;
+        }
+
+        #header p a:hover {
+            color: #ddd;
+        }
+
+        #content {
+            background: white;
+        }
+
+        #formContainer {
+            border: 3px solid #c2c2c2;
+            background: #ebebeb url(http://media.parkvisitor.com/images/gradients/ff-eb.png) repeat-x;
+            padding: 30px 50px;
+            width: 540px;
+            margin: 20px 170px 50px;
+        }
+
+        .formLeft {
+            width: 100px;
+            float: left;
+            clear: left;
+        }
+
+        .formLeft label {
+            display: block;
+            color: #0079c2;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 13px 0;
+        }
+
+        .formLeft label.error {
+            color: #c11;
+        }
+
+        .formRight {
+            width: 440px;
+            padding-bottom: 20px;
+            float: left;
+        }
+
+        .formRight .errorlist {
+            margin: 5px 0;
+            padding: 0 10px;
+        }
+
+        .formRight .errorlist li {
+            color: #c11;
+            font-size: 12px;
+        }
+
+        .formField {
+            background: url(http://media.parkvisitor.com/images/forms/login-form-field.png) 0 0 no-repeat;
+            width: 412px;
+            height: 24px;
+            padding: 8px 10px;
+        }
+
+        .formField input {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            border: none;
+            background: white;
+            line-height: 24px;
+            font-size: 18px;
+        }
+
+        .formTextbox {
+            background: url(http://media.parkvisitor.com/images/forms/rate-comment-field.png) no-repeat;
+            width: 412px;
+            height: 159px;
+            padding: 8px 10px;
+            position: relative;
+        }
+
+        .formTextbox textarea {
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            height: 100%;
+            max-height: 100%;
+            min-height: 100%;
+            padding: 0;
+            margin: 0;
+            border: none;
+            background: white;
+            line-height: 18px;
+            font-size: 14px;
+        }
+
+        #formSubmitButton {
+            margin: 20px 0 0;
+            font-size: 12px;
+            width: 72px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            color: white;
+            background: url(http://media.parkvisitor.com/images/button-blue-tiny.png) no-repeat;
+            overflow: hidden;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        #formSubmitButton:hover {
+            color: #ddd;
+        }
+
+        #successMessage {
+            text-align: center;
+            margin: 10px 0;
+            font-weight: 700;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <div id="container">
+
+        <div id="header">
+            <h1>Park Visitor</h1>
+
+            <p><a href="/">Back to Home</a></p>
+        </div>
+
+        <div id="content">
+            <!--CONTENT-->
+            <img src="http://media.parkvisitor.com/images/500-banner.png" alt="" width="960" height="420"/>
+
+            <div id="formContainer">
+                {% if success %}
+                    <p id="successMessage">Thank you. <a href="/">Click here</a> to return home.</p>
+                {% else %}
+                    <form action="/bugs/" method="post">
+                        <div class="formLeft">
+                            <label for="name"{% if form.name.errors %} class="error"{% endif %}>Name</label>
+                        </div>
+                        <div class="formRight">
+                            <div class="formField">{% if form %}{{ form.name }}{% else %}
+                                <input name="name" id="id_name"{% if user.is_authenticated %}
+                                       value="{{ user.get_full_name }}"{% endif %}/>{% endif %}</div>
+                            {{ form.name.errors }}
+                        </div>
+
+                        <div class="formLeft">
+                            <label for="email"{% if form.email.errors %} class="error"{% endif %}>Email</label>
+                        </div>
+                        <div class="formRight">
+                            <div class="formField">{% if form %}{{ form.email }}{% else %}
+                                <input name="email" id="id_email"{% if user.is_authenticated %}
+                                       value="{{ user.email }}"{% endif %}/>{% endif %}</div>
+                            {{ form.email.errors }}
+                        </div>
+
+                        <div class="formLeft">
+                            <label for="message"{% if form.message.errors %} class="error"{% endif %}>Message</label>
+                        </div>
+                        <div class="formRight">
+                            <div class="formTextbox">
+                                {% if form %}{{ form.message }}{% else %}<textarea name="message" id="id_message">
+                                    </textarea>{% endif %}</div>
+                            {{ form.message.errors }}
+                            <button id="formSubmitButton" type="submit">Submit</button>
+                        </div>
+
+                        <div class="clear spacer0">&nbsp;</div>
+                    </form>
+                {% endif %}
+            </div>
+            <!--END CONTENT-->
+            <div class="clear spacer0">&nbsp;</div>
+        </div>
+
+        <div id="footer">
+
+            <ul id="footerVisitors">
+                <li style="font-weight:bold;">Park Visitors</li>
+                <li><a href="/what-to-do/">What To Do</a></li>
+                <li><a href="/where-to-go/">Where To Go</a></li>
+                <li><a href="/insider-tips/">Insider Tips</a></li>
+                <li><a href="/rate-a-park/">Rate a Park</a></li>
+                <li><a href="/parks/">Park Index</a></li>
+            </ul>
+
+            <ul id="footerResources">
+                <li style="font-weight:bold;">Resources</li>
+                <li><a href="/newsletters/">Newsletters</a></li>
+                <li><a href="/welcome-maps/">Welcome Maps</a></li>
+                <li><a href="http://www.zoomerang.com/Survey/WEB22CFZR5NECN/" target="_blank">Surveys</a></li>
+                <li><a href="/submit-a-park/">Submit a Park</a></li>
+                <li><a href="/become-an-expert/">Become an Expert</a></li>
+            </ul>
+
+            <ul id="footerPartners">
+                <li style="font-weight:bold;">Partnerships</li>
+                <li><a href="/programs/">Programs</a></li>
+                <li><a href="/partners/">Partners</a></li>
+                <li><a href="/participate/">Participate</a></li>
+            </ul>
+
+            <ul id="footerCompany">
+                <li style="font-weight:bold;">Company</li>
+                <li><a href="/about-us">About Us</a></li>
+                <li><a href="/privacy/">Privacy Policy</a></li>
+                <li><a href="/terms/">Terms of Service</a></li>
+                <li><a href="/legal/">Legal</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+
+            <div id="footerSocialContainer">
+                <ul id="footerSocial">
+                    <li><a href="http://www.facebook.com/ParkVisitor" target="_blank"><img
+                            src="http://media.parkvisitor.com/images/footerFB.png" alt=""/> Facebook</a></li>
+                    <li><a href="http://twitter.com/#!/ParkVisitor" target="_blank"><img
+                            src="http://media.parkvisitor.com/images/footerTwit.png" alt=""/> Twitter</a></li>
+                    <li><a href="http://www.flickr.com/photos/64496138@N08/sets/" target="_blank"><img
+                            src="http://media.parkvisitor.com/images/footerFK.png" alt=""/> Flickr</a></li>
+                    <li><a href="http://www.youtube.com/parkvisitorvideos" target="_blank"><img
+                            src="http://media.parkvisitor.com/images/footerYT.png" alt=""/> YouTube</a></li>
+                    <li><a href="http://blog.parkvisitor.com/blog/rss.xml" target="_blank"><img
+                            src="http://media.parkvisitor.com/images/footerRSS.png" alt=""/> RSS</a></li>
+                </ul>
+            </div>
+
+            <h1 id="footerBrand"><a href="/">Park Visitor</a></h1>
+
+            <div class="clear spacer0">&nbsp;</div>
+        </div>
+
+        <div id="copyright">&copy; 2011 <a href="http://goodsolutionsgroup.com/" target="_blank"><img
+                src="http://media.parkvisitor.com/images/gsgfooterlogo.jpg" alt="Good Solutions Group"/> Good Solutions
+            Group</a>. All Rights Reserved. Powered by <a href="http://weareanyone.com"
+                                                          target="_blank">Anyone&trade;</a>.
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

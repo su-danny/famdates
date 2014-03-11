@@ -1,0 +1,45 @@
+<link href="/static/css/bootstrap.css" rel="stylesheet">
+<link href="/static/css/skeleton.css" rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+<link rel="icon" href="/static/static/images/favicon.png" type="image/png">
+<link href="/static/css/jquery.fancybox.css" rel="stylesheet">
+<link href="/static/flowplayer/skin/minimalist.css" rel="stylesheet">
+<link href="/static/css/chosen.css" rel="stylesheet">
+<link href="/static/css/datepicker.css" rel="stylesheet">
+<link href="/static/css/profile.css" rel="stylesheet">
+<link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/static/css/pricing.css" rel="stylesheet">
+<link href="/static/css/style.css" rel="stylesheet">
+<link href="/static/css/font-awesome.css" rel="stylesheet">
+<script src="/static/js/bootstrap.js"></script>
+
+
+{% block content %}
+<style>
+    #wrap .registrationForm ul {
+        list-style-type: none;
+    }
+
+</style>
+
+<div class="clearfix">
+    <img src="/static/images/fanzone_icon-medium.png" class="tab-fanzone span1" alt="FanZone">
+    <img src="/static/images/fitness_icon-medium.png" class="tab-nutrition span1" alt="FanZone">
+    <img src="/static/images/gametime_icon-medium.png" class="tab-gametime span1" alt="FanZone">
+</div>
+
+<div class="interest-page inner">
+    <div class="container">
+        <form class="form-inline registrationForm standard form-horizontal" method="post" id="update_interest_form">
+            <div class="tabbable tab-fanzone" style="width: 90%">
+                <!-- Only required for left/right tabs -->
+                {{form.fan_zone_interests}}
+                {{form.fan_zone_interests.errors}}
+            </div>
+        </form>
+    </div>
+    <!-- end of container -->
+</div>
+
+
+{% endblock %}

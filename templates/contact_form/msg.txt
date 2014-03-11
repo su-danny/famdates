@@ -1,0 +1,6 @@
+Dear Administrator:
+
+The following information has been submitted:
+Name: {{ contact }}
+Email: {{ email }}
+Message: {{ message }}

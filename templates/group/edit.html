@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load humanize %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load voting_tags %}
+
+{% block title %}Select your interest{% endblock %}
+
+{% block head %}
+    <link href="{{ STATIC_URL }}css/chosen.css" rel="stylesheet">
+    <style>
+        .icon-plus {
+            cursor: pointer;
+        }
+    </style>
+
+{% endblock %}
+
+{% block footer_js %}
+    <script src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var hash = window.location.hash;
+
+            (hash && $('ul.nav a[href="' + hash + '"]').tab('show'));
+
+            // $('select').chosen();
+            setTimeout(function () {
+                $('select').chosen()
+            }, 2000);
+
+            $("input[type=file][name=default_image]").change(function () {
+                var input = this;
+                try {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            //the only jQuery line.  All else is the File API.
+                            $('#avatar').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                } catch (e) {
+                    // do nothing now
+                }
+            });
+
+            $('#group_edit_form').submit(function (e) {
+                e.preventDefault();
+                $("button[type=submit]").attr('disabled', 'disabled');
+                $('html body').css('cursor', 'wait');
+                var formData = new FormData(this);
+
+                if (true) {
+                    var form = $("#group_edit_form");
+                    var data = form.serialize();
+                    $.ajax({
+                        url: form.attr('action'),
+                        data: formData,
+                        type: 'post',
+                        xhr: function () {// custom xhr
+                            myXhr = $.ajaxSettings.xhr();
+                            if (myXhr.upload) {// check if upload property exists
+                                // for handling the progress of the upload
+                                myXhr.upload.addEventListener('progress', function (e) {
+                                    console.log(e.lengthComputable);
+                                }, false);
+                            }
+                            return myXhr;
+                        },
+                        success: function (json) {
+                            $('html body').css('cursor', 'auto');
+                            if (json.errors !== undefined) {
+                                var errors = json.errors;
+                                var error = _.keys(errors)[0];
+                                $('#group_edit_form').find('.status_msg').text(error + ': ' + errors[error]);
+
+                            } else {
+
+                                $('#group_edit_form div').removeClass('error');
+                                $('#group_edit_form').find('.status_msg').text('Group has been updated.');
+
+                                setTimeout(function () {
+                                    window.location.reload();
+                                    window.location.href = "/group/#my_groups";
+                                }, 3000);
+                            }
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });
+                }
+            });
+
+
+            $('.addMember').click(function () {
+                $('.user-list').append('<form action="{% url group_invite form.instance.id %}" method="POST">'
+                        + '<div class="control-group"><input type="text" name="name_or_email" value="" placeholder="Type the follower name or email address" /></div>'
+                        + '<div class="control-group"><input type="text" name="first_name" value="" placeholder="First Name" /></div>'
+                        + '<div class="control-group"><input type="text" name="last_name" value="" placeholder="Last Name" /></div>'
+                        + '<div class="control-group"><input type="button" value="Invite" onclick="invite(this);" /></div>'
+                        + '</form>')
+            });
+
+
+            function submit_invite_form($self) {
+                $.ajax({
+                    url: '{% url group_invite form.instance.id %}',
+                    method: 'POST',
+                    data: {'name_or_email': $self.parent().find('input[name=name_or_email]').val(),
+                        'first_name': $self.parent().find('input[name=first_name]').val(),
+                        'last_name': $self.parent().find('input[name=last_name]').val(),
+                    }
+                })
+            }
+
+            function invite(self) {
+                $(self).parent().append('<input type="button" value="Re-send" onClick="resend(this)" />');
+                submit_invite_form($(self));
+                $(self).remove();
+            }
+
+            function resend(self) {
+                submit_invite_form($(self));
+            }
+
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    <style>
+        #wrap .registrationForm ul {
+            list-style-type: none;
+        }
+
+        .interest-page .tab-content li {
+            float: left;
+            width: 165px;
+        }
+
+        .interest-page .tab-content .nav-tabs li {
+            width: auto;
+        }
+
+    </style>
+    <div class="group-page inner">
+        <div class="container">
+            <div class="row-fluid">
+
+                <div class="span4">
+                    {% include "modules/left_side_bar.html" %}
+                </div>
+                <!-- end of span4 -->
+
+                <div class="span8">
+                    <h3>Edit Group</h3>
+                    {% include "group/form.html" %}
+                </div>
+            </div>
+        </div>
+        <!-- end of container -->
+
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,568 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load gravatar %}
+{% load follow_tags %}
+{% load thumbnail %}
+{% load humanize %}
+<!-- Begin page content -->
+{% load upload_tags %}
+{% load utils %}
+
+{% block content %}
+    <div class="span9 alpha">
+    <!-- ******************************
+        each view has a mainheader
+    ******************************* -->
+    <div class="mainHeader clearfix">
+        <form class="form-search span5 alpha">
+            <div class="control-group">
+                <label class="control-label" for="search"><i class="fa fa-search"></i></label>
+
+                <div class="controls">
+                    <input type="text" id="search" class="span5 search-query" placeholder="Search for Current Friend">
+                </div>
+            </div>
+
+        </form>
+        <div class="right clearfix miniModal">
+            <a href="#addPlaydateModal" class="btn primary right openModal">add friend</a>
+
+            <div class="clearfix"></div>
+            <div class="addFriendModal clearfix" style="display:none">
+                <div class="control-group">
+                    <label for"friendsEmail">Enter Friend's Email</label>
+                    <input type="text" id="friendsEmail">
+                </div>
+                <div class="control-group">
+                    <input type="submit" class="btn primary" value="submit">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- *********************************************************
+        starting the recommendation profiles. This is a loop
+    ********************************************************** -->
+    <div class="profile horizontal left clearfix">
+        <div class="left profileThumb">
+            <img class="thumb" src="http://placehold.it/80x60x&text=profile+thumbnail">
+            <ul class="actions">
+                <!-- open the modal to add a playdate -->
+                <li><a href="#addPlaydateModal" data-toggle="modal"><i class="fa fa-calendar"></i></a></li>
+                <!-- go to the inbox. need to prefill in the compose box of the inbox with the username -->
+                <li><a href="#inbox" data-toggle="tooltip" data-original-title="Send Message"><i
+                        class="fa fa-comments"></i></a></li>
+            </ul>
+        </div>
+        <div class="left profileInfo clearfix">
+            <div class="header clearfix">
+                <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                <ul class="family clearfix">
+                    <li>
+                        <span class="gender girl"><img src="library/images/girl-icon.gif" alt="girl-icon" width="22"
+                                                       height="21"/>girls</span>
+                        <span class="number">2</span>
+                    </li>
+                    <li>
+                        <span class="gender boy"><img src="library/images/boy-icon.gif" alt="boy-icon" width="22"
+                                                      height="21"/>boys</span>
+                        <span class="number">1</span>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+    </div>
+    <!-- end of profile -->
+    <!-- *************************************************
+        this is the end of each profile for the loop
+    ************************************************** -->
+    <!-- just adding some more for the html demo -->
+    <div class="profile horizontal left clearfix">
+        <div class="left profileThumb">
+            <img class="thumb" src="http://placehold.it/80x60x&text=profile+thumbnail">
+            <ul class="actions">
+                <li><a href="playdates.php"><i class="fa fa-calendar"></i></a></li>
+                <li><a href="#"><i class="fa fa-comments"></i></a></li>
+            </ul>
+        </div>
+        <div class="left profileInfo clearfix">
+            <div class="header clearfix">
+                <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                <ul class="family clearfix">
+                    <li class="inactive">
+                        <span class="gender girl"><img src="library/images/girl-icon-inactive.gif" alt="girl-icon"
+                                                       width="22" height="21"/>girls</span>
+                        <span class="number">0</span>
+                    </li>
+                    <li>
+                        <span class="gender boy"><img src="library/images/boy-icon.gif" alt="boy-icon" width="22"
+                                                      height="21"/>boys</span>
+                        <span class="number">1</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile horizontal left clearfix">
+        <div class="left profileThumb">
+            <img class="thumb" src="http://placehold.it/80x60x&text=profile+thumbnail">
+            <ul class="actions">
+                <li><a href="playdates.php"><i class="fa fa-calendar"></i></a></li>
+                <li><a href="#"><i class="fa fa-comments"></i></a></li>
+            </ul>
+        </div>
+        <div class="left profileInfo clearfix">
+            <div class="header clearfix">
+                <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                <ul class="family clearfix">
+                    <li>
+                        <span class="gender girl"><img src="library/images/girl-icon.gif" alt="girl-icon" width="22"
+                                                       height="21"/>girls</span>
+                        <span class="number">2</span>
+                    </li>
+                    <li>
+                        <span class="gender boy"><img src="library/images/boy-icon.gif" alt="boy-icon" width="22"
+                                                      height="21"/>boys</span>
+                        <span class="number">1</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile horizontal left clearfix">
+        <div class="left profileThumb">
+            <img class="thumb" src="http://placehold.it/80x60x&text=profile+thumbnail">
+            <ul class="actions">
+                <li><a href="playdates.php"><i class="fa fa-calendar"></i></a></li>
+                <li><a href="#"><i class="fa fa-comments"></i></a></li>
+            </ul>
+        </div>
+        <div class="left profileInfo clearfix">
+            <div class="header clearfix">
+                <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                <ul class="family clearfix">
+                    <li>
+                        <span class="gender girl"><img src="library/images/girl-icon.gif" alt="girl-icon" width="22"
+                                                       height="21"/>girls</span>
+                        <span class="number">2</span>
+                    </li>
+                    <li>
+                        <span class="gender boy"><img src="library/images/boy-icon.gif" alt="boy-icon" width="22"
+                                                      height="21"/>boys</span>
+                        <span class="number">1</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile horizontal left clearfix">
+        <div class="left profileThumb">
+            <img class="thumb" src="http://placehold.it/80x60x&text=profile+thumbnail">
+            <ul class="actions">
+                <li><a href="playdates.php"><i class="fa fa-calendar"></i></a></li>
+                <li><a href="#"><i class="fa fa-comments"></i></a></li>
+            </ul>
+        </div>
+        <div class="left profileInfo clearfix">
+            <div class="header clearfix">
+                <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                <ul class="family clearfix">
+                    <li>
+                        <span class="gender girl"><img src="library/images/girl-icon.gif" alt="girl-icon" width="22"
+                                                       height="21"/>girls</span>
+                        <span class="number">2</span>
+                    </li>
+                    <li>
+                        <span class="gender boy"><img src="library/images/boy-icon.gif" alt="boy-icon" width="22"
+                                                      height="21"/>boys</span>
+                        <span class="number">1</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile horizontal left clearfix">
+        <div class="left profileThumb">
+            <img class="thumb" src="http://placehold.it/80x60x&text=profile+thumbnail">
+            <ul class="actions">
+                <li><a href="playdates.php"><i class="fa fa-calendar"></i></a></li>
+                <li><a href="#"><i class="fa fa-comments"></i></a></li>
+            </ul>
+        </div>
+        <div class="left profileInfo clearfix">
+            <div class="header clearfix">
+                <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                <ul class="family clearfix">
+                    <li>
+                        <span class="gender girl"><img src="library/images/girl-icon.gif" alt="girl-icon" width="22"
+                                                       height="21"/>girls</span>
+                        <span class="number">2</span>
+                    </li>
+                    <li>
+                        <span class="gender boy"><img src="library/images/boy-icon.gif" alt="boy-icon" width="22"
+                                                      height="21"/>boys</span>
+                        <span class="number">1</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile horizontal left clearfix">
+        <div class="left profileThumb">
+            <img class="thumb" src="http://placehold.it/80x60x&text=profile+thumbnail">
+            <ul class="actions">
+                <li><a href="playdates.php"><i class="fa fa-calendar"></i></a></li>
+                <li><a href="#"><i class="fa fa-comments"></i></a></li>
+            </ul>
+        </div>
+        <div class="left profileInfo clearfix">
+            <div class="header clearfix">
+                <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                <ul class="family clearfix">
+                    <li>
+                        <span class="gender girl"><img src="library/images/girl-icon.gif" alt="girl-icon" width="22"
+                                                       height="21"/>girls</span>
+                        <span class="number">2</span>
+                    </li>
+                    <li>
+                        <span class="gender boy"><img src="library/images/boy-icon.gif" alt="boy-icon" width="22"
+                                                      height="21"/>boys</span>
+                        <span class="number">1</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile horizontal left clearfix">
+        <div class="left profileThumb">
+            <img class="thumb" src="http://placehold.it/80x60x&text=profile+thumbnail">
+            <ul class="actions">
+                <li><a href="playdates.php"><i class="fa fa-calendar"></i></a></li>
+                <li><a href="#"><i class="fa fa-comments"></i></a></li>
+            </ul>
+        </div>
+        <div class="left profileInfo clearfix">
+            <div class="header clearfix">
+                <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                <ul class="family clearfix">
+                    <li>
+                        <span class="gender girl"><img src="library/images/girl-icon.gif" alt="girl-icon" width="22"
+                                                       height="21"/>girls</span>
+                        <span class="number">2</span>
+                    </li>
+                    <li>
+                        <span class="gender boy"><img src="library/images/boy-icon.gif" alt="boy-icon" width="22"
+                                                      height="21"/>boys</span>
+                        <span class="number">1</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+    </div>
+    <!-- end of profile -->
+
+    <div class="profile horizontal left clearfix">
+        <div class="left profileThumb">
+            <img class="thumb" src="http://placehold.it/80x60x&text=profile+thumbnail">
+            <ul class="actions">
+                <li><a href="playdates.php"><i class="fa fa-calendar"></i></a></li>
+                <li><a href="#"><i class="fa fa-comments"></i></a></li>
+            </ul>
+        </div>
+        <div class="left profileInfo clearfix">
+            <div class="header clearfix">
+                <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                <ul class="family clearfix">
+                    <li>
+                        <span class="gender girl"><img src="library/images/girl-icon.gif" alt="girl-icon" width="22"
+                                                       height="21"/>girls</span>
+                        <span class="number">2</span>
+                    </li>
+                    <li>
+                        <span class="gender boy"><img src="library/images/boy-icon.gif" alt="boy-icon" width="22"
+                                                      height="21"/>boys</span>
+                        <span class="number">1</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- end of header -->
+        </div>
+        <!-- end of profileInfo -->
+    </div>
+    <!-- end of profile -->
+
+
+    </div><!-- end of span8 -->
+
+    <!-- *************************
+        time for the sidebar
+    ************************** -->
+    <div class="span3">
+        <div id="recommendations" class="sidebar">
+            <h2>Recommendations:</h2>
+
+            <!--  recommended loop -->
+            <div class="profile small horizontal left clearfix">
+                <div class="left profileThumb">
+                    <img class="thumb" src="http://placehold.it/65x45x&text=profile+thumbnail">
+                    <ul class="actions">
+                        <!-- see the prototype for the ajax that does the friend request automatically -->
+                        <li><a href="#" data-toggle="tooltip" data-original-title="Request Friendship"><i
+                                class="fa fa-group"></i></a></li>
+                        <!-- need to find out if we need to be friends before you can send a message -->
+                        <li><a href="#" data-toggle="tooltip" data-original-title="Send Message"><i
+                                class="fa fa-comments"></i></a></li>
+                    </ul>
+                </div>
+                <div class="left profileInfo clearfix">
+                    <div class="header clearfix">
+                        <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                        <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                        <ul class="family clearfix">
+                            <li>
+                                <span class="gender girl">girls</span>
+                                <span class="number">2</span>
+                            </li>
+                            <li>
+                                <span class="gender boy">boys</span>
+                                <span class="number">1</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end of header -->
+                </div>
+                <!-- end of profileInfo -->
+            </div>
+            <!-- end of profile -->
+
+            <div class="profile small horizontal left clearfix">
+                <div class="left profileThumb">
+                    <img class="thumb" src="http://placehold.it/65x45x&text=profile+thumbnail">
+                    <ul class="actions">
+                        <!-- see the prototype for the ajax that does the friend request automatically -->
+                        <li><a href="#" data-toggle="tooltip" data-original-title="Request Friendship"><i
+                                class="fa fa-group"></i></a></li>
+                        <!-- need to find out if we need to be friends before you can send a message -->
+                        <li><a href="#" data-toggle="tooltip" data-original-title="Send Message"><i
+                                class="fa fa-comments"></i></a></li>
+                    </ul>
+                </div>
+                <div class="left profileInfo clearfix">
+                    <div class="header clearfix">
+                        <h2><a href="#" class="link"><span>//</span>Rochelle Chase</a></h2>
+
+                        <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                        <ul class="family clearfix">
+                            <li>
+                                <span class="gender girl">girls</span>
+                                <span class="number">2</span>
+                            </li>
+                            <li>
+                                <span class="gender boy">boys</span>
+                                <span class="number">1</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end of header -->
+                </div>
+                <!-- end of profileInfo -->
+            </div>
+            <!-- end of profile -->
+
+        </div>
+        <!-- end of sidebar -->
+    </div><!-- end of span3 -->
+    <!-- adding modal to request a playdate -->
+    <div id="addPlaydateModal" class="modal hide fade" tabindex="-1" role="dialog"
+         aria-labelledby="requestPlaydateLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="requestPlaydateLabel">Request <span class="attention">Playdate</span></h3>
+        </div>
+        <div class="modal-body">
+            <form id="requestPlaydateForm" action="">
+                <div class="control-group">
+                    <label for="requestTo">To</label>
+                    <input type="text" id="requestTo" placeholder="Friend's Name">
+                </div>
+                <div class="control-group">
+                    <label for="requestTitle">Title</label>
+                    <input type="text" id="requestTitle" placeholder="Request Title">
+                </div>
+                <div class="control-group">
+                    <label for="requestInvited">Who's Invited</label>
+                    <ul class="childrenInvited">
+                        <li><label class="checkbox"><input type="checkbox" name="requestInvited" id="requestInvited"
+                                                           value="childOne">Child One</label><img class="thumb"
+                                                                                                  src="http://placehold.it/100x80&text=child">
+                        </li>
+                        <li><label class="checkbox"><input type="checkbox" name="requestInvited" id="requestInvited"
+                                                           value="childTwo">Child Two</label><img class="thumb"
+                                                                                                  src="http://placehold.it/100x80&text=child">
+                        </li>
+                        <li><label class="checkbox"><input type="checkbox" name="requestInvited" id="requestInvited"
+                                                           value="childOne">Child Three</label><img class="thumb"
+                                                                                                    src="http://placehold.it/100x80&text=child">
+                        </li>
+                    </ul>
+                </div>
+                <div class="control-group">
+                    <label for="requestTime">When</label>
+                    <input type="text" id="requestTimeStart" class="half left first" placeholder="Start Time">
+                    <input type="text" id="requestEndStart" class="half left" placeholder="End Time">
+                </div>
+                <div class="control-group">
+                    <label for="requestLocation">Where</label>
+                    <input type="text" id="requestLocation" placeholder="Title of Location">
+                </div>
+                <div class="control-group">
+                    <label for="requestAddress">Address</label>
+                    <input type="text" id="requestAddress" placeholder="Street Address">
+                </div>
+                <div class="control-group">
+                    <label for="requestCity">City</label>
+                    <input type="text" id="requestCity" placeholder="City">
+                </div>
+                <div class="control-goup state">
+                    <label for="requestState">State</label>
+                    <select id="requestState">
+                        <option value="AL">AL</option>
+                        <option value="AK">AK</option>
+                        <option value="AZ">AZ</option>
+                        <option value="AR">AR</option>
+                        <option value="CA">CA</option>
+                        <option value="CO">CO</option>
+                        <option value="CT">CT</option>
+                        <option value="DE">DE</option>
+                        <option value="DC">DC</option>
+                        <option value="FL">FL</option>
+                        <option value="GA">GA</option>
+                        <option value="HI">HI</option>
+                        <option value="ID">ID</option>
+                        <option value="IL">IL</option>
+                        <option value="IN">IN</option>
+                        <option value="IA">IA</option>
+                        <option value="KS">KS</option>
+                        <option value="KY">KY</option>
+                        <option value="LA">LA</option>
+                        <option value="ME">ME</option>
+                        <option value="MD">MD</option>
+                        <option value="MA">MA</option>
+                        <option value="MI">MI</option>
+                        <option value="MN">MN</option>
+                        <option value="MS">MS</option>
+                        <option value="MO">MO</option>
+                        <option value="MT">MT</option>
+                        <option value="NE">NE</option>
+                        <option value="NV">NV</option>
+                        <option value="NH">NH</option>
+                        <option value="NJ">NJ</option>
+                        <option value="NM">NM</option>
+                        <option value="NY">NY</option>
+                        <option value="NC">NC</option>
+                        <option value="ND">ND</option>
+                        <option value="OH">OH</option>
+                        <option value="OK">OK</option>
+                        <option value="OR">OR</option>
+                        <option value="PA">PA</option>
+                        <option value="RI">RI</option>
+                        <option value="SC">SC</option>
+                        <option value="SD">SD</option>
+                        <option value="TN">TN</option>
+                        <option value="TX">TX</option>
+                        <option value="UT">UT</option>
+                        <option value="VT">VT</option>
+                        <option value="VA">VA</option>
+                        <option value="WA">WA</option>
+                        <option value="WV">WV</option>
+                        <option value="WI">WI</option>
+                        <option value="WY">WY</option>
+                    </select>
+                </div>
+                <div class="control-group zip">
+                    <label for="requestZip">Zip</label>
+                    <input type="text" id="requestZip" placeholder="Zip">
+                </div>
+                <div class="control-group">
+                    <label for="requestMessage">Message</label>
+                    <textarea id="requestMessage" class="full"></textarea>
+                </div>
+
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn secondary" data-dismiss="modal" aria-hidden="true">cancel</button>
+            <button class="btn primary">send request</button>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block footer_js %}
+    <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+    <script src="{{ STATIC_URL }}js/tmpl.min.js"></script>
+    <script src="{{ STATIC_URL }}js/load-image.min.js"></script>
+    <script src="{{ STATIC_URL }}js/canvas-to-blob.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-image-gallery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.iframe-transport.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.fileupload.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.fileupload-fp.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.fileupload-ui.js"></script>
+    <script src="{{ STATIC_URL }}js/locale.js"></script>
+    <script src="{{ STATIC_URL }}js/fileupload_main.js"></script>
+    <script src="{{ STATIC_URL }}js/csrf.js"></script>
+
+    {% upload_js %}
+
+{% endblock %}

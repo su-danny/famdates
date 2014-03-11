@@ -1,0 +1,440 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+
+
+
+    <!-- CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <!--<link href="/static/css/skeleton.css" rel="stylesheet">-->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC" rel="stylesheet" type="text/css">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/library/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/library/css/base.css" rel="stylesheet">
+
+    <link href="/static/library/css/docs.css" rel="stylesheet">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="library/images/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="library/images/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="library/images/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="library/images/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="library/images/ico/favicon.png">
+
+
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="icon" href="/static/static/images/favicon.png" type="image/png">
+    <link href="/static/css/jquery.fancybox.css" rel="stylesheet">
+    <link href="/static/flowplayer/skin/minimalist.css" rel="stylesheet">
+
+    <!-- PULL IN JQUERY AND MASONRY RIGHT AWAY -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.masonry.min.js"></script>
+    <!--[if lt IE 7]>
+    <link href="/static/css/font-awesome-ie7.min.css" rel="stylesheet">
+    <![endif]-->
+    <!-- Fav and touch icons -->
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+
+
+
+    <!-- google fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC" rel="stylesheet" type="text/css">
+    <!-- the styles -->
+    <link href="/static/library/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/library/css/base.css" rel="stylesheet">
+    <link href="/static/library/css/docs.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="library/js/modernizr-2.7.1.js"></script>
+    <![endif]-->
+
+    <!-- lets get jquery right away from google -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="/static/library/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="/static/library/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="/static/library/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/library/images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/static/library/images/ico/favicon.png">
+
+
+
+    {% block extra_head %}{% endblock %}
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <style id="holderjs-style" type="text/css">
+    .holderjs-fluid {
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        font-family: sans-serif;
+        margin: 0
+    }
+    
+    /*.signup-button {*/
+    	/*background: #d64449 !important;*/
+    /*}*/
+    
+    </style>
+    <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/cat_js/intl/vi_ALL/mapfiles/api-3/14/10/%7Bcommon,util,stats%7D.js"></script>
+</head>
+
+{% load inbox %}
+
+
+{% inbox_count as message_count %}
+
+<body data-spy="scroll" data-target=".top-spy" class="{{feed_type|default:'other'}}_page {% if request.user.is_authenticated %}logged-in{% endif %}">
+
+<!-- HEADER -->
+<header>
+    <!-- NAVBAR
+      ================================================== -->
+    <div class="navbar-wrapper">
+        <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+
+
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="/"><img src="/static/library/images/logo.png" alt="logo"/></a>
+                    <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+                    <div class="nav-collapse collapse right">
+                        <ul class="nav right">
+                            <li><a class="signup" href="#signUpForm">sign up</a></li>
+                            <li class="marks">//</li>
+                            <li><a class="login" href="#loginForm">login</a></li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+                <!-- end of container -->
+            </div>
+            <!-- /.navbar-inner -->
+        </div>
+        <!-- /.navbar -->
+
+    </div>
+    <!-- /.navbar-wrapper -->
+
+    <div id="formContainer" class="span6">
+        <form id="signUpForm" class="span6" style="display:none">
+            <h4><span class="marks">//</span> sign up</h4>
+
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">Email</label>
+
+                <div class="controls">
+                    <input type="text" id="inputEmail">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="inputPassword">Password</label>
+
+                <div class="controls">
+                    <input type="password" id="inputPassword">
+                </div>
+            </div>
+            <div class="control-group password">
+                <label class="control-label" for="verifyPassword">Verify Password</label>
+
+                <div class="controls">
+                    <input type="password" id="verifyPassword">
+                </div>
+            </div>
+
+            <div class="control-group terms">
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox"> i agree to the <a href="#">terms & conditions</a>
+                    </label>
+                </div>
+            </div>
+            <div class="control-group submit">
+                <button class="btn" type="submit">Sign Me Up</button>
+            </div>
+        </form>
+
+        <form id="loginForm" class="" style="display:none" method="POST" action="{% url login_page %}">
+            {% csrf_token %}
+            <h4><span class="marks">//</span> login</h4>
+
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">Email</label>
+
+                <div class="controls">
+                    <input type="text" id="inputEmail">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="inputPassword">Password</label>
+
+                <div class="controls">
+                    <input type="password" id="inputPassword">
+                </div>
+            </div>
+
+            <div class="control-group submit">
+                <button class="btn" type="submit">Login</button>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+    <!-- end of form container -->
+</header>
+    {% if request.user.is_authenticated %}
+    <div class="container wrapper">
+
+        <div id="profile" class="clearfix">
+            <div class="span6 personal alpha">
+                <div class="span3 alpha">
+                    <img class="thumb" src="http://placehold.it/208x180&amp;text=profile+thumbnail">
+                </div>
+                <div class="span3 alpha profileInfo">
+                    <div class="header">
+                        <span class="greeting">Hi</span>
+                        <h2>I'm Rochelle Chase</h2>
+                        <h3 class="location">Location: <a href="" class="city">San Francisco</a></h3>
+                    </div>
+                    <ul class="family">
+                        <li>
+                            <span class="gender girl"><img src="/static/library/images/girl-icon.gif" alt="girl-icon" width="22" height="21">girls</span>
+                            <span class="number">2</span>
+                        </li>
+                        <li>
+                            <span class="gender boy"><img src="/static/library/images/boy-icon.gif" alt="boy-icon" width="22" height="21">boys</span>
+                            <span class="number">1</span>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- end of personal span6 -->
+
+            <div class="span4 description alpha">
+                <p>I am a working mother with two sons and one daugher who is looking to pair them with other children in the area. My kids love sports arts, dancing and the occasional trip to Great America. We are not a religeous family but respect families who are ect ect</p>
+                <!-- dont have the edit button if we are on the profile-edit page -->
+                <p><a class="link" href="/account/edit_profile"><span>//</span>edit</a></p>
+            </div><!-- end of description span4 -->
+            <div class="span2 progressInfo">
+                <h4>Profile Strength:</h4>
+                <!-- lets try http://anthonyterrien.com/knob/ -->
+                <div id="progressContainer">
+                    <!--?php
+                        $profileComplete = '70';
+                    ?-->
+                    <input class="profileProgress" value="&lt;?=$profileComplete?&gt;">
+                </div>
+                <!-- dont have the finish profile if on the profile-edit page -->
+                <p><a class="link" href="/account/profile"><span>//</span>finish profile</a></p>
+            </div><!-- end of progress -->
+        </div><!-- end of the profile area -->
+    </div>
+
+    <div class="gridWrapper">
+        <div id="mainNav" class="clearfix">
+			<div class="container">
+                <ul class="nav">
+                    <!-- add class active to the active page -->
+                    <li class="active"><a href="/account/home">Dashboard</a></li>
+                    <li class="divider">|</li>
+                    <li><a href="/account/profile">Friends</a></li>
+                    <li class="divider">|</li>
+                    <li><a href="/message">Inbox</a></li>
+                    <li class="divider">|</li>
+                    <li><a href="/event/live">Playdates</a></li>
+                    <li class="divider">|</li>
+                    <li><a href="/account/family_profile">Family Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+<!-- / HEADER -->
+
+<!--<div class="container container-bg">-->
+        <div class="container clearfix">
+{% block content %}
+{% endblock %}
+        </div>
+<!-- end of container container-bg -->
+    </div>
+<!--/wrap-->
+
+<!-- FOOTER -->
+<footer class="clearfix">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span6">
+                © 2013 Company, Inc. &middot;
+                <a class="blue bold" href="#">Privacy</a> &middot;
+                <a class="blue bold" href="#">Terms</a>
+            </div>
+            <div class="span6 text-right ">
+                <a class="blue bold" href="#">Back to top</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- / FOOTER -->
+
+{% include 'modules/login-modal.html' %}
+
+
+{% include 'modules/signup-1-modal.html' %}
+
+{% include 'modules/signup-21-modal.html' %}
+
+{% include 'modules/signup-20-modal.html' %}
+
+{% include 'modules/signup-3-modal.html' %}
+
+{% include 'modules/signup-4-modal.html' %}
+
+{% include 'modules/signup-5-modal.html' %}
+
+{% include 'modules/signup-6-modal.html' %}
+
+{% include 'modules/signup-7-modal.html' %}
+
+{% include 'modules/signup-8-modal.html' %}
+
+{% include 'modules/bio-modal.html' %}
+
+
+</div>
+<!-- end of modal -->
+
+<script src="/static/js/md5.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/holder.js"></script>
+<script src="/static/js/bootstrap-datepicker.js"></script>
+<script src="/static/js/bootstrap-timepicker.js"></script>
+<script src="/static/js/bootstrap-modal.js"></script>
+<script src="/static/js/jquery.cookie.js"></script>
+<script src="/static/js/jquery.fancybox.pack.js?v=2.1.4"></script>
+<script src="/static/js/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script src="/static/js/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script src="/static/js/helpers/jquery.fancybox-media.js?v=1.0.5"></script>
+<script src="/static/js/underscore-min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="/static/flowplayer/flowplayer.min.js"></script>
+<script src="/static/js/chosen.jquery.min.js"></script>
+<script src="/static/js/classie.js"></script>
+<script src="/static/js/gnmenu.js"></script>
+<script src="/static/js/app.js"></script>
+<script src="/static/js/jquery.tmpl.min.js"></script>
+
+<script src="/static/js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
+<script src="/static/js/jquery.localscroll-1.2.7-min.js" type="text/javascript"></script>
+<script src="/static/js/jquery.scrollTo.min.js" type="text/javascript"></script>
+<!-- PAGE CUSTOM SCROLLER -->
+<script src="/static/js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
+<script src="/static/js/jquery.localscroll-1.2.7-min.js" type="text/javascript"></script>
+<script src="/static/js/jquery.scrollTo.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/js/jquery.nicescroll.min.js"></script>
+
+<link href="{{ STATIC_URL }}ajax_upload/css/ajax-upload-widget.css" rel="stylesheet" type="text/css"/>
+<script src="{{ STATIC_URL }}ajax_upload/js/jquery.iframe-transport.js"></script>
+<script src="{{ STATIC_URL }}ajax_upload/js/ajax-upload-widget.js"></script>
+
+
+<!-- SMOOTH SECTIONS SCROLL + PARALLAX PLUGIN -->
+<script>
+    //http://www.ianlunn.co.uk/plugins/jquery-parallax/
+    jQuery(document).ready(function () {
+        jQuery('#topnav').localScroll(1000);
+        jQuery('.gobtnwrapper').localScroll(1000);
+
+        //.parallax(xPosition, speedFactor, outerHeight) options:
+        //xPosition - Horizontal position of the element
+        //inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+        //outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+        //jQuery('#section-1').parallax("50%", 0.1);
+        //jQuery('#section-2').parallax("50%", 0.1);
+        //jQuery('#section-3').parallax("50%", 0.1);
+
+    })
+</script>
+
+<!-- NICE Scroll plugin -->
+<script>
+    //scroll bar custom
+    jQuery(document).ready(
+            function () {
+                jQuery("html").niceScroll({cursorcolor: "#2b2b2b"});
+            }
+    );
+</script>
+
+<script>
+    window.feed_type = '{{feed_type}}';
+
+    //Minimizes the menu on the mobile after clicking
+    jQuery('.nav-collapse .nav > li > a').click(function () {
+        jQuery('.collapse.in').removeClass('in').css('height', '0');
+    });
+</script>
+
+<script>
+    //adapt section height to window height
+    jQuery(function () {
+        jQuery('#head-top').css({'height': (jQuery(window).height()) + 'px'});
+        jQuery(window).resize(function () {
+            jQuery('#head-top').css({'height': (jQuery(window).height()) + 'px'});
+        });
+    });
+</script>
+
+<script>
+    jQuery('.carousel').carousel({
+        interval: 7000
+    })
+</script>
+{% block footer_js %}
+{% endblock %}
+
+<style>
+    .sui {
+        position: relative;
+    }
+
+    .sui .chzn-results {
+        display: none;
+        position: absolute;
+        width: 100%;
+        background: white;
+        margin: 5px 10px;
+        padding: 3px;
+    }
+</style>
+
+</body>
+</html>

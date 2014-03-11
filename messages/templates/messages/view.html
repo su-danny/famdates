@@ -1,0 +1,25 @@
+{% extends "messages/base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block page_content %}
+    <h1>{% trans "View Message" %}</h1>
+    <ul class="message-headers">
+        <li><label>{% trans "Subject" %}:</label><span class="soft">{{ message.subject }}</span></li>
+        <li><label>{% trans "Sender" %}:</label><span class="soft">{{ message.sender }}</span></li>
+        <li><label>{% trans "Date" %}:</label><span class="soft">{{ message.sent_at|date:_("DATETIME_FORMAT") }}</span>
+        </li>
+        <li><label>{% trans "Recipient" %}:</label><span class="soft">{{ message.recipient }}</span></li>
+    </ul>
+    <h4>Message:</h4>
+    {{ message.body|linebreaksbr }}<br/><br/>
+
+
+    <ul class="actions">
+    {% ifequal message.recipient.pk user.pk %}
+        <li class="reply"><i class="icon-reply-all"></i><a
+                href="{% url 'messages_reply' message.id %}">{% trans "Reply" %}</a></li>
+    {% endifequal %}
+    <li><i class="icon-trash"></i><a href="{% url 'messages_delete' message.id %}">{% trans "Delete" %}</a></li>
+{% endblock %}
+</ul>

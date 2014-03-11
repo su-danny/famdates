@@ -1,0 +1,235 @@
+<script type="text/javascript">
+$(document).ready(function () {
+    $('select').chosen();
+    $('input[name=use_gravatar]').click(function () {
+        if ($(this).is(':checked')) {
+            $('#avatar').attr('src', 'http://www.gravatar.com/avatar/' + md5($('input[name=email]').val()));
+        } else {
+            $('#avatar').attr('src', '{{STATIC_URL}}images/avatar.png');
+        }
+    });
+
+    function initControls() {
+        $("input[name=acct_type][value=individual]").click(function () {
+            $('input[name=gender], select[name^=birthday], input[name=occupation], input[name=hide_birthday]').closest('.control-group').show('slow');
+            $('select[name^=date_founded]').closest('.control-group').hide('slow');
+        });
+
+        $("input[name=acct_type][value=individual]").click();
+
+        $("input[name=acct_type][value=business]").click(function () {
+            $('input[name=gender], select[name^=birthday], input[name=occupation], input[name=hide_birthday]').closest('.control-group').hide('slow');
+            $('select[name^=date_founded]').closest('.control-group').show('slow');
+        });
+    }
+
+    $("input[type=file][name=avatar]").change(function () {
+        var input = this;
+        try {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    //the only jQuery line.  All else is the File API.
+                    $('#avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        } catch (e) {
+            // do nothing now
+        }
+    });
+
+    function display_error(field, error_text, is_checkbox) {
+
+        if (is_checkbox) {
+            if (field.find('.help-inline').length > 0) {
+                field.parent().siblings('.help-inline').text(error_text);
+            } else {
+                // insert help-inline to this field
+                $span = $('<span/>', {
+                    'class': 'help-inline'
+                });
+                $span.html(error_text);
+                if (field.next('.chzn-container').length > 0) {
+                    field.next('.chzn-container').after($span);
+                } else {
+                    field.parent().after($span);
+                }
+            }
+        } else {
+            if (field.find('.help-inline').length > 0) {
+                field.siblings('.help-inline').text(error_text);
+            } else {
+                // insert help-inline to this field
+                $span = $('<span/>', {
+                    'class': 'help-inline'
+                });
+                $span.html(error_text);
+                if (field.next('.chzn-container').length > 0) {
+                    field.next('.chzn-container').after($span);
+                } else {
+                    field.after($span);
+                }
+            }
+        }
+    }
+
+    function hide_form_errors() {
+        $('.errorlist').remove();
+    }
+
+    function process_form_errors(errors, form) {
+        var curField;
+        hide_form_errors();
+        $("button[type=submit]").removeAttr('disabled');
+
+        prefix = form.find(":hidden[name='prefix']").val();
+
+        prefix == undefined ? prefix = '' : prefix = prefix + '-';
+        $('.error').removeClass('error');
+        $('.help-inline').text('');
+
+        if (errors.__all__ != undefined) {
+            // form.append(errors.__all__);
+            // append error for email or password based on return value
+
+            if (errors.__all__.indexOf('password') !== -1) {
+                field = $('[name=password2]');
+            }
+
+            display_error(field, errors.__all__, false);
+            field.closest('.control-group').addClass('error')
+        }
+
+        var scroll = true;
+        for (field in errors) {
+            if (errors.hasOwnProperty(field)) {
+                curField = form.find('[name^=' + errors[field][0] + ']:last, [name^=' + field + ']:last');
+
+                if (curField.attr('type') === 'checkbox' || curField.attr('type') === 'radio') {
+                    display_error(curField, errors[field][1], true);
+                } else {
+                    display_error(curField, errors[field][1], false);
+                }
+                curField.closest('.control-group').addClass('error')
+
+                if (errors[field][0] == 'birthday') {
+                    curField = curField.parent();
+                }
+
+                if (scroll) {
+                    $('html,body').animate({scrollTop: curField.offset().top - 80});
+                    scroll = false;
+                }
+            }
+        }
+    }
+    {% if not edit %}
+        $('.step-2').hide();
+    {% else %}
+        initControls();
+    {% endif %}
+
+    $('#registration_form').submit(function (e) {
+        e.preventDefault();
+        $("button[type=submit]").attr('disabled', 'disabled');
+        $('html body').css('cursor', 'wait');
+        var formData = new FormData(this);
+
+        var is_edit_form = $(this).hasClass('edit-form');
+
+        if (true) {
+            var form = $("#registration_form");
+            var data = form.serialize();
+
+            $.ajax({
+                url: form.attr('action'),
+                data: formData,
+                type: 'post',
+                xhr: function () {  // custom xhr
+                    myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // check if upload property exists
+                        // for handling the progress of the upload
+                        myXhr.upload.addEventListener('progress', function (e) {
+                            console.log(e.lengthComputable);
+                        }, false);
+                    }
+                    return myXhr;
+                },
+                success: function (json) {
+                    $('html body').css('cursor', 'auto');
+                    var errors = json.errors;
+
+                    if (is_edit_form) {
+                        if (json.success === false && json.errors !== undefined) {
+                            process_form_errors(errors, form);
+                            $('#registration_form').find('.status_msg').text('Invalid or missing ' + errors[0][0]);
+
+                        } else {
+                            $('#registration_form div').removeClass('error');
+                            $('#preview_section').html('<img src="' + json.background + '" id="background_img" />');
+
+                            $('#background_img').Jcrop({
+                                onChange: updateCoords,
+                                onSelect: updateCoords,
+                                aspectRatio: 1200 / 200.0
+                            });
+                            $('#registration_form').find('.status_msg').text('Your profile has been updated');
+                        }
+                        return;
+                    }
+
+
+                    if (json.success === false && json.errors !== undefined) {
+
+
+                        if (!$('.step-1').hasClass('passed')) {
+
+                            {% if not edit %}
+                                var step1 = {'confirm_email': true, 'email': true, 'first_name': true};
+
+                                var _errors = [];
+                                for (i = 0; i < errors.length; i++) {
+                                    if (step1[errors[i][0]]) {
+                                        _errors.push(errors[i]);
+                                    }
+                                }
+
+                                if (_errors.length == 0) {
+                                    if (!$('.step-1').hasClass('passed')) {
+                                        $('.step-1').hide();
+                                        $('.step-2').show();
+                                        $('.step-1').addClass('passed');
+                                        initControls();
+                                    } else {
+                                        process_form_errors(errors, form);
+                                    }
+                                } else {
+                                    process_form_errors(_errors, form);
+                                }
+
+                            {% endif %}
+                        } else {
+                            process_form_errors(errors, form);
+                            $('#registration_form').find('.status_msg').text('Invalid or missing ' + errors[0][0]);
+                        }
+                    } else {
+
+                        {% if not edit %}
+                            window.location.href = "{% url account_invite_friends %}";
+                        {% endif %}
+
+                        $('#registration_form div').removeClass('error');
+                        $('#registration_form').find('.status_msg').text('Success');
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        }
+    });
+
+
+});
+</script>

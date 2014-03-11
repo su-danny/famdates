@@ -1,0 +1,167 @@
+{% load utils %}
+
+<!-- modal -->
+<div class="modal hide fade" id="signup21Modal" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h1><span class="red">Sports</span><span class="white">Freak</span> Customize Your famdates Experience</h1>
+    </div>
+    <!-- end of modal heading -->
+    <div class="modal-body">
+        <form class="form-inline standard form-horizontal" method="POST" action="/account/signup/2">
+            {% csrf_token %}
+            <div class="row-fluid">
+                <div class="control-group span8">
+                    <div class="control-group">
+                        <label class="control-label">Are you an individual, team or business?</label>
+
+                        <div class="controls">
+                            <ul>
+                                <li><label for="id_acct_type_0"><input type="radio" id="id_acct_type_0" value="individual" name="acct_type">Individual</label></li>
+                                <li><label for="id_acct_type_1"><input type="radio" id="id_acct_type_1" value="business" checked="checked" name="acct_type"> Team or Business</label> </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid business">
+                <div class=" control-group">
+                    <label class="control-label">Name *</label>
+
+                    <div class="controls">
+                        <input id="id_name" class="required" type="text" name="name" maxlength="30">
+                        <span class="help-inline"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid business">
+                <div class="control-group">
+                    <label class="control-label">Type *</label>
+
+                    <div class="controls">
+                        <input id="id_type" class="required" type="text" name="profile_type" maxlength="30">
+                        <span class="help-inline"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid business">
+                <div class="control-group">
+                    <label class="control-label">Date founded</label>
+
+                    <div class="controls">
+                        <select name="date_founded_year" id="id_date_founded_year">
+                            <option value="0">Year</option>
+                            {% for i in "1900,2013"|in_range %}
+                                <option value="{{i}}">{{i}}</option>
+                            {% endfor %}
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid business">
+                <div class="control-group">
+                    <label class="control-label">Address *</label>
+
+                    <div class="controls">
+                        <input id="id_address" class="required" type="text" name="region" placeholder="Street Address" maxlength="100">
+                        <input id="id_postalcode" class="required" type="text" name="zipcode" placeholder="Postal Code" maxlength="100">*
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid individual">
+                <div class=" control-group">
+                    <label class="control-label">Name*</label>
+
+                    <div class="controls">
+                        <input id="id_first_name" class="required" placeholder="First name" type="text" name="first_name" maxlength="30">
+                        <input id="id_last_name" class="required" placeholder="Last name" type="text" name="last_name" maxlength="30">
+                        <span class="help-inline"></span>
+                    </div>
+                </div>
+            </div>
+<!-- we are calling this on two pages 
+            <div class="row-fluid individual">
+                <div class="control-group">
+                    <label class="control-label">Address *</label>
+
+                    <div class="controls">
+                        <input id="id_individual_postalcode" class="required" type="text" name="zipcode"
+                               placeholder="Postal Code" maxlength="100">*
+
+                    </div>
+                </div>
+            </div>
+-->
+            <div class="row-fluid individual">
+                <div class="control-group step-2 ">
+                    <label class="control-label">Birthday *</label>
+
+                    <div class="controls">
+                        <select name="birthday_month" class="span3 required" id="id_birthday_month">
+                            <option value="0">Month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <select name="birthday_day" class="span3 required" id="id_birthday_day">
+                            <option value="0">Day</option>
+                            {% for i in "1,31"|in_range %}
+                                <option value="{{i}}">{{i}}</option>
+                            {% endfor %}
+                        </select>
+                        <select name="birthday_year" class="span3 required" id="id_birthday_year">
+                            <option value="0">Year</option>
+                            {% for i in "1900,2013"|in_range %}
+                                <option value="{{i}}">{{i}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid individual">
+                <div class="control-group">
+                    <label class="control-label"></label>
+
+                    <div class="controls">
+                        <input class="" type="checkbox" name="show_month_day"><label>Month and day only please</label>
+                        <input class="" type="checkbox" name="hide_birthday"><label>Hide it all together thank you</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid individual">
+                <div class="control-group">
+                    <label class="control-label"></label>
+
+                    <div class="controls">
+                        <input class="" type="radio" name="gender" value="male"><label>Male</label>
+                        <input class="" type="radio" name="gender" value="female"><label>Female</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <button type="submit" href="#" class="btn btn-red pull-right">Continue</button>
+                <span class="login_error_msg" style="color: red"></span>
+            </div>
+        </form>
+    </div>
+    <!-- end of row-fluid -->
+</div>
+
+

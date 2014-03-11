@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    <div class="container container-bg">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="page-header">
+                    {#				<div class="transparent general-page-header hidden-phone"><span class="red">user</span> login</div>#}
+                </div>
+                <div id="content" class="well">
+                    <h2>Login</h2>
+
+                    <form class="form-inline loginForm2 standard" class="editable" method="post"
+                          action="{% url login_page %}">
+                        <div class="fb-login">
+                            <!--                     	<a href="{% url socialauth_begin 'facebook' %}" class="fb-login-button"></a> -->
+                        </div>
+                        <div class="clearfix"></div>
+                        {% if formError %}
+                            <div class="alert">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ formError }}
+                            </div>
+                        {% endif %}
+
+                        {% csrf_token %}
+                        {% if next %}
+                            <p style="display: none;"><input type="hidden" name="next" value="{{ next }}"/></p>
+                        {% endif %}
+                        <input type="text" class="" name="email" placeholder="Email">
+                        <input class="" name="password" id="appendedInputButton" type="password" placeholder="Password">
+                        {{ form.next_redirect }}
+                        <!-- <button class="btn" type="button"><div class="arrow-left"></div>login!</button> -->
+                        <button type="submit" class="btn btn-red">
+                            <div class="arrow-left"></div>
+                            login!
+                        </button>
+                        <p></p>
+
+                        <p><a href="/account/reset/">Forgot Your Password?</a></p>
+                    </form>
+
+
+                    <p class="socialRegister">Don't have an account yet? <a href="{% url registration %}">Register
+                        online</a> or with
+                        <a class="icon-right icon" type="submit" href="{% url socialauth_begin 'facebook' %}"><i
+                                class="icon-facebook"></i></a>
+                        <a class="icon" type="submit" href="{% url socialauth_begin 'twitter' %}"><i
+                                class="icon-twitter"></i></a>.
+                    </p>
+                </div>
+                <!-- end of #content -->
+            </div>
+            <!-- end of span12 -->
+        </div>
+        <!-- end of row -->
+
+    </div> <!--/container-bg-->
+{% endblock %}

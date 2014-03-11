@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% load i18n %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content_header %}
+<h2>{% trans "Contact Us" %}</h2>
+<h3>{% trans "We look forward to hearing from you" %}</h3>
+{% endblock %}
+
+{% block content %}
+<div class="container container-bg">
+    <section id="Section-0" class="contact-form">
+        <div class="container">
+
+            <div class="white-background general-hero" id="general-input">
+                <form action="" method="POST" id="contact-form">
+                    {% csrf_token %}
+
+                    <div class="row-fluid">
+                        <div class="span11 general-margin-left">
+                            <h3 class="page-title span10">contact us anytime!</h3>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <label for="name"><span class="red">*</span>Your Name</label>
+                        </div>
+                    </div>
+
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <input type="text" name="name" class="span4" required="">
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <label for="email"><span class="red">*</span>Your Email</label>
+                        </div>
+                    </div>
+
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <input type="email" name="email" class="span4" required="">
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <label for="message"><span class="red">*</span>Your Message</label>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <textarea cols="40" rows="15" class="span10" name="message"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <button class="send button" type="submit">Send Message</button>
+                            <span class="info-message"> </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+
+{% block footer_js %}
+<style type="text/css">
+    .info-message {
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    function clear_form_elements(ele) {
+        $(ele).find(':input').each(function () {
+            switch (this.type) {
+                case 'password':
+                case 'select-multiple':
+                case 'select-one':
+                case 'text':
+                case 'textarea':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = false;
+            }
+        });
+    }
+
+
+    $(document).ready(function () {
+        $('#contact-form').submit(function (e) {
+            $('html, body').css("cursor", "waiting");
+            e.preventDefault();
+            // clean up error from previous submit
+            $('.error').removeClass('error');
+            $.each($('.help-inline'), function () {
+                $(this).html("");
+            });
+
+            var form = $('#contact-form');
+
+            var url = $(this).attr('action');
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: $('#contact-form').serialize(),
+                success: function (data) {
+                    $('html, body').css("cursor", "auto");
+                    if (data['success'] == false) {
+                        $.each(data['errors'], function (i, val) {
+                            var container = $('#' + i).parent().parent();
+                            var span = $('#' + i).parent().find('span');
+                            $(container).addClass('error');
+                            $(span).text(val);
+                        });
+                    } else {
+                        clear_form_elements(form);
+                        $('.info-message').text('Message has been sent').fadeIn(500);
+                        // window.location.href = "
+                        {%
+                            url
+                            message_sent %
+                        }
+                        ";
+                    }
+                }
+            })
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block bodyClass %}inner{% endblock %}
+{% block title %}
+    Reset Password Confirm
+{% endblock %}
+
+{% block content %}
+    <div class="container container-bg">
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="content">
+                    <div id="userProfilePage">
+
+                        <section id="userResetForm">
+                            {% if success %}
+                                <p id="userResetSuccess">Your new password has been set. Please <a
+                                        href="/account/login/">click here</a> to login.</p>
+                            {% else %}
+                                {% if validlink %}
+                                    <p id="formIntro">Please enter your new password in the fields below.</p>
+                                    <form action="" method="post">{% csrf_token %}
+                                        <div class="formLeft">
+                                            <label for="new_password1"{% if form.new_password1.errors %}
+                                                   class="error"{% endif %}>New Password</label>
+                                        </div>
+                                        <div class="formRight">
+                                            <div class="formField">{{ form.new_password1 }}</div>
+                                            {{ form.new_password1.errors }}
+                                        </div>
+                                        <div class="formLeft">
+                                            <label for="new_password2"{% if form.new_password2.errors %}
+                                                   class="error"{% endif %}>Confirm Password</label>
+                                        </div>
+                                        <div class="formRight">
+                                            <div class="formField">{{ form.new_password2 }}</div>
+                                            {{ form.new_password2.errors }}
+                                            <button id="formSubmitButton" type="submit" class="btn post-button">Save
+                                            </button>
+                                        </div>
+                                        <div class="clear spacer0">&nbsp;</div>
+                                    </form>
+                                {% else %}
+                                    <h3>Password reset unsuccessful</h3>
+                                    <p>The password reset link was invalid, possibly because it has already been used.
+                                        Please request a new password reset.</p>
+                                {% endif %}
+                            {% endif %}
+                        </section>
+
+                    </div>
+                    <!-- end #userProfilePage -->
+                </div>
+                <!-- end #content -->
+            </div>
+            <!-- end span12 -->
+        </div>
+        <!-- end of row -->
+    </div><!-- end of container-bg -->
+{% endblock %}

@@ -1,0 +1,178 @@
+[
+    {
+        "pk": 1,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "sd",
+            "created": "2013-04-26T03:40:22",
+            "name": "sdf",
+            "email": "dat@vastbit.com"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "sd",
+            "created": "2013-04-26T03:42:54",
+            "name": "sdf",
+            "email": "dat@vastbit.com"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "sdfsdf",
+            "created": "2013-04-26T03:43:25",
+            "name": "sdfsd",
+            "email": "dat@vastbit.com"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "sdfsd",
+            "created": "2013-04-26T03:45:19",
+            "name": "sdfsd",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "sdfds",
+            "created": "2013-04-26T03:47:19",
+            "name": "sdfsd",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "sdf",
+            "created": "2013-04-26T03:49:52",
+            "name": "sdfds",
+            "email": "thanh.nguyenvan@gmail.com"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "sdf",
+            "created": "2013-04-26T03:50:20",
+            "name": "sdf",
+            "email": "thanh.nguyenvan@gmail.com"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "test",
+            "created": "2013-06-17T20:30:36",
+            "name": "test",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "test",
+            "created": "2013-06-17T20:30:44",
+            "name": "test",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "dfds",
+            "created": "2013-06-17T20:31:35",
+            "name": "admin",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "dfds",
+            "created": "2013-06-17T20:31:38",
+            "name": "admin",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "test",
+            "created": "2013-06-17T20:53:41",
+            "name": "test",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "test",
+            "created": "2013-06-17T20:53:48",
+            "name": "test",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "test",
+            "created": "2013-06-17T20:54:26",
+            "name": "tes",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "test",
+            "created": "2013-06-17T20:59:32",
+            "name": "test",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 16,
+        "model": "contact_form.contact",
+        "fields": {
+            "message": "test",
+            "created": "2013-06-17T21:04:57",
+            "name": "test",
+            "email": "ben@simpleunion.com"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "contact_form.contactcategory",
+        "fields": {
+            "msg_subject": "New contact",
+            "name": "Contact",
+            "recipients": "ben@simpleunion.com",
+            "created": "2013-04-26T03:42:48",
+            "is_active": true,
+            "reply_body": "<!-- template for emails for famdates -->\r\n<style type=\"text/css\">\r\n\th2 {color: #8d8d8d;font-size: 16px;margin-bottom: 25px;}\r\n\tp {color: #8d8d8d;font-size: 16px;margin-bottom: 20px;line-height: 24px;}\r\n\ta {color: #ff3030;font-size: 16px;}\r\n        .famdates {color: red;font-size: 16px;}\r\n</style>\r\n<table id=\"Table_01\" width=\"600\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n\t<tr>\r\n\t\t<td colspan=\"9\"><img src=\"/static/images/email-templates/emailtemplates_01.png\" width=\"600\" height=\"91\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<!-- this is the content area -->\r\n\t\t<td colspan=\"9\" style=\"background: #f2f2f2;padding: 30px 20px\">\r\n\t\t\r\n\t\t\t<!-- add our email message here. Use H2 for titles and then normal paragraphs -->\r\n\r\n\t\t\t<strong>Dear {{  contact.name }}</strong>\r\n\r\n\r\n<p>\r\nThe following information has been submitted:\r\n</p>\r\n\r\n<p>\r\n<strong>Name</strong>: {{ contact.name }} <br/>\r\n<strong>Email</strong>: {{ contact.email }} \r\n</p>\r\n\r\n<p>\r\n<strong>Message</strong>: {{contact.message}}\r\n\r\n<p>\r\nThis information was supplied from the Contact form at \r\nhttp://famdates.com/contact\r\n</p>\r\n\r\n\r\n\r\n\t\t\t<p>\r\n                        Thank you! <br />\r\n                        <span  class=\"famdates\"><strong>The Sports Freak Team</strong></span>\r\n                        </p>\r\n\r\n\r\n\t\t</td>\r\n\t\t<!-- end of content area -->\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td colspan=\"9\"><img src=\"/static/images/email-templates/emailtemplates_03.png\" width=\"600\" height=\"116\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td><img src=\"/static/images/email-templates/emailtemplates_04.png\" width=\"129\" height=\"23\" alt=\"\" /></td>\r\n\t\t<!-- facebook page link -->\r\n\t\t<td><a href=\"#facebook\"><img src=\"/static/images/email-templates/emailtemplates_05.png\" width=\"95\" height=\"23\" alt=\"\" /></a></td>\r\n\t\t<td><img src=\"/static/images/email-templates/emailtemplates_06.png\" width=\"24\" height=\"23\" alt=\"\" /></td>\r\n\t\t<!-- twitter page link -->\r\n\t\t<td><a href=\"#twitter\"><img src=\"/static/images/email-templates/emailtemplates_07.png\" width=\"76\" height=\"23\" alt=\"\" /></a></td>\r\n\t\t<td><img src=\"/static/images/email-templates/emailtemplates_08.png\" width=\"27\" height=\"23\" alt=\"\" /></td>\r\n\t\t<!-- youtube page link -->\r\n\t\t<td><a href=\"#youtube\"><img src=\"/static/images/email-templates/emailtemplates_09.png\" width=\"87\" height=\"23\" alt=\"\" /></a></td>\r\n\t\t<td colspan=\"3\"><img src=\"/static/images/email-templates/emailtemplates_10.png\" width=\"162\" height=\"23\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td colspan=\"7\" rowspan=\"3\"><img src=\"/static/images/email-templates/emailtemplates_11.png\" width=\"449\" height=\"131\" alt=\"\" /></td>\r\n\t\t<td colspan=\"2\"><img src=\"/static/images/email-templates/emailtemplates_12.png\" width=\"151\" height=\"43\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<!-- unsubsribe link goes here -->\r\n\t\t<td><a href=\"#\"><img src=\"/static/images/email-templates/emailtemplates_13.png\" width=\"72\" height=\"23\" alt=\"\" /></a></td>\r\n\t\t<td><img src=\"/static/images/email-templates/emailtemplates_14.png\" width=\"79\" height=\"23\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td colspan=\"2\"><img src=\"/static/images/email-templates/emailtemplates_15.png\" width=\"151\" height=\"65\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"129\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"95\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"24\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"76\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"27\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"87\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"11\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"72\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"79\" height=\"1\" alt=\"\" /></td>\r\n\t</tr>\r\n</table>\r\n<!-- end of email template -->",
+            "msg_body": "<!-- template for emails for famdates -->\r\n<style type=\"text/css\">\r\n\th2 {color: #8d8d8d;font-size: 16px;margin-bottom: 25px;}\r\n\tp {color: #8d8d8d;font-size: 16px;margin-bottom: 20px;line-height: 24px;}\r\n\ta {color: #ff3030;font-size: 16px;}\r\n        .famdates {color: red;font-size: 16px;}\r\n</style>\r\n<table id=\"Table_01\" width=\"600\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\r\n\t<tr>\r\n\t\t<td colspan=\"9\"><img src=\"/static/images/email-templates/emailtemplates_01.png\" width=\"600\" height=\"91\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<!-- this is the content area -->\r\n\t\t<td colspan=\"9\" style=\"background: #f2f2f2;padding: 30px 20px\">\r\n\t\t\r\n\t\t\t<!-- add our email message here. Use H2 for titles and then normal paragraphs -->\r\n\r\n\t\t\t<strong>Dear Administrator</strong>\r\n\r\n\r\n<p>\r\nThe following information has been submitted:\r\n</p>\r\n\r\n<p>\r\n<strong>Name</strong>: {{ contact.name }} <br/>\r\n<strong>Email</strong>: {{ contact.email }} \r\n</p>\r\n\r\n<p>\r\n<strong>Message</strong>: {{contact.message}}\r\n\r\n<p>\r\nThis information was supplied from the Contact form at \r\nhttp://famdates.com/contact\r\n</p>\r\n\r\n\r\n\r\n\t\t\t<p>\r\n                        Thank you! <br />\r\n                        <span  class=\"famdates\"><strong>The Sports Freak Team</strong></span>\r\n                        </p>\r\n\r\n\r\n\t\t</td>\r\n\t\t<!-- end of content area -->\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td colspan=\"9\"><img src=\"/static/images/email-templates/emailtemplates_03.png\" width=\"600\" height=\"116\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td><img src=\"/static/images/email-templates/emailtemplates_04.png\" width=\"129\" height=\"23\" alt=\"\" /></td>\r\n\t\t<!-- facebook page link -->\r\n\t\t<td><a href=\"#facebook\"><img src=\"/static/images/email-templates/emailtemplates_05.png\" width=\"95\" height=\"23\" alt=\"\" /></a></td>\r\n\t\t<td><img src=\"/static/images/email-templates/emailtemplates_06.png\" width=\"24\" height=\"23\" alt=\"\" /></td>\r\n\t\t<!-- twitter page link -->\r\n\t\t<td><a href=\"#twitter\"><img src=\"/static/images/email-templates/emailtemplates_07.png\" width=\"76\" height=\"23\" alt=\"\" /></a></td>\r\n\t\t<td><img src=\"/static/images/email-templates/emailtemplates_08.png\" width=\"27\" height=\"23\" alt=\"\" /></td>\r\n\t\t<!-- youtube page link -->\r\n\t\t<td><a href=\"#youtube\"><img src=\"/static/images/email-templates/emailtemplates_09.png\" width=\"87\" height=\"23\" alt=\"\" /></a></td>\r\n\t\t<td colspan=\"3\"><img src=\"/static/images/email-templates/emailtemplates_10.png\" width=\"162\" height=\"23\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td colspan=\"7\" rowspan=\"3\"><img src=\"/static/images/email-templates/emailtemplates_11.png\" width=\"449\" height=\"131\" alt=\"\" /></td>\r\n\t\t<td colspan=\"2\"><img src=\"/static/images/email-templates/emailtemplates_12.png\" width=\"151\" height=\"43\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<!-- unsubsribe link goes here -->\r\n\t\t<td><a href=\"#\"><img src=\"/static/images/email-templates/emailtemplates_13.png\" width=\"72\" height=\"23\" alt=\"\" /></a></td>\r\n\t\t<td><img src=\"/static/images/email-templates/emailtemplates_14.png\" width=\"79\" height=\"23\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td colspan=\"2\"><img src=\"/static/images/email-templates/emailtemplates_15.png\" width=\"151\" height=\"65\" alt=\"\" /></td>\r\n\t</tr>\r\n\t<tr>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"129\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"95\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"24\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"76\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"27\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"87\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"11\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"72\" height=\"1\" alt=\"\" /></td>\r\n\t\t<td><img src=\"/static/images/email-templates/spacer.gif\" width=\"79\" height=\"1\" alt=\"\" /></td>\r\n\t</tr>\r\n</table>\r\n<!-- end of email template -->",
+            "reply_subject": "Thank you for contacting us",
+            "contact_page_content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "send_reply": true
+        }
+    }
+]

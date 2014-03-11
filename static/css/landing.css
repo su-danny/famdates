@@ -1,0 +1,168 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* Sticky footer styles
+     -------------------------------------------------- */
+
+html,
+body {
+    height: 100%;
+    background: url(../images/homepage_slant_bg.png) repeat !important;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -80px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;
+}
+
+#footer {
+    margin-top: -33px;
+
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+body {
+    height: 100%;
+    background: #242424;
+    min-height: 100% !important;
+}
+
+.welcome-bg {
+    background: url(../images/landing_bg.png) no-repeat;
+    width: 100%;
+    min-width: 960px;
+    height: 619px;
+}
+
+.welcome {
+    padding-top: 30px;
+}
+
+.welcome p {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.welcome-msg {
+    margin: 0 auto;
+    text-transform: uppercase;
+    width: 960px;
+    font-size: 2.6em;
+    font-weight: bold;
+    text-rendering: optimizelegibility;
+    text-shadow: #010101 !important;
+}
+
+.sub-welcome {
+    width: 960px;
+    font-size: 1.7em;
+    line-height: 1.3em;
+    text-rendering: optimizelegibility;
+    text-shadow: #010101;
+    margin: 20px auto;
+    font-weight: bold;
+}
+
+.red {
+    color: #FF3030;
+}
+
+.white {
+    color: #FFF;
+}
+
+.landing-sample-pages {
+    width: 960px;
+    margin: 88px auto;
+    background: url(../images/landing_sample_pages.png) no-repeat;
+    height: 371px;
+}
+
+.transparent {
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, .7);
+    height: 116px;
+
+    margin-top: -204px;
+    margin-bottom: 30px;
+}
+
+.large-logo-sheild {
+    width: 202px;
+    height: 223px;
+    margin: -41px auto;
+}
+
+.emailsubmit {
+    width: 500px;
+    border-radius: 333px;
+    -webkit-border-radius: 333px;
+    -moz-border-radius: 333px;
+    background: #FFF;
+    border: 1px solid FFF;
+    height: 55px;
+    margin: 133px auto 0;
+
+}
+
+input[type="email"],
+.uneditable-input {
+    border: none !important;
+    height: 35px;
+    box-shadow: none !important;
+    margin: 5px 0 0 22px;
+    width: 360px;
+}
+
+.recommend-left {
+    width: 261px;
+    margin: 32px 0 0 103px;
+}
+
+.recommend-right {
+    width: 261px;
+    margin: -106px 106px 0 0;
+
+}
+
+#MERGE0 {
+    font-style: italic;
+    color: #bdbab5;
+    font-size: 1.2em;
+}
+
+.button {
+    border-radius: 333px;
+    -webkit-border-radius: 333px;
+    -moz-border-radius: 333px;
+    background: #FF3030;
+    border: 1px solid #FF3030;
+    font-weight: bold;
+    height: 40px;
+    letter-spacing: 2px;
+    margin: 5px 0 0 0px;
+    padding: 5px !important;
+    text-transform: uppercase;
+    width: 95px;
+    color: #FFF;
+}

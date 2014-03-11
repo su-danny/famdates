@@ -1,0 +1,32 @@
+{% load humanize %}
+{% load gravatar %}
+{% load thumbnail %}
+
+{% if public_events %}
+<div class="full_post">
+    <div class="post event-container">
+        <h3>Public Events</h3>
+
+            {% for event in public_events %}
+            {% if event.name %}
+
+            <div class="row-fluid">
+                {% with profile=event.related_object %}
+                <a href="{% url public_profile_detail profile.id %}">
+                    {% if profile.use_gravatar or not profile.avatar %}
+                    <img src="{% gravatar_url post.author.email 32 %}" class="circle photo-border"> {% else %}
+                    {% thumbnail profile.avatar "32x32" as im %}
+                    <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" class="circle photo-border">
+                    {% endthumbnail %}
+                    {% endif %} </a>
+                {% endwith %}
+                {{ event.name }}
+                {{ event.beginning|naturalday}} @ {{event.time}}
+            </div>
+            {% endif %}
+            {% endfor %}
+
+    </div>
+</div>
+
+{% endif %}

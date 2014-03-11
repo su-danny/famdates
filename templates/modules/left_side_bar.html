@@ -1,0 +1,419 @@
+{% load i18n %}
+{% load gravatar %}
+{% load follow_tags %}
+{% load thumbnail %}
+{% load humanize %}
+
+
+<style>
+    .chzn-container {
+        width: 200px;
+    }
+</style>
+<div class="left-sidebar">
+<div id="profile" class="section-border">
+{% if not request.user.pk == profile.user.pk %}
+    <div class="row-fluid">
+        <ul class="userActions">
+            <li class="span5">{% follow_form profile %}</li>
+            <li class="span6"><a class="btn message" href="/message/compose/{{ profile.user.pk }}">Send a Message</a>
+            </li>
+        </ul>
+    </div>
+{% endif %}
+
+{% if not feed == 'FAN ZONE' and not feed == 'GAME TIME' and not feed == 'FITNESS NUTRITION' and not feed == 'HOME' %}
+    <div class="photos bio">
+        <div class="section-border">
+            <span class="red sidebar-header">Personal</span><span class="black">BIO</span><span class="pull-right"><a
+                href="#bio"><i class="icon-eye-open icon-left"></i>view</a></span>
+        </div>
+        <ul>
+            {% if profile.acct_type == "individual" %}
+                {% if profile.hide_birthday %}
+                    <li><label>DOB:</label><span class="sidebar-gray"
+                                                 style="text-transform:capitalize"> {{ profile.birthday|date:"N d" }}</span>
+                    </li>
+                {% else %}
+                    <li><label>DOB:</label><span class="sidebar-gray"
+                                                 style="text-transform:capitalize">  {% firstof profile.birthday|date:"N d, Y" 'na' %}</span>
+                    </li>
+                {% endif %}
+                <li><label>SEX:</label><span class="sidebar-gray"
+                                             style="text-transform:capitalize">  {% firstof profile.gender 'na' %}</span>
+                </li>
+            {% else %}
+                <li><label>Date Founded:</label><span class="sidebar-gray"
+                                                      style="text-transform:capitalize">  {% firstof profile.date_founded|date:"N d, y" 'na' %}</span>
+                </li>
+            {% endif %}
+            <li><label>OCCUPATION:</label><span class="sidebar-gray"
+                                                style="text-transform:capitalize"> {% firstof profile.occupation 'na' %}</span>
+            </li>
+        </ul>
+    </div><!--/bio section-->
+    <div class="modal hide fade" id="bio" aria-hidden="true">
+        <div class="modal-header">
+            <h2>About Me</h2>
+        </div>
+        <!-- end of modal heading -->
+        <div class="modal-body">
+            <p>{{ profile.about_me }}</p>
+        </div>
+        <!-- end of modal body -->
+        <div class="modal-footer">
+            <button class="btn btn-red" data-dismiss="modal" aria-hidden="true">close</button>
+        </div>
+        <!-- end of modal footer -->
+    </div><!-- end of modal -->
+{% endif %}
+
+{% if request.user.pk == profile.user.pk %}
+    {% block community_pages_block %}
+        <div class="photos hidden-phone">
+            <div>
+                <div class="section-border">
+                    <span class="red sidebar-header">Community</span><span class="black">PAGES</span>
+                </div>
+                <ul class="margin-bottom35 unstyled feed-page-sidebar">
+                    {% with stats=profile.get_stats %}
+                        <li><a href="/fan-zone"><i class="icon-user"></i><span class="sidebar-gray">Fan Zone</span></a>{% if stats.fan_zone %}
+                            <span class="pull-right sidebar-total">{{ stats.fan_zone }}</span>{% endif %}</li>
+                        <li><a href="/fitness-nutrition"><i class="icon-user"></i><span class="sidebar-gray">Fitness & Nutrition</span></a>{% if stats.fitness_nutrition %}
+                            <span class="pull-right sidebar-total">{{ stats.fitness_nutrition }}</span>{% endif %}</li>
+                        <li><a href="/game-time"><i class="icon-user"></i><span
+                                class="sidebar-gray">Game Time</span></a>{% if stats.game_time %}
+                            <span class="pull-right sidebar-total">{{ stats.game_time }}</span>{% endif %}</li>
+
+                    {% endwith %}
+                </ul>
+            </div>
+        </div><!-- end of community pages -->
+    {% endblock %}
+{% endif %}
+
+{% if request.user.pk == profile.user.pk %}
+    {% block my_page_block %}
+
+
+        <div class="photos hidden-phone">
+            <div class="section-border">
+                <span class="red sidebar-header">my</span><span class="black">PAGES</span>
+            </div>
+            <ul class="margin-bottom35 unstyled feed-page-sidebar">
+                <li><i class="icon-home"></i><a href="{% url account_home %}"><span class="sidebar-gray">Home</span></a>
+                </li>
+                {% if comments_count %}
+                    <li>
+                        <i class="icon-globe"></i><span class="sidebar-gray">Comments</span>
+                        <span class="pull-right sidebar-total"><a href="#">{{ comments_count }}</a></span>
+                    </li>
+                {% endif %}
+
+                <li>
+                    <i class="icon-comment"></i><a href="{% url messages_inbox %}"><span
+                        class="sidebar-gray">Messages</span>{% if messages_inbox_count %}
+                    <span class="pull-right sidebar-total">{{ messages_inbox_count }}</span>{% endif %}</a>
+                </li>
+
+                <li>
+                    <i class="icon-user"></i><a href="/group/#all_groups"><span class="sidebar-gray">Groups</span></a>
+
+                    {% if group_count %}
+                        <span class="pull-right sidebar-total">{{ group_count }}</span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div><!-- end of photos my page -->
+    {% endblock %}
+{% endif %}
+
+
+<div class="accordion photos hidden-phone" id="photosGroup">
+    <div class="accordion-group">
+        <div class="section-border accordion-heading">
+            <a class="dataToggle" data-toggle="collapse" data-target="#photosGroupToggle" data-parent="#photosGroup"><i
+                    class="icon-caret-up"></i><span class="red sidebar-header">PHOTOS</span></a><span
+                class="count-total">{{ profile.get_photo_count }}</span><span class="pull-right">
+  					
+  					{% if request.user.pk == profile.user.pk %}
+                        <a href="{% url account_images_edit %}"><i class="icon-edit"></i>edit</a></span>
+                    {% else %}
+                        <a href="{% url account_images_view profile.pk %}"><i class="icon-eye-open icon-left"></i>view
+                            all</a></span>
+                    {% endif %}
+        </div>
+
+        <ul class="thumbnails margin-bottom35">
+            {% for photo in profile.get_photos|slice:":3" %}
+                <li>{% thumbnail photo "65x65" crop="center" as im %}
+                    <a href="{{ MEDIA_URL }}{{ photo }}" class="thumbnail fancybox" rel="gallery1"><img
+                            src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"></a>{% endthumbnail %}</li>
+            {% endfor %}
+        </ul>
+
+        <div class="accordion-body collapse" id="photosGroupToggle">
+            <!--/section border-->
+            <ul class="thumbnails margin-bottom35">
+                {% for photo in profile.get_photos|slice:"3:9" %}
+                    <li>{% thumbnail photo "65x65" crop="center" as im %}
+                        <a href="{{ MEDIA_URL }}{{ photo }}" class="thumbnail fancybox" rel="gallery1"><img
+                                src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"></a>{% endthumbnail %}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- end of accordion body -->
+    </div>
+    <!-- end of accordion group -->
+</div>
+<!--/photosGroup-->
+
+<div class="accordion photos hidden-phone" id="interestsGroup">
+    <div class="accordion-group">
+        <div class="section-border accordion-heading">
+            <a class="dataToggle" data-toggle="collapse" data-target="#interestsGroupToggle"
+               data-parent="#interestsGroup"><i class="icon-caret-up"></i><span
+                    class="red sidebar-header">INTERESTS</span></a><span
+                class="count-total">{{ profile.get_interest_count }}</span><span class="pull-right">
+					
+					{% if request.user.pk == profile.user.pk %}
+                        <a href="{% url edit_profile %}#interests"><i class="icon-edit"></i>edit</a></span>
+                    {% else %}
+                        <a href="{% url account_interests_view profile.id %}"><i class="icon-eye-open icon-left"></i>view
+                            all</a></span>
+                    {% endif %}
+        </div>
+        <ul class="thumbnails margin-bottom35">
+            {% for interest in profile.interests|slice:":3" %}
+                <li>
+                    <a href="#" data-toggle="tooltip" title="{{ interest.name }}" class="thumbnail sf-tooltip"><img
+                            src="holder.js/65x65" alt=""></a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="accordion-body collapse" id="interestsGroupToggle">
+            <!--/section border-->
+            <ul class="thumbnails margin-bottom35">
+                {% for interest in profile.interests|slice:"3:9" %}
+                    <li>
+                        <a href="#" data-toggle="tooltip" title="{{ interest.name }}" class="thumbnail sf-tooltip"><img
+                                src="holder.js/65x65" alt=""></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- end of accordion body -->
+    </div>
+    <!-- end of accordion group -->
+</div>
+<!--/interestsGroup-->
+
+<div class="accordion following hidden-phone" id="followerGroup">
+    <div class="accordion-group">
+        <div class="section-border accordion-heading">
+            {% get_following profile %}
+            <a class="dataToggle" data-toggle="collapse" data-target="#followerGroupToggle"
+               data-parent="#followerGroup"><i class="icon-caret-up"></i><span
+                    class="red sidebar-header">FOLLOWERS</span></a><span
+                class="count-total">{{ followers_count }}</span><span class="pull-right">
+						
+						{% if request.user.pk == profile.user.pk %}
+                            <a href="{% url account_followers_edit %}"><i class="icon-edit"></i>edit</a></span>
+                        {% else %}
+                            <a href="{% url account_followers_view profile.pk %}"><i
+                                    class="icon-eye-open icon-left"></i>view all</a></span>
+                        {% endif %}
+        </div>
+        <ul class="thumbnails margin-bottom35">
+            {% for profile in followers|slice:":3" %}
+                <li>
+                    <a href="{% url public_profile_detail profile.id %}" data-toggle="tooltip"
+                       title="<span class='profileName'>{{ profile.get_pretty_name }}</span>"
+                       class="thumbnail sf-tooltip"> {% if profile.user_gravatar or not profile.avatar %}
+                        <img src="{% gravatar_url profile.user.email 65 %}"> {% else %}
+                        {% thumbnail profile.avatar "65x65" crop="center" as im %}
+                            <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"> {% endthumbnail %}
+                    {% endif %} </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="accordion-body collapse" id="followerGroupToggle">
+            <ul class="thumbnails margin-bottom35">
+                {% for profile in followers|slice:"3:9" %}
+                    <li>
+                        <a href="{% url public_profile_detail profile.id %}" data-toggle="tooltip"
+                           title="<span class='profileName'>{{ profile.get_pretty_name }}</span>"
+                           class="thumbnail sf-tooltip"> {% if profile.user_gravatar or not profile.avatar %}
+                            <img src="{% gravatar_url profile.user.email 65 %}"> {% else %}
+                            {% thumbnail profile.avatar "65x65" crop="center" as im %}
+                                <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"> {% endthumbnail %}
+                        {% endif %} </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- end of accordion body -->
+    </div>
+    <!-- end of accordion group -->
+</div>
+<!--/followingGroup-->
+
+<div class="accordion like hidden-phone" id="likeGroup">
+    <div class="accordion-group">
+        <div class="section-border accordion-heading">
+            <a class="dataToggle" data-toggle="collapse" data-target="#likeGroupToggle" data-parent="#likeGroup"><i
+                    class="icon-caret-up"></i><span class="red sidebar-header">FOLLOWING</span></a><span
+                class="count-total">{{ following_count }}</span><span class="pull-right"><a href="#">
+
+            {% if request.user.pk == profile.user.pk %}
+                <a href="{% url account_followings_view profile.pk %}"><i class="icon-edit"></i>edit</a></span>
+            {% else %}
+                <a href="{% url account_followings_view profile.pk %}"><i class="icon-eye-open icon-left"></i>view
+                    all</a></span>
+            {% endif %}
+        </div>
+
+        <ul class="thumbnails margin-bottom35">
+            {% for profile in following|slice:":3" %}
+                <li>
+                    <a href="{% url public_profile_detail profile.id %}" data-toggle="tooltip"
+                       title="<span class='profileName'>{{ profile.get_pretty_name }}</span>"
+                       class="thumbnail sf-tooltip"> {% if profile.user_gravatar or not profile.avatar %}
+                        <img src="{% gravatar_url profile.user.email 65 %}"> {% else %}
+                        {% thumbnail profile.avatar "65x65" crop="center" as im %}
+                            <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"> {% endthumbnail %}
+                    {% endif %} </a>
+                </li>
+
+            {% endfor %}
+        </ul>
+
+        <div class="accordion-body collapse" id="likeGroupToggle">
+            <ul class="thumbnails margin-bottom35">
+                {% for profile in following|slice:"3:9" %}
+                    <li>
+                        <a href="{% url public_profile_detail profile.id %}" data-toggle="tooltip"
+                           title="<span class='profileName'>{{ profile.get_pretty_name }}</span>"
+                           class="thumbnail sf-tooltip"> {% if profile.user_gravatar or not profile.avatar %}
+                            <img src="{% gravatar_url profile.user.email 65 %}"> {% else %}
+                            {% thumbnail profile.avatar "65x65" crop="center" as im %}
+                                <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"> {% endthumbnail %}
+                        {% endif %} </a>
+                    </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- end of accordion body -->
+    </div>
+    <!-- end of accordion group -->
+</div>
+<!--/likes-->
+
+{% if request.user.pk == profile.user.pk %}
+    <div class="accordion similar hidden-phone" id="similarGroup">
+        <div class="accordion-group">
+            <div class="section-border accordion-heading">
+                <a class="dataToggle" data-toggle="collapse" data-target="#similarGroupToggle"
+                   data-parent="#similarGroup"><i class="icon-caret-up"></i><span class="red sidebar-header">SIMILAR USERS</span></a><span
+                    class="count-total">{{ similar_user_count }}</span>
+
+                <button type="button" class="btn btn-search">search</button>
+            </div>
+
+            {% with request.user.get_profile.get_similar_profiles as similar_users %}
+                <ul class="thumbnails margin-bottom35">
+                    {% for profile in similar_users|slice:":3" %}
+                        <li>
+                            <a href="{% url public_profile_detail profile.id %}" data-toggle="tooltip"
+                               title="<span class='profileName'>{{ profile.get_pretty_name }}</span>"
+                               class="thumbnail sf-tooltip"> {% if profile.user_gravatar or not profile.avatar %}
+                                <img src="{% gravatar_url profile.user.email 65 %}"> {% else %}
+                                {% thumbnail profile.avatar "65x65" crop="center" as im %}
+                                    <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"> {% endthumbnail %}
+                            {% endif %} </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="accordion-body collapse" id="similarGroupToggle">
+                    <ul class="thumbnails margin-bottom35">
+                        {% for profile in similar_users|slice:"3:9" %}
+                            <li>
+                                <a href="{% url public_profile_detail profile.id %}" data-toggle="tooltip"
+                                   title="<span class='profileName'>{{ profile.get_pretty_name }}</span>"
+                                   class="thumbnail sf-tooltip"> {% if profile.user_gravatar or not profile.avatar %}
+                                    <img src="{% gravatar_url profile.user.email 65 %}"> {% else %}
+                                    {% thumbnail profile.avatar "65x65" crop="center" as im %}
+                                        <img src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}">
+                                    {% endthumbnail %}
+                                {% endif %} </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div><!-- end of accordion body -->
+            {% endwith %}
+        </div>
+        <!-- end of accordion group -->
+        <div class="modal hide fade" id="myModal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Search Similar Users</h3>
+            </div>
+            <form action="/search/people" class="MultiFile-intercepted">
+                <div class="modal-body">
+                    <div class="control-group">
+                        <div class="controls">
+                            <div class="chzn-container-single span5 sui chzn-with-drop chzn-drop chzn-container-active">
+                                <div class="chzn-drop">
+                                    <div class="chzn-search"><input type="text" placeholder="Enter a name"
+                                                                    name="similar_users" autocomplete="off">
+                                        <ul class="chzn-results">
+                                            {% for p in request.user.get_profile.get_similar_profiles %}
+                                                <li id="similar_user_chzn_o_2" class="active-result"
+                                                    style="">{{ p.get_pretty_name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls distance">
+                            <input placeholder="City or Zip Code" name="zip_code"/>
+                            <label>Distance Radius</label>
+                            <select name="distance" id="distance" style="width: 112px;">
+                                <option value="0">Choose</option>
+                                <option value="1">0 - 20 miles</option>
+                                <option value="20">21+ miles</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- end of control group -->
+                    <div class="control-group">
+                        <div class="controls">
+                            {% load interests %}
+                            {% get_interests fan_zone %}
+                            <select multiple="multiple" data-placeholder="Interests" name="interests">
+                                {% for i in interests %}
+                                    <option value="{{ i.pk }}">{{ i.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of modal body -->
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button type="submit" class="btn btn-red">Search</button>
+                </div>
+            </form>
+        </div>
+        <!-- end of modal -->
+    </div><!--/similar-->
+{% endif %}
+
+</div>
+<!-- end of profile -->
+</div><!-- end of left sidebar -->

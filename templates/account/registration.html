@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% block title %}Registration{% endblock %}
+{% block head %}
+    <link href="{{ STATIC_URL }}css/chosen.css" rel="stylesheet">
+{% endblock %}
+{% block footer_js %}
+    <script src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>
+    {% include 'modules/registration_js.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <style type="text/css">
+        .fullHeight {
+            height: 1200px;
+        }
+
+        .registrationForm input[type='checkbox'] {
+            width: auto;
+            display: inline-block;
+            margin-top: 0;
+        }
+
+        .control-group li {
+            list-style: none;
+        }
+
+        .control-group ul {
+            margin: 0 0 0 0;
+        }
+
+        #avatar {
+            height: 50px;
+        }
+    </style>
+    <div class="container container-bg">
+    <div class="page-header">
+        {#		<div class="transparent general-page-header hidden-phone"><span class="red">get</span> registered</div>#}
+    </div>
+    <div class="registrationSlider well">
+    <div class="registration row-fluid">
+
+    <form class="form-inline registrationForm standard form-horizontal span7 offset1" method="post"
+          id="registration_form" action="." enctype="multipart/form-data" style="width:initial">
+    <div class="control-group">
+        <div class="controls">
+            <h2>Registration</h2>
+
+            <p>
+                <small>* indicates a required field</small>
+            </p>
+        </div>
+    </div>
+    {% csrf_token %}
+    <div class="control-group step-1 {% if user_form.first_name.errors %}error{% endif %} ">
+        <label class="control-label">First Name *</label>
+
+        <div class="controls">
+            {{ user_form.first_name }}
+
+            <span class="help-inline">{{ user_form.first_name.errors|striptags }}</span>
+
+        </div>
+    </div>
+
+    <div class="control-group step-1 {% if user_form.last_name.errors %}error{% endif %}">
+        <label class="control-label">Last Name *</label>
+
+        <div class="controls">
+            {{ user_form.last_name }}
+            <span class="help-inline">{{ user_form.last_name.errors|striptags }}</span>
+        </div>
+    </div>
+
+    <div class="control-group step-1 {% if user_form.email.errors %}error{% endif %}">
+        <label class="control-label">Email *</label>
+
+        <div class="controls">
+            {{ user_form.email }}
+            <span class="help-inline">{{ user_form.email.errors|striptags }}</span>
+        </div>
+    </div>
+
+    <div class="control-group step-1 {% if user_form.confirm_email.errors %}error{% endif %}">
+        <label class="control-label">Confirm email *</label>
+
+        <div class="controls">
+            <input id="id_confirm_email" type="text" name="confirm_email" maxlength="75">
+            <span class="help-inline">{{ user_form.confirm_email.errors|striptags }}</span>
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if user_form.gender.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.acct_type.label }}</label>
+
+        <div class="controls">
+            {{ profile_form.acct_type }}
+            {% if profile_form.acct_type.errors %}
+                <span class="help-inline">{{ profile_form.acct_type.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if user_form.gender.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.gender.label }}</label>
+
+        <div class="controls">
+            {{ profile_form.gender }}
+        </div>
+        {% if profile_form.gender.errors %}
+            <span class="help-inline">{{ profile_form.gender.errors|striptags }}</span>
+        {% endif %}
+    </div>
+
+
+    <div class="control-group step-2 {% if user_form.birthday.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.birthday.label }} *</label>
+
+        <div class="controls">
+            {{ profile_form.birthday }}
+            {% if profile_form.birthday.errors %}
+                <span class="help-inline">{{ profile_form.birthday.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if profile_form.hide_birthday.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.hide_birthday.label }}</label>
+
+        <div class="controls">
+            {{ profile_form.hide_birthday }}
+            {% if profile_form.hide_birthday.errors %}
+                <span class="help-inline">{{ profile_form.hide_birthday.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if profile_form.date_founded.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.date_founded.label }}</label>
+
+        <div class="controls">
+            {{ profile_form.date_founded }}
+            {% if profile_form.date_founded.errors %}
+                <span class="help-inline">{{ profile_form.date_founded.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if profile_form.region.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.city.label }} *</label>
+
+        <div class="controls">
+            {{ profile_form.city }}
+            {% if profile_form.city.errors %}
+                <span class="help-inline">{{ profile_form.city.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if profile_form.zipcode.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.zipcode.label }} *</label>
+
+        <div class="controls">
+            {{ profile_form.zipcode }}
+            {% if profile_form.zipcode.errors %}
+                <span class="help-inline">{{ profile_form.zipcode.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="control-group step-2 {% if profile_form.region.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.state.label }} *</label>
+
+        <div class="controls">
+            {{ profile_form.state }}
+            {% if profile_form.state.errors %}
+                <span class="help-inline">{{ profile_form.state.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if profile_form.occupation.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.occupation.label }}</label>
+
+        <div class="controls">
+            {{ profile_form.occupation }}
+            {% if profile_form.occupation.errors %}
+                <span class="help-inline">{{ profile_form.occupation.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if profile_form.about_me.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.about_me.label }}</label>
+
+        <div class="controls">
+            {{ profile_form.about_me }}
+            {% if profile_form.about_me.errors %}
+                <span class="help-inline">{{ profile_form.about_me.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if profile_form.status.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.status.label }}</label>
+
+        <div class="controls">
+            {{ profile_form.status }}
+            {% if profile_form.status.errors %}
+                <span class="help-inline">{{ profile_form.status.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if profile_form.avatar.errors %}error{% endif %}">
+        <label class="control-label">{{ profile_form.avatar.label }}</label>
+
+        <div class="controls">
+            {% if profile_form.instance.avatar %}
+                <img src="{{ MEDIA_URL }}{{ profile_form.instance.avatar }}" id="avatar"/>
+            {% else %}
+                <img src="{{ STATIC_URL }}images/avatar.png" id="avatar"/>
+            {% endif %}
+
+            {{ profile_form.avatar }}
+            {% if profile_form.avatar.errors %}
+                <span class="help-inline">{{ profile_form.avatar.errors|striptags }}</span>
+            {% endif %}
+            <br/>
+            {{ profile_form.use_gravatar }}
+            {% if profile_form.use_gravatar.errors %}
+                <span class="help-inline">{{ profile_form.use_gravatar.errors|striptags }}</span>
+            {% endif %}
+            <span>User Gravatar instead</span>
+        </div>
+    </div>
+
+
+    <div class="control-group step-2 ">
+        <label class="control-label">Profile Banner</label>
+
+        <div class="controls">
+            {{ profile_form.background }}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if user_form.password.errors %}error{% endif %}">
+        <label class="control-label">Password *</label>
+
+        <div class="controls">
+            {{ user_form.password }}
+            {% if user_form.password.errors %}
+                <span class="help-inline">{{ user_form.password.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group step-2 {% if user_form.confirm_password.errors %}error{% endif %}">
+        <label class="control-label">Password Confirmation</label>
+
+        <div class="controls">
+            {{ user_form.confirm_password }}
+            {% if user_form.confirm_password.errors %}
+                <span class="help-inline">{{ user_form.confirm_password.errors|striptags }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="control-group">
+
+        <div class="controls">
+            <input type="submit" value="Continue" class="btn btn-red pull-right"/>
+        </div>
+    </div>
+
+    </form>
+    </div>
+    <!-- end of full-width-slider -->
+    </div>
+    <!-- end of sliderContainer -->
+    </div><!-- container bg -->
+{% endblock %}

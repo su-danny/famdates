@@ -1,0 +1,136 @@
+<div class="row-fluid">
+    <span class="ticker"></span>
+</div>
+<div class="post-container">
+<div class="full_post masonry-brick post_box">
+    <div class="post create">
+        <textarea class="textarea" autocomplete="off" name="body" placeholder="Create a Post..."></textarea>
+        <span class="alert" style="display: none;"></span>
+        <span class="detected-location"></span>
+        <!-- this is where the previews get added -->
+        <table class="table table-striped" role="presentation">
+            <tbody class="files" data-target="#modal-gallery" data-toggle="modal-gallery"></tbody>
+        </table>
+    </div>
+    <!-- end of post create -->
+
+    <form id="fileupload" method="post" action="/upload/new/" enctype="multipart/form-data">
+        <div class="fileupload-loading"></div>
+        <table class="table table-striped" id="preview-section">
+            <tbody class="files" data-toggle="modal-gallery2" data-target="#modal-gallery2"></tbody>
+        </table>
+
+        <input type="hidden" name="feed" value="{{feed_type|default:'fan_zone'}}">
+
+        {% csrf_token %}
+        <div class="fileupload-buttonbar">
+            <div class="gray-bottom row-fluid">
+                <div class="span6">
+                    <div class="post-type">
+                        <i class="icon-map-marker"></i>
+
+					<span class="fileinput-button"> <i class="icon-camera"></i>
+						<input id="fileuploadImage" type="file" name="image" multiple/>
+					</span>
+					<span class="fileinput-button"> <i class="icon-film"></i>
+						<input id="fileuploadVideo" type="file" name="video" multiple/>
+					</span>
+
+                        <a href="#" onclick="$('#createEventModal').modal()" data-toggle="modal"><i class="icon-calendar"></i></a>
+
+
+                        <button style="display: none;" type="submit" class="btn btn-success start">
+                            <i class="icon-upload icon-white"></i>
+                            <span>Start upload</span>
+                        </button>
+                    </div>
+                    <!-- end of post-type -->
+                </div>
+
+                <div class="span3 pull-right">
+                    <span class="btn btn-red post-button">Post</span>
+                </div>
+                <div class="span1 pull-right">
+                    <span class="icon pull-right feed-icon">
+                        <img src="/static/images/{%if feed_type == 'fitness_nutrition' %}fitness{% elif feed_type == 'game_time'%}gametime{% else %}fanzone{%endif%}_icon-mini.png">
+                    </span>
+                </div>
+
+            </div>
+
+            <input type="hidden" name="location"/>
+
+            <div class="span3 fileupload-progress fade">
+                <!-- <div class="progress progress-success progres-striped active">
+                    <div class="bar" style="width:0%"></div>
+                </div> -->
+                <!-- <div class="progress-extended">&nbsp;</div> -->
+            </div>
+        </div>
+    </form>
+    <div class="fileupload-content">
+        <table class="files"></table>
+        <div class="fileupload-progressbar"></div>
+    </div>
+
+</div><!-- end of span6 -->
+
+<!-- modal -->
+<div class="modal hide fade" id="eventModal" aria-hidden="true">
+    <div class="modal-header">
+        <h1><span class="red">Sports</span><span class="white">Freak</span> Events</h1>
+    </div>
+    <!-- end of modal heading -->
+    <div class="modal-body">
+        <form class="form-inline loginForm standard" class="editable" method="POST" action="">
+
+            <div class="row-fluid">
+
+                <div class="span6">
+                    <div class="control-group">
+                        <input type="text" id="eventName" name="eventName" placeholder="Event Name" class="">
+                    </div>
+                    <!-- end of control group -->
+                    <div class="control-group">
+
+
+                    </div>
+                    <!-- end of control group -->
+                    <div class="control-group">
+                        <button class="span4 btn btn-red pull-right" type="submit">Submit</button>
+                        <span class="login_error_msg" style="color: red"></span>
+                    </div>
+                </div>
+                <!-- end of span6 -->
+            </div>
+            <!-- end of row-fluid -->
+        </form>
+
+    </div>
+    <!-- end of modal body -->
+    <div class="modal-footer">
+        <p>I'm the modal footer</p>
+    </div>
+    <!-- end of modal footer -->
+
+
+</div><!-- end of eventModal -->
+
+<script>
+    $(document).ready(function(){
+        $('textarea[name=body]').keyup(function(){
+            var self = $(this);
+            var post_body = self.val();
+            var feeds = ['#getfit', '#fanzone', '#gametime'];
+            for(i=0;i < feeds.length;i++) {
+                if (post_body.indexOf(feeds[i]) != -1) {
+                    var $img = $('.post_box').find('.feed-icon img');
+                    var img_src = $img.attr('src');
+                    $img.attr('src', "/static/images/" + feeds[i].replace('#', '') + "_icon-mini.png")
+                }
+            }
+        })
+    })
+</script>
+
+{% include 'modules/create-event-modal.html' %}

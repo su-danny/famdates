@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block bodyClass %}inner{% endblock %}
+{% load gravatar %}
+{% load thumbnail %}
+{% load follow_tags %}
+
+
+{% block title %}Select your interest{% endblock %}
+
+{% block content %}
+    <div class="container user-home">
+        <div class="box">
+            <h2 style="margin-top: 20px;">You're Not Only the Only One</h2>
+
+            <h3>Based on your interests we'd recommend the following like-minded enthusiasts</h3>
+
+            <div class="row-fluid" id="recommenedUsers">
+                {% for profile in similar_profiles %}
+                    <div class="span4">
+                        <div class="similar-user">
+                            {% if profile.user_gravatar or not profile.avatar %}
+                                <img style="display: inline-block;" src="{% gravatar_url profile.user.email 100 %}"
+                                     class="profile-image">
+                            {% else %}
+                                {% thumbnail profile.avatar "100x100" crop="center" as im %}
+                                <img style="display: inline-block;" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}" class="">
+                                {% endthumbnail %}
+                            {% endif %}
+
+
+                            <h4 class="name red">{{ profile.user.first_name }} {{ profile.user.last_name }}</h4>
+                            <h6>{{ profile.city }}, {{ profile.state }}</h6><span
+                                class="follow">{% follow_form profile %}</span>
+
+                            <div class="clearfix"></div>
+                            <p>{{ profile.about_me }}</p>
+                            <h4 class="title">Similar interests</h4>
+                            <ul>
+                                {% for interest in profile.similar_interests %}
+                                    <li class="interest"><i class="icon-tag"></i>{{ interest }}</li>
+                                {% endfor %}
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- end of similar user -->
+                        <div class="clearfix"></div>
+                    </div><!-- end of span6 -->
+                {% endfor %}
+            </div>
+            <!-- end of row-fluid -->
+            <a href="{% url home %}" class="btn pull-right">Skip</a>
+            <a class="btn btn-red pull-right" href="{% url account_home %}">Continue</a>
+        </div>
+    </div>
+    <!-- end of container -->
+
+{% endblock %}
