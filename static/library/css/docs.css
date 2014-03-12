@@ -115,14 +115,14 @@
 	#formContainer .controls input {padding-left: 25%;font-size: 15px;color: #009abf;font-weight: 400;margin-bottom: 0; /*this matches the width of the label*/}
 	#formContainer .control-group.password {margin-top: -20px;}
 	#formContainer .control-group.terms {background: rgba(84,179,207,.55);padding: 6px;margin-top: 10px;width: 210px;margin-right: 20px;float: left;height: 40px;}
-	#formContainer .control-group.submit {margin-top: 10px;float: left;text-align: center;width: 210px;}
+	#formContainer .control-group.submit {margin-top: 10px}
 	
 	
 	#formContainer .control-group.terms label.checkbox {font-weight: 400px;font-size: 12px;color: #d7d90b;font-variant: small-caps;line-height: 14px;}
 	#formContainer .control-group.terms label.checkbox a {display: block;color: #fff;text-decoration: underline}
 	#formContainer .control-group.terms input[type="checkbox"] {width: 20px;height: 20px;margin-right: 10px;}
 	
-	#formContainer button {background: #d7d90b;color:#014353;border: none;-moz-border-radius: 0;-webkit-border-radius: 0;border-radius: 0;font-size: 18px;font-weight: 400;position: relative;text-shadow: none;height: 52px;width: 100%;}
+	#formContainer button {background: #d7d90b;color:#014353;border: none;-moz-border-radius: 0;-webkit-border-radius: 0;border-radius: 0;font-size: 18px;font-weight: 400;position: relative;text-shadow: none;height: 52px;width: 50%;}
 	#formContainer button:active, #formContainer button:focus {box-shadow: none}
 
 
@@ -363,4 +363,11 @@ footer {padding: 30px 0 10px;font-size: 12px;}
  		width: 195px;
  	}
 
+}
+.forgot-link{
+    line-height: 50px;
+}
+.btn-yellow{
+    background-color: #eff107;
+    color: #014353;
 }

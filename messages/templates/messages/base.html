@@ -28,7 +28,115 @@
         .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
             width: 940px;
         }
-    </style>
+
+    ul.wysihtml5-toolbar {margin: 0 0 6px;padding: 0;display: block;background: rgba(0,0,0,.05);}
+    ul.wysihtml5-toolbar::after {clear: both;display: table;content: "";}
+    ul.wysihtml5-toolbar > li {float: left;display: list-item;list-style: none;margin: 0 5px 0 0;}
+    ul.wysihtml5-toolbar a[data-wysihtml5-command=bold] {font-weight: bold;}
+    ul.wysihtml5-toolbar a[data-wysihtml5-command=italic] {font-style: italic;}
+    ul.wysihtml5-toolbar a[data-wysihtml5-command=underline] {text-decoration: underline;}
+    ul.wysihtml5-toolbar a.btn.wysihtml5-command-active {background-image: none;-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15),0 1px 2px rgba(0, 0, 0, 0.05);-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15),0 1px 2px rgba(0, 0, 0, 0.05);box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15),0 1px 2px rgba(0, 0, 0, 0.05);background-color: #E6E6E6;background-color: #D9D9D9;outline: 0;}
+    ul.wysihtml5-commands-disabled .dropdown-menu {display: none !important;}
+    ul.wysihtml5-toolbar div.wysihtml5-colors {display:block;width: 50px;height: 20px;margin-top: 2px;margin-left: 5px;position: absolute;pointer-events: none;}
+    ul.wysihtml5-toolbar a {color: #454e57;}
+    ul.wysihtml5-toolbar a.wysihtml5-colors-title {padding-left: 70px;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="black"] 	{background: black !important;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="silver"] 	{background: silver !important;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="gray"] 	{background: gray !important;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="maroon"] 	{background: maroon !important;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="red"] 	{background: red !important;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="purple"] 	{background: purple !important;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="green"] 	{background: green !important;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="olive"] 	{background: olive !important;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="navy"] 	{background: navy !important;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="blue"] 	{background: blue !important;}
+    ul.wysihtml5-toolbar div[data-wysihtml5-command-value="orange"] 	{background: orange !important;}
+    /*******************
+    MESSAGE CENTER
+    *******************/
+    /*override bootstrap*/
+    #message-center .nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {background-color: transparent;background: transparent;border-color: transparent;border:none;}
+    #message-center .nav-tabs.nav-stacked > li > a {border: none;}
+    #message-center .nav-tabs.nav-stacked > li:first-child > a {border-top-left-radius: 0;border-top-right-radius: 0;}
+
+
+    #message-center .tab-content > .tab-pane {margin-left: 10px;width: 765px;}
+
+    #message-center .innerNav {/*height: 450px;*/}
+    #message-center .innerNav .unread li {position: relative;}
+
+    #message-center .itemListContent button {margin: 0 0 10px -5px;padding: 3px 6px 4px 6px;border:none;background: transparent}
+    #message-center .itemListContent button i {margin-top: 2px;}
+
+    #message-center {margin: 10px 0}
+    #message-center .nav-tabs.nav-stacked > li  {border:none;margin-bottom: 10px;font-size: 13px;}
+    #message-center .nav-tabs.nav-stacked > li:last-child {margin-bottom: 0}
+    #message-center a {}
+    #message-center .component-nav a {text-align: center;cursor: pointer;position: relative}
+    #message-center .component-nav a .badge {display: inline-block;margin-left: 7px;position: relative;top: -4px;}
+    #message-center .component-nav li.active a {}
+    #message-center .nav-tabs.nav-stacked > li > a, #message-center #notificationCenter li {background: #fff}
+    #message-center .nav-tabs.nav-stacked > li > a.btn.primary, #message-center #notificationCenter li a.btn.primary {background: #54b3cf;color: #fff;margin-bottom: 30px;}
+    #message-center #notificationCenter li {padding: 8px 12px;}
+    #message-center .nav-tabs.nav-stacked > .active > a, #message-center .nav-tabs.nav-stacked > .active > a:hover, #message-center .nav-tabs.nav-stacked a:hover {background: #E6EEF1}
+    #message-center .innerNav.unread .active a {background: #fff}
+
+    #message-center .component-nav .icon {font-size: 28px}
+    #message-center .component-nav span {display: block;}
+    /*width: 135px*/
+    #message-center .component-nav {width: 114px;padding-right: 20px;border-right: 1px solid #ccc;float: left;margin-bottom: 0})
+    #message-center .itemList ul.innerNav {/*width: 290px;*/width: 100%;float: left;}
+    #message-center .itemList ul.innerNav .subject {width: 100%}
+    #message-center .itemList .itemListContent {/*width: 470px;*/float: left;}
+    #message-center .itemList .itemListContent .tab-pane {padding: 10px;}
+
+    #message-center #createMessageCenter .itemListContent {/*width: 790px;margin-left: 10px;*/}
+
+    #message-center #createMessageCenter form {margin: 10px 0 0}
+    #message-center #createMessageCenter label {display: inline-block;width: 40px;float:left}
+    #message-center #createMessageCenter .dropdown-toggle {color: #333 }
+    #message-center #createMessageCenter textarea {width: 755px;height: 150px}
+
+    #message-center .innerNav .post_author_thumb, #message-center .post_author_thumb {float: left;margin-bottom: 0;width: 60px;margin-right: 10px;}
+    #message-center .innerNav .messageInfo {float: left;}
+    #message-center .innerNav .messageInfo span {display: block}
+    #message-center .innerNav li.unreadMessage .messageInfo span.title, #message-center .innerNav li.unreadMessage .messageInfo span.subject {color: #1bb7d6}
+    #message-center .innerNav .messageActions .icon-trash {display: inline-block;margin-right: 12px;}
+    #message-center .innerNav .messageActions .icon-trash:hover {color: #d64449}
+    #message-center .innerNav .messageActions .date {display: inline-block;font-size: 11px;line-height: 12px; margin: 0 5px;}
+    #message-center .innerNav .messageActions .fa {position: relative;top: 25px;color: #1bb7d6;margin: 0 2px;font-size: 15px;}
+    #message-center .innerNav .messageActions .badge {padding-left: 6px;padding-right: 6px;font-size: 9px;background: #8bcee1;text-shadow: none}
+    #message-center .innerNav .messageActions .fa fa-mail-reply {font-size: 12px;}
+    #message-center .innerNav .messageActions .fa-check {color: #EFF107}
+
+    /*message Details*/
+    #message-center .conversationThread {margin: 30px 0 30px;}
+    #message-center .conversationThread li {list-style: none;float: left;margin-bottom: 15px;position: relative;width: 100%}
+    #message-center .conversationMeta {width: 500px;margin-right: 20px;float:left}
+    #message-center .conversationActions {width: 240px;float:left}
+    #message-center .conversationActions .icon{float:right;}
+    #message-center .conversationActions .icon.icon-trash {margin-right: 15px;}
+
+    #message-center .itemListContent .response_comment {width: 96%}
+    #message-center .itemListContent #replyMessage textarea {width: 755px;height: 150px;}
+
+    #message-center .conversationComment {float: left;background-color: #FFFFFF;border-radius: 8px;max-width: 665px;padding: 3px 6px;position: relative;white-space: normal;left:90px;font-size: 13px;border: 1px solid #ccc}
+    #message-center .conversationThread li.alt .conversationComment {max-width: 665px;margin-right: 13px;left: 0}
+
+    #message-center .conversationThread .post_author_thumb {margin-top: -31px;position: absolute;top: 50%;}
+    #message-center .conversationThread li.alt .post_author_thumb {right: 0;}
+    #message-center .conversationThread li.alt p {text-align: right}
+    #message-center .conversationComment .arrow, #message-center .conversationComment .arrow:after {border-color: rgba(0, 0, 0, 0);border-style: solid;display: block;height: 0;position: absolute;width: 0;}
+    #message-center .conversationComment .arrow {border-width: 11px;}
+    #message-center .conversationComment.right .arrow { border-left-width: 0;border-right-color: #ccc;left: -11px;margin-top: -11px;top: 50%;}
+    #message-center .conversationComment .arrow:after {border-width: 10px;content: "";}
+    #message-center .conversationComment.right .arrow:after {border-left-width: 0;border-right-color: #FFFFFF;bottom: -10px;left: 1px;}
+
+    #message-center .conversationComment.left .arrow {border-left-color: #ccc;border-right-width: 0;margin-top: -11px;right: -11px;top: 50%;	}
+    #message-center .conversationComment.left .arrow:after {border-left-color: #FFFFFF;border-right-width: 0;bottom: -10px;right: 1px;}
+    #message-center .conversationCommentContent {border-left-width: 0;border-right-color: #FFFFFF;bottom: -10px;left: 1px;}
+</style>
+
     <div class="box">
 
     <div id="message-center">
@@ -342,7 +450,7 @@
                         $(json).each(function (index, item) {
                             str += '<li>' +
                                     '<a class="messageLink" href="#commentOne" data-toggle="tab">' +
-                                    '<div class="post_author_thumb">' +
+                                    '<Send Messagediv class="post_author_thumb">' +
                                     '<img width="32" height="20" class="circle photo-border">' +
                                     '</div>' +
                                     '<div class="messageActions">' +

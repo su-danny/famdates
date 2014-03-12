@@ -896,37 +896,41 @@ def signup(request, step):
             user.save()
             user.backend = 'django.contrib.auth.backends.ModelBackend'
 
-            UserProfile.objects.create(user=user, current_registration_step='2')
+            UserProfile.objects.create(user=user)
 
             login(request, user)
+            print "asdsa"
+            print request
+            return redirect("/account/home")
         else:
             ret = {'success': False, 'errors': [str(e) for e in form.errors]}
+            return HttpResponse(json.dumps(ret))
 
-    if step == '2':
-        profile = request.user.get_profile()
-        form = CreateProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
+    # if step == '2':
+    #     profile = request.user.get_profile()
+    #     form = CreateProfileForm(request.POST, instance=profile)
+    #     if form.is_valid():
+    #         form.save()
+    #
+    #         data = form.cleaned_data
+    #         if data['acct_type'] == 'individual':
+    #             user = request.user
+    #             user.first_name = data.get('first_name')
+    #             user.last_name = data.get('last_name')
+    #             user.save()
+    #
+    #             profile.current_registration_step = '3'
+    #             profile.save()
+    #     else:
+    #         print 'form is not valid'
+    #
+    # if step == '3':
+    #     ret = signup3(request, ret)
+    #
+    # if step == '4':
+    #     ret = signup4(request, ret)
 
-            data = form.cleaned_data
-            if data['acct_type'] == 'individual':
-                user = request.user
-                user.first_name = data.get('first_name')
-                user.last_name = data.get('last_name')
-                user.save()
 
-                profile.current_registration_step = '3'
-                profile.save()
-        else:
-            print 'form is not valid'
-
-    if step == '3':
-        ret = signup3(request, ret)
-
-    if step == '4':
-        ret = signup4(request, ret)
-
-    return HttpResponse(json.dumps(ret))
 
 
 @csrf_exempt
